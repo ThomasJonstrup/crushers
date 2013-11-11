@@ -4,6 +4,7 @@
  */
 package commands;
 
+import dk.candycrushers.dto.AccountDetail;
 import dk.candycrushers.dto.CustomerDetail;
 import javax.servlet.http.HttpServletRequest;
 import dummy.model.Account;
