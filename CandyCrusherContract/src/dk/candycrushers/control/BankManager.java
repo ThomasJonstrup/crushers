@@ -22,7 +22,7 @@ public interface BankManager {
     CustomerDetail getCustomer(long id);
     CustomerDetail addCustomer(String firstName, String lastName, String email, String password, int role);
     CustomerDetail updateCustomer(long customerID, String firstName, String lastName, String email, String password);
-//    CustomerDetail updateCustomer(CustomerDetail customerdetail);
+
     void addAccount(AccountDetail account);
 
 }
