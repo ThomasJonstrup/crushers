@@ -1,0 +1,23 @@
+/* 
+    Document   : newCascadeStyleSheet
+    Created on : Sep 10, 2013, 3:47:23 PM
+    Author     : Rasmus
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+}
+h2{
+    text-align: center;
+}

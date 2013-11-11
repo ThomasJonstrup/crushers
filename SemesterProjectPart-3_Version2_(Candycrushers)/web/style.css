@@ -1,0 +1,52 @@
+/* 
+    Document   : newcss
+    Created on : 08-10-2013, 17:12:27
+    Author     : Thomas
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body {
+/*    margin: 0;
+    padding:0;*/
+    background-color: #E2EDF9;
+/*    background-image: url(body-bg.png);*/
+/*    background-image: url(background.jpg);*/
+    background-image: url(pics/blue-bg.jpg);
+/*    background-repeat: repeat-x;*/
+    background-size: cover;
+}
+
+ul {
+        background-image: url(pics/normal_back.png); height:60px; width: 100%;
+    background-color: navy; height:60px; width: 100%;
+}
+
+li {
+    float: left;
+}
+
+ul a {
+    color: white;
+    padding-left: 32px;
+    padding-right: 32px;
+    text-decoration: none;
+    line-height: 60px;
+    font-size: 20px;
+        background-image: url(pics/red-bottom-line.gif); background-repeat: no-repeat;
+/*    background-color: blue;*/
+    display: block;
+}
+
+ul a:hover {
+    color: silver;
+    background-color: black
+}
+
+h1 {
+    color: white;
+}
+
+h2 {
+    color: white;
+}

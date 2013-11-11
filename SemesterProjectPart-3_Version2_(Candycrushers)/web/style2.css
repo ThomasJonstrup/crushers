@@ -1,0 +1,26 @@
+/* 
+    Document   : style2
+    Created on : 09-10-2013, 11:58:51
+    Author     : Thomas
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body {
+/*    margin: 0;
+    padding:0;*/
+    background-color: #E2EDF9;
+/*    background-image: url(body-bg.png);*/
+/*    background-image: url(background.jpg);*/
+    background-image: url(pics/blue-bg.jpg);
+/*    background-repeat: repeat-x;*/
+    background-size: cover;
+}
+
+li {
+    background-color: white;
+}
+
+h1 {
+    color: white;
+}
