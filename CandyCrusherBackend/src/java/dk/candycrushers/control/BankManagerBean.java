@@ -9,6 +9,7 @@ import dk.candycrushers.dto.CustomerSummary;
 import dk.candycrushers.model.Customer;
 import static dk.candycrushers.control.BankAssembler.*;
 import dk.candycrushers.dto.AccountDetail;
+import dk.candycrushers.model.Account;
 import dk.candycrushers.model.Groups;
 import java.util.Collection;
 import javax.ejb.Stateless;
@@ -22,11 +23,10 @@ import javax.persistence.Query;
  */
 @Stateless
 public class BankManagerBean implements BankManager {
+
     @PersistenceContext(unitName = "CandyCrusherBackendPU")
     private EntityManager em;
 
-    
-    
     @Override
     public String sayHello(String name) {
         return "Hello " + name + " from Remote Bank Manager Bean";
@@ -42,15 +42,15 @@ public class BankManagerBean implements BankManager {
     @Override
     public CustomerDetail getCustomer(long id) {
         Query q = em.createNamedQuery("Customer.findByCustomerId");
-        
+
         q.setParameter("id", id);
-        
+
         Customer cus = (Customer) q.getSingleResult();
-        
+
         CustomerDetail cDetail = new CustomerDetail(cus.getCustomerId(), cus.getFirstName(), cus.getLastName(), cus.getEmail());
-        
+
         return null;
-        
+
     }
 
     public void persist(Object object) {
@@ -60,48 +60,39 @@ public class BankManagerBean implements BankManager {
     @Override
     public CustomerDetail addCustomer(String firstName, String lastName, String email, String password, int role) {
         Customer customer;
-        
-        customer = new Customer(firstName, lastName, email, password, 1);
+        customer = new Customer(firstName, lastName, email, password, role);
         Query query = em.createNamedQuery("Groups.findByGroupName");
         query.setParameter("groupName", "Customers");
-        Groups group = (Groups)query.getSingleResult();
+        Groups group = (Groups) query.getSingleResult();
         em.persist(customer);
         return createCustomerDetail(customer);
-        
-        
-    } 
-    
-//    @Override
-//    public CustomerDetail updateCustomer(long customerID, String firstName, String lastName, String email, String password) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-    
+    }
 
     @Override
     public void addAccount(AccountDetail account) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Account acc;
+        Integer i = (int) account.getAccountId();
+        acc = new Account(i, account.getAccountType());
+        Query query = em.createNamedQuery("Account.findByAccountId");
+        em.persist(acc);
+        
+        
     }
 
     @Override
     public CustomerDetail updateCustomer(long customerID, String firstName, String lastName, String email, String password) {
-//        long id = customerdetail.getCustomerId();
-//        Customer customer;
-//        if (id == 0) {
-//            customer = new Customer(
-//                    0, 
-//                    customerdetail.getFirstName(), 
-//                    customerdetail.getLastName(), 
-//                    customerdetail.getEmail()
-//                    );
-//            em.persist(customer);
-//            }
-//        else {
-//            customer = em.find(Customer.class, (int)id);
-//            customer.setFirstName(customerdetail.getFirstName());
-//            customer.setLastName(customerdetail.getLastName());
-//            customer.setEmail(customerdetail.getEmail());
-//            }
-//        return createCustomerDetail(customer);
-        }    
-    
+        long id = customerID;
+        Customer cust;
+        if (id == 0) {
+            cust = new Customer(0, firstName, lastName, email, password);
+            em.persist(cust);
+        } else {
+            cust = em.find(Customer.class, (int) id);
+            cust.setFirstName(firstName);
+            cust.setLastName(lastName);
+            cust.setEmail(email);
+            cust.setPassword(password);
+        }
+        return createCustomerDetail(cust);
+    }
 }

@@ -52,7 +52,9 @@ create table accounts (
     account_id int primary key,
     account_type varchar(40) not null,
     balance double,
-    owner varchar(40) not null
+    owner int not null,
+    constraint fk_customer_id foreign key (owner)
+    references customers(customer_id)
 );
 
 

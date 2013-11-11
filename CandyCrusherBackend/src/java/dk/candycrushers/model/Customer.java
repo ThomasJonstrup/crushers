@@ -7,6 +7,7 @@ package dk.candycrushers.model;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,7 +16,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -26,7 +29,8 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Thomas
  */
 @Entity
-@Table(name = "CUSTOMERS")
+@Table(name = "CUSTOMERS", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"EMAIL"})})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c"),
@@ -37,11 +41,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Customer.findByPassword", query = "SELECT c FROM Customer c WHERE c.password = :password"),
     @NamedQuery(name = "Customer.findByCustomerRole", query = "SELECT c FROM Customer c WHERE c.customerRole = :customerRole")})
 public class Customer implements Serializable {
-    @JoinTable(name = "CUSTOMER_GROUP", joinColumns = {
-        @JoinColumn(name = "EMAIL", referencedColumnName = "EMAIL", nullable = false)}, inverseJoinColumns = {
-        @JoinColumn(name = "GROUP_NAME", referencedColumnName = "GROUP_NAME", nullable = false)})
-    @ManyToMany
-    private Collection<Groups> groupsCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -61,8 +60,8 @@ public class Customer implements Serializable {
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 40)
-    @Column(name = "EMAIL", nullable = false, length = 40)
+    @Size(min = 1, max = 100)
+    @Column(name = "EMAIL", nullable = false, length = 100)
     private String email;
     @Basic(optional = false)
     @NotNull
@@ -71,6 +70,13 @@ public class Customer implements Serializable {
     private String password;
     @Column(name = "CUSTOMER_ROLE")
     private Integer customerRole;
+    @JoinTable(name = "CUSTOMER_GROUP", joinColumns = {
+        @JoinColumn(name = "EMAIL", referencedColumnName = "EMAIL", nullable = false)}, inverseJoinColumns = {
+        @JoinColumn(name = "GROUP_NAME", referencedColumnName = "GROUP_NAME", nullable = false)})
+    @ManyToMany
+    private Collection<Groups> groupsCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    private Collection<Account> accountCollection;
 
     public Customer() {
     }
@@ -92,7 +98,7 @@ public class Customer implements Serializable {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.customerRole = customerRole;
+        this.customerRole = customerRole;;
     }
     
     
@@ -145,6 +151,24 @@ public class Customer implements Serializable {
         this.customerRole = customerRole;
     }
 
+    @XmlTransient
+    public Collection<Groups> getGroupsCollection() {
+        return groupsCollection;
+    }
+
+    public void setGroupsCollection(Collection<Groups> groupsCollection) {
+        this.groupsCollection = groupsCollection;
+    }
+
+    @XmlTransient
+    public Collection<Account> getAccountCollection() {
+        return accountCollection;
+    }
+
+    public void setAccountCollection(Collection<Account> accountCollection) {
+        this.accountCollection = accountCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -168,15 +192,6 @@ public class Customer implements Serializable {
     @Override
     public String toString() {
         return "dk.candycrushers.model.Customer[ customerId=" + customerId + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Groups> getGroupsCollection() {
-        return groupsCollection;
-    }
-
-    public void setGroupsCollection(Collection<Groups> groupsCollection) {
-        this.groupsCollection = groupsCollection;
     }
     
 }

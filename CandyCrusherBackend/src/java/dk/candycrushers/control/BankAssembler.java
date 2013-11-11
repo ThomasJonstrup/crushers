@@ -4,8 +4,10 @@
  */
 package dk.candycrushers.control;
 
+import dk.candycrushers.dto.AccountDetail;
 import dk.candycrushers.dto.CustomerDetail;
 import dk.candycrushers.dto.CustomerSummary;
+import dk.candycrushers.model.Account;
 import dk.candycrushers.model.Customer;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,5 +36,15 @@ public class BankAssembler {
                 customer.getEmail()
                 );
         }
+    
+//   public static void createAccountDetail(Account account) {
+//
+//       return new AccountDetail(
+//               account.getAccountId(),
+//               account.getAccountType(),
+//               account.getBalance(),
+//               account
+//                 );
+//   }
     
 }

@@ -1,6 +1,7 @@
 delete from customers;
 delete from banktellers;
 delete from groups;
+delete from accounts;
 
 --------
 
@@ -38,6 +39,15 @@ insert into groups (group_name, group_desc)
 values ('Banktellers', 'Banktellers');
 
 insert into customer_group(email, group_name)
-values ('ph@cph.dk', 'Customers')
+values ('ph@cph.dk', 'Customers');
 
 
+
+insert into accounts(account_id, account_type, balance, owner)
+values (1, 'Savings', 100, 1);
+
+insert into accounts(account_id, account_type, balance, owner)
+values (2, 'Pension', 500, 2);
+
+insert into accounts(account_id, account_type, balance, owner)
+values (3, 'MULLE', 700000, 3);
