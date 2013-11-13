@@ -24,5 +24,10 @@ public interface BankManager {
     CustomerDetail updateCustomer(long customerID, String firstName, String lastName, String email, String password);
 
     void addAccount(AccountDetail account);
+    AccountDetail getAccount();
+    String transactionToAnOtherAccount(int fromAccountId, int toAccountId, double amount);
+    AccountDetail getAccountTransactionToEachOther(long accountId);
+    
+    
 
 }
