@@ -70,14 +70,14 @@ public class BankManagerBean implements BankManager {
     }
 
     @Override
-    public void addAccount(AccountDetail account) {
+    public AccountDetail addAccount(String accountType, double balance, long customerID) {
         Account acc;
-        Integer i = (int) account.getAccountId();
-        acc = new Account(i, account.getAccountType());
+        Integer i = (int) customerID;
+        acc = new Account(i, accountType);
         Query query = em.createNamedQuery("Account.findByAccountId");
         em.persist(acc);
         
-        
+        return createAccountDetail(acc);
     }
 
     @Override
@@ -103,7 +103,7 @@ public class BankManagerBean implements BankManager {
        
         Account acc = (Account) q.getSingleResult();
 
-        AccountDetail aDetail = new AccountDetail(acc.getAccountId(), acc.getAccountType(), acc.getBalance(), acc.getOwner());
+        AccountDetail aDetail = new AccountDetail(acc.getAccountId(), acc.getAccountType(), acc.getBalance(), acc.getOwner().toString());
 
         return createAccountDetail(acc);
 

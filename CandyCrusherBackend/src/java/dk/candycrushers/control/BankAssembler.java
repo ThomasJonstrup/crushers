@@ -37,14 +37,14 @@ public class BankAssembler {
                 );
         }
     
-//   public static AccountDetail createAccountDetail(Account account) {
-//
-//       return new AccountDetail(
-//               account.getAccountId(),
-//               account.getAccountType(),
-//               account.getBalance(),
-//               account.getOwner()
-//                 );
-//   }
+   public static AccountDetail createAccountDetail(Account account) {
+
+       return new AccountDetail(
+               account.getAccountId(),
+               account.getAccountType(),
+               account.getBalance(),
+               account.getOwner().toString()
+                 );
+   }
     
 }

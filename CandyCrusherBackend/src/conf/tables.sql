@@ -5,11 +5,12 @@ drop table banktellers;
 drop table customers;
 drop sequence customer_seq restrict;
 drop sequence bankteller_seq restrict;
+drop sequence account_seq restrict;
 
 --------
 
 
-Create sequence customer_seq as int minvalue 1000;
+Create sequence customer_seq as int minvalue 1000 START WITH 1000 INCREMENT BY 1;
 
 
 create table groups (
@@ -47,6 +48,8 @@ create table customer_group (
     constraint fk_group_name foreign key (group_name)
     references groups(group_name)
 );
+
+Create sequence account_seq as int minvalue 5000;
 
 create table accounts (
     account_id int primary key,
