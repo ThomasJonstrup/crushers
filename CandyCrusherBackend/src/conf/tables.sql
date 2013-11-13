@@ -10,7 +10,7 @@ drop sequence account_seq restrict;
 --------
 
 
-Create sequence customer_seq as int minvalue 1000 START WITH 1000 INCREMENT BY 1;
+Create sequence customer_seq start with 1000;
 
 
 create table groups (
@@ -27,7 +27,7 @@ create table customers (
     customer_role int
 );
 
-Create sequence bankteller_seq as int minvalue 1000;
+Create sequence bankteller_seq start with 1000;
 
 create table banktellers (
     bankteller_id int primary key,
@@ -49,7 +49,7 @@ create table customer_group (
     references groups(group_name)
 );
 
-Create sequence account_seq as int minvalue 5000;
+Create sequence account_seq start with 1000;
 
 create table accounts (
     account_id int primary key,

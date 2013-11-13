@@ -8,15 +8,17 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -24,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "ACCOUNTS")
-@XmlRootElement
+@SequenceGenerator(name = "ASEQ", sequenceName = "account_seq")
 @NamedQueries({
     @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a"),
     @NamedQuery(name = "Account.findByAccountId", query = "SELECT a FROM Account a WHERE a.accountId = :accountId"),
@@ -36,6 +38,7 @@ public class Account implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ACCOUNT_ID", nullable = false)
+    @GeneratedValue(generator = "ASEQ", strategy = GenerationType.SEQUENCE)
     private Integer accountId;
     @Basic(optional = false)
     @NotNull

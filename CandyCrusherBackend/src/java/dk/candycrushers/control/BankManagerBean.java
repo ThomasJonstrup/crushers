@@ -16,7 +16,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import sun.nio.fs.AbstractFileTypeDetector;
 
 /**
  *
@@ -42,12 +41,13 @@ public class BankManagerBean implements BankManager {
 
     @Override
     public CustomerDetail getCustomer(long id) {
-        Query q = em.createNamedQuery("Customer.findByCustomerId");
-
-        q.setParameter("id", id);
-
-        Customer cus = (Customer) q.getSingleResult();
-
+//        Query q = em.createNamedQuery("Customer.findByCustomerId");
+//
+//        q.setParameter("id", id);
+//
+//        Customer cus = (Customer) q.getSingleResult();
+//
+        Customer cus = em.find(Customer.class, (int)id);
         CustomerDetail cDetail = new CustomerDetail(cus.getCustomerId(), cus.getFirstName(), cus.getLastName(), cus.getEmail());
 
         return createCustomerDetail(cus);
