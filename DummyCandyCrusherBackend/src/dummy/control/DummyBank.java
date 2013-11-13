@@ -106,10 +106,6 @@ public class DummyBank implements BankManager {
     }
 
 
-    @Override
-    public void addAccount(AccountDetail account) {
-        accountDetails.add(account);
-    }
 //
 //    @Override
 //    public Person checkLogin(String username, String password) {
@@ -158,10 +154,10 @@ public class DummyBank implements BankManager {
         double minusAmount = amount - (2 * amount);
 
         try {
-            Account fromAccount = getAccountTransactionToEachOther(fromAccountId);
+            AccountDetail fromAccount = getAccountTransactionToEachOther(fromAccountId);
             fromAccount.createTransaction(minusAmount, amount + " has been moved to account number: " + toAccountId);
 
-            Account toAccount = getAccountTransactionToEachOther(toAccountId);
+            AccountDetail toAccount = getAccountTransactionToEachOther(toAccountId);
             toAccount.createTransaction(amount, amount + " has been inserted from account number: " + fromAccount.getAccountId());
             returnString = "Transaction complete!";
         } catch (Exception e) {
@@ -171,7 +167,7 @@ public class DummyBank implements BankManager {
 
     @Override
     public AccountDetail getAccountTransactionToEachOther(long accountId) {
-        Account accountReturn = null;
+        AccountDetail accountReturn = null;
         for (int i = 0; i <= accounts.size() - 1; i++) {
             if (accounts.get(i).getAccountId() == accountId) {
                 accountReturn = accounts.get(i);
@@ -185,6 +181,13 @@ public class DummyBank implements BankManager {
 //                }
 //            }
 //        }
+    }
+
+    @Override
+    public AccountDetail addAccount(String accountType, double balance, long customerID) {
+           Account account = new Account(accountType, balance);
+        accounts.put(account.getCustomerId(), account);
+        return DummyBankAssembler.createCustomerDetail(newCust);
     }
 
 
