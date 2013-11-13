@@ -26,6 +26,7 @@ public class LoginCommand extends TargetCommand{
     public String execute(HttpServletRequest request) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        
         Person currentPerson = Factory.getInstance().getBank().checkLogin(username, password);
         
         if(currentPerson != null){
@@ -33,7 +34,7 @@ public class LoginCommand extends TargetCommand{
         return super.execute(request); //To change body of generated methods, choose Tools | Templates.
         }
         
-//        request.getSession().setAttribute("username", username);
+        request.getSession().setAttribute("username", username);
         return "/login.jsp";
     }
 }

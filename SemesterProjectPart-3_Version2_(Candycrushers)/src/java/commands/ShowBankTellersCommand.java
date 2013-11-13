@@ -20,7 +20,7 @@ public class ShowBankTellersCommand extends TargetCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        request.setAttribute("banktellers", Factory.getInstance().getBank().getBankTellers());
+//        request.setAttribute("banktellers", Factory.getInstance().getBank().getBankTellers());
         return super.execute(request); //To change body of generated methods, choose Tools | Templates.
     }
     
