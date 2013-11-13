@@ -23,7 +23,7 @@ public interface BankManager {
     CustomerDetail addCustomer(String firstName, String lastName, String email, String password, int role);
     CustomerDetail updateCustomer(long customerID, String firstName, String lastName, String email, String password);
 
-    void addAccount(AccountDetail account);
+    AccountDetail addAccount(String accountType, double balance, long customerID);
     AccountDetail getAccount();
     String transactionToAnOtherAccount(int fromAccountId, int toAccountId, double amount);
     AccountDetail getAccountTransactionToEachOther(long accountId);

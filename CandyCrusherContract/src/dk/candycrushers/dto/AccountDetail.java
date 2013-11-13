@@ -17,10 +17,10 @@ public class AccountDetail implements Serializable {
     private long accountId;
     private String accountType;
     private double balance;
-    private CustomerSummary owner;
+    private String owner;
 //    private List<Transaction> transactions = new ArrayList();
 
-    public AccountDetail(long accountId, String accountType, double balance, CustomerSummary owner) {
+    public AccountDetail(long accountId, String accountType, double balance, String owner) {
         this.accountId = accountId;
         this.accountType = accountType;
         this.balance = balance;
@@ -39,7 +39,7 @@ public class AccountDetail implements Serializable {
         return balance;
     }
 
-    public CustomerSummary getOwner() {
+    public String getOwner() {
         return owner;
     }
 
