@@ -4,8 +4,11 @@
  */
 package dummy.control;
 
+import dk.candycrushers.dto.AccountDetail;
+import dk.candycrushers.dto.AccountSummary;
 import dk.candycrushers.dto.CustomerDetail;
 import dk.candycrushers.dto.CustomerSummary;
+import dummy.model.Account;
 import dummy.model.Customer;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,5 +38,24 @@ public class DummyBankAssembler {
                 customer.getLastName(), 
                 customer.getEmail());
     }
+    
+    public static AccountSummary createAccountSummary(Account account)
+    {
+        return new AccountSummary(
+               account.getAccountId(),
+               account.getAccountType()
+                );
+    }
+    
+    public static AccountDetail createAccountDetail(Account account)
+    {
+        return new AccountDetail(
+                account.getAccountId(),
+                account.getAccountType(),
+                account.getBalance(),
+                account.getOwner());
+    }
+    
+    
     
 }

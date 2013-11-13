@@ -22,7 +22,9 @@ public class DummyBank implements BankManager {
     private Map<Long, BankTeller> banktellers = new HashMap<>();
     private Map<Long, Person> persons = new HashMap<>();
     private Account account;
+    private AccountDetail accountDetail;
     private List<Account> accounts = new ArrayList();
+    private List<AccountDetail> accountDetails = new ArrayList();
     //    private List<Transaction> transactions = new ArrayList();
     //    private List<Transaction> transactions = new ArrayList();
 
@@ -73,12 +75,12 @@ public class DummyBank implements BankManager {
         return DummyBankAssembler.createCustomerDetail(customers.get(id));
     }
 
-//    @Override
-//    public Account getAccount() {
-//
-//        return account;
-//    }
-//
+    @Override
+    public AccountDetail getAccount() {
+
+        return accountDetail;
+    }
+
     @Override
     public CustomerDetail addCustomer(String firstname, String lastName, String email, String password, int role) {
         Customer newCust = new Customer(firstname, lastName, email, password, role);
@@ -106,7 +108,7 @@ public class DummyBank implements BankManager {
 
     @Override
     public void addAccount(AccountDetail account) {
-//        accounts.add(account);
+        accountDetails.add(account);
     }
 //
 //    @Override
@@ -149,41 +151,41 @@ public class DummyBank implements BankManager {
 //
 //    @Override
 
-//
-//    @Override
-//    public String transactionToAnOtherAccount(int fromAccountId, int toAccountId, double amount) {
-//        String returnString = "Transaction did not complete ..";
-//        double minusAmount = amount - (2 * amount);
-//
-//        try {
-//            Account fromAccount = getAccountTransactionToEachOther(fromAccountId);
-//            fromAccount.createTransaction(minusAmount, amount + " has been moved to account number: " + toAccountId);
-//
-//            Account toAccount = getAccountTransactionToEachOther(toAccountId);
-//            toAccount.createTransaction(amount, amount + " has been inserted from account number: " + fromAccount.getAccountId());
-//            returnString = "Transaction complete!";
-//        } catch (Exception e) {
-//        }
-//        return returnString;
-//    }
-//
-//    @Override
-//    public Account getAccountTransactionToEachOther(long accountId) {
-//        Account accountReturn = null;
-//        for (int i = 0; i <= accounts.size() - 1; i++) {
-//            if (accounts.get(i).getAccountId() == accountId) {
-//                accountReturn = accounts.get(i);
+
+    @Override
+    public String transactionToAnOtherAccount(int fromAccountId, int toAccountId, double amount) {
+        String returnString = "Transaction did not complete ..";
+        double minusAmount = amount - (2 * amount);
+
+        try {
+            Account fromAccount = getAccountTransactionToEachOther(fromAccountId);
+            fromAccount.createTransaction(minusAmount, amount + " has been moved to account number: " + toAccountId);
+
+            Account toAccount = getAccountTransactionToEachOther(toAccountId);
+            toAccount.createTransaction(amount, amount + " has been inserted from account number: " + fromAccount.getAccountId());
+            returnString = "Transaction complete!";
+        } catch (Exception e) {
+        }
+        return returnString;
+    }
+
+    @Override
+    public AccountDetail getAccountTransactionToEachOther(long accountId) {
+        Account accountReturn = null;
+        for (int i = 0; i <= accounts.size() - 1; i++) {
+            if (accounts.get(i).getAccountId() == accountId) {
+                accountReturn = accounts.get(i);
+            }
+        }
+        return accountReturn;
+//        for (Account acc : accounts) {
+//            if (cus.getFirstName().equals(username)) {
+//                if (cus.getPassword().equals(password)) {
+//                    person = cus;
+//                }
 //            }
 //        }
-//        return accountReturn;
-////        for (Account acc : accounts) {
-////            if (cus.getFirstName().equals(username)) {
-////                if (cus.getPassword().equals(password)) {
-////                    person = cus;
-////                }
-////            }
-////        }
-//    }
+    }
 
 
 
