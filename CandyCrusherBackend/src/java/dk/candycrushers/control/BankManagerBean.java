@@ -16,6 +16,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import sun.nio.fs.AbstractFileTypeDetector;
 
 /**
  *
@@ -49,7 +50,7 @@ public class BankManagerBean implements BankManager {
 
         CustomerDetail cDetail = new CustomerDetail(cus.getCustomerId(), cus.getFirstName(), cus.getLastName(), cus.getEmail());
 
-        return null;
+        return createCustomerDetail(cus);
 
     }
 
@@ -94,5 +95,27 @@ public class BankManagerBean implements BankManager {
             cust.setPassword(password);
         }
         return createCustomerDetail(cust);
+    }
+
+    @Override
+    public AccountDetail getAccount() {
+        Query q = em.createNamedQuery("Account.findByAccountId");
+       
+        Account acc = (Account) q.getSingleResult();
+
+        AccountDetail aDetail = new AccountDetail(acc.getAccountId(), acc.getAccountType(), acc.getBalance(), acc.getOwner());
+
+        return createAccountDetail(acc);
+
+    }
+
+    @Override
+    public String transactionToAnOtherAccount(int fromAccountId, int toAccountId, double amount) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public AccountDetail getAccountTransactionToEachOther(long accountId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
