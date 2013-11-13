@@ -4,6 +4,7 @@
  */
 package commands;
 
+import dk.candycrushers.dto.CustomerDetail;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import dummy.model.Customer;
@@ -15,7 +16,8 @@ import servlets.Factory;
  * @author Thomas
  */
 public class SaveCustomerCommand extends TargetCommand{
-    private Customer cusChanged;
+//    private Customer cusChanged;
+    private CustomerDetail cusChanged;
 
     public SaveCustomerCommand(String target, SecurityRole role) {
         super(target, role);
