@@ -27,11 +27,12 @@ public class CreateNewAccountCommand extends TargetCommand{
         String accountType = request.getParameter("accountType");
         Account newAccount = new Account(accountType, 0);
         newAccount.createTransaction(0, "Konto oprettet!");
-        Factory.getInstance().getBank().addAccount(newAccount);
         
         String cusId = request.getParameter("customerId");
         long customerId = Integer.parseInt(cusId);
         CustomerDetail cus = Factory.getInstance().getBank().getCustomer(customerId);
+        
+        Factory.getInstance().getBank().addAccount(accountType, 0, customerId);
         
         request.setAttribute("currentPerson", cus);
         
