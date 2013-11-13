@@ -53,7 +53,7 @@ public class DummyBankAssembler {
                 account.getAccountId(),
                 account.getAccountType(),
                 account.getBalance(),
-                account.getOwner());
+                account.getOwner().toString());
     }
     
     
