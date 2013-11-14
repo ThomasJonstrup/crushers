@@ -5,6 +5,7 @@
 package dk.candycrushers.view;
 
 import dk.candycrushers.control.BankManager;
+import dk.candycrushers.dto.AccountDetail;
 import dk.candycrushers.dto.CustomerDetail;
 import dk.candycrushers.dto.CustomerSummary;
 import java.io.IOException;
@@ -58,7 +59,12 @@ public class Dummy extends HttpServlet {
 //            CustomerDetail addCustomer = manager.addCustomer("Mads", "Larsen", "xxx@cph.dk","k", 2);
             
 //            CustomerDetail updateCustomer = manager.updateCustomer(2, "Hans", "Madsen", "hans.madsen@cph.dk", "w");
-                manager.addAccount("Lån", 1000, 1);
+//            
+            out.println("<p>" + manager.getAccount(1)+"<p>");
+            
+//            AccountDetail account = manager.addAccount("Lån", 1000, 1);
+//            
+//            out.println("<p>" + account.getAccountType() + " oprettet </p>");
             out.println("</body>");
             out.println("</html>");
         } finally {
