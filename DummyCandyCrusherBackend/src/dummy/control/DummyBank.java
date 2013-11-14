@@ -76,7 +76,7 @@ public class DummyBank implements BankManager {
     }
 
     @Override
-    public AccountDetail getAccount() {
+    public AccountDetail getAccount(long id) {
 
         return accountDetail;
     }
