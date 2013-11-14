@@ -20,7 +20,7 @@ public class ShowCustomersOwnAccountCommand extends TargetCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        request.setAttribute("account", Factory.getInstance().getBank().getAccount());
+//        request.setAttribute("account", Factory.getInstance().getBank().getAccount());
 //        request.setAttribute("account", Factory.getInstance().getBank().getAccount());
         return super.execute(request);
     }

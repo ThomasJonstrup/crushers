@@ -22,7 +22,7 @@ public class ShowCustomerAccountCommand extends TargetCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        request.setAttribute("account", Factory.getInstance().getBank().getAccount());
+//        request.setAttribute("account", Factory.getInstance().getBank().getAccount());
         
         String cusId = request.getParameter("customerId");
         long customerId = Integer.parseInt(cusId);
