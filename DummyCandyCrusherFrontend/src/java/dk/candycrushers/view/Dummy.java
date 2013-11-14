@@ -55,8 +55,10 @@ public class Dummy extends HttpServlet {
             }
             out.println("<p>Test at hente en kunde<p>");
             out.println("<p>"+manager.getCustomer(1)+"</p>");
-            CustomerDetail addCustomer = manager.addCustomer("Mads", "Larsen", "xxx@cph.dk","k", 2);
+//            CustomerDetail addCustomer = manager.addCustomer("Mads", "Larsen", "xxx@cph.dk","k", 2);
             
+//            CustomerDetail updateCustomer = manager.updateCustomer(2, "Hans", "Madsen", "hans.madsen@cph.dk", "w");
+                manager.addAccount("Lån", 1000, 1);
             out.println("</body>");
             out.println("</html>");
         } finally {
