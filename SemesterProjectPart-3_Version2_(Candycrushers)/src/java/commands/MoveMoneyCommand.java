@@ -4,6 +4,7 @@
  */
 package commands;
 
+import dk.candycrushers.dto.AccountDetail;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import dummy.model.Customer;
@@ -27,7 +28,7 @@ public class MoveMoneyCommand extends TargetCommand{
         int toAcountId = Integer.parseInt(request.getParameter("toAcountId"));
         int amount = Integer.parseInt(request.getParameter("amount"));
         
-        String moneyTransfer = Factory.getInstance().getBank().transactionToAnOtherAccount(fromAcountId, toAcountId, amount);
+        AccountDetail moneyTransfer = Factory.getInstance().getBank().transactionToAnOtherAccount(fromAcountId, toAcountId, amount);
 //        Person currentPerson = Factory.getInstance().getBank().checkLogin(username, password);
         
 //        if(currentPerson != null){

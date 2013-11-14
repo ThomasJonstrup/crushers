@@ -149,7 +149,7 @@ public class DummyBank implements BankManager {
 
 
     @Override
-    public String transactionToAnOtherAccount(int fromAccountId, int toAccountId, double amount) {
+    public AccountDetail transactionToAnOtherAccount(int fromAccountId, int toAccountId, double amount) {
         String returnString = "Transaction did not complete ..";
         double minusAmount = amount - (2 * amount);
 

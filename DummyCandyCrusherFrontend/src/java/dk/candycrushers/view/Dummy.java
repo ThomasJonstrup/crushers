@@ -55,16 +55,24 @@ public class Dummy extends HttpServlet {
                 out.println("<p>" + customer.getFirstName() + " " + customer.getLastName() + "</p>");
             }
             out.println("<p>Test at hente en kunde<p>");
-            out.println("<p>"+manager.getCustomer(1)+"</p>");
+            out.println("<hr>");
+            out.println("<p>"+manager.getCustomer(1).getFirstName()+"</p>");
 //            CustomerDetail addCustomer = manager.addCustomer("Mads", "Larsen", "xxx@cph.dk","k", 2);
             
 //            CustomerDetail updateCustomer = manager.updateCustomer(2, "Hans", "Madsen", "hans.madsen@cph.dk", "w");
 //            
-            out.println("<p>" + manager.getAccount(1)+"<p>");
+            out.println("<p>" + manager.getAccount(1).getAccountType()+ " saldo: " 
+                    + manager.getAccount(1).getBalance() + "<p>");
             
 //            AccountDetail account = manager.addAccount("Lån", 1000, 1);
             
 //            out.println("<p>" + account.getAccountType() + " oprettet </p>");
+            
+            manager.transactionToAnOtherAccount(2, 1, 5000);
+            
+            out.println("<p>" + manager.getAccount(1).getAccountType()+ " saldo: " 
+                    + manager.getAccount(1).getBalance() + "<p>");
+            
             out.println("</body>");
             out.println("</html>");
         } finally {
