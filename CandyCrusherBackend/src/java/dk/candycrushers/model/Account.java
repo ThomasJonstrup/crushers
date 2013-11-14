@@ -59,10 +59,18 @@ public class Account implements Serializable {
         this.accountId = accountId;
     }
 
-    public Account(Integer accountId, String accountType) {
+    public Account(Integer accountId, double balance, String accountType) {
         this.accountId = accountId;
+        this.balance = balance;
         this.accountType = accountType;
     }
+
+    public Account(String accountType, Double balance) {
+        this.accountType = accountType;
+        this.balance = balance;
+    }
+    
+    
 
     public Integer getAccountId() {
         return accountId;

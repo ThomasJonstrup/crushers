@@ -7,6 +7,8 @@ package dk.candycrushers.control;
 import dk.candycrushers.dto.AccountDetail;
 import dk.candycrushers.dto.CustomerDetail;
 import dk.candycrushers.dto.CustomerSummary;
+import dk.candycrushers.dto.TransactionDetail;
+import dk.candycrushers.dto.TransactionSummary;
 import dk.candycrushers.model.Account;
 import dk.candycrushers.model.Customer;
 import java.util.ArrayList;
@@ -43,8 +45,8 @@ public class BankAssembler {
                account.getAccountId(),
                account.getAccountType(),
                account.getBalance(),
-               account.getOwner().toString()
+               "" + account.getOwner().getFirstName() + " " + account.getOwner().getLastName()
                  );
    }
-    
+   
 }

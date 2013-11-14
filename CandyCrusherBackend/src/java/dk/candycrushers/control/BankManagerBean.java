@@ -73,7 +73,12 @@ public class BankManagerBean implements BankManager {
     public AccountDetail addAccount(String accountType, double balance, long customerID) {
         Account acc;
         Integer i = (int) customerID;
-        acc = new Account(i, accountType);
+        acc = new Account(accountType, balance);
+        
+        Customer cus = em.find(Customer.class, i);
+        
+        acc.setOwner(cus);
+        
         Query query = em.createNamedQuery("Account.findByAccountId");
         em.persist(acc);
         
@@ -98,12 +103,9 @@ public class BankManagerBean implements BankManager {
     }
 
     @Override
-    public AccountDetail getAccount() {
-        Query q = em.createNamedQuery("Account.findByAccountId");
-       
-        Account acc = (Account) q.getSingleResult();
-
-        AccountDetail aDetail = new AccountDetail(acc.getAccountId(), acc.getAccountType(), acc.getBalance(), acc.getOwner().toString());
+    public AccountDetail getAccount(long id) {
+        Account acc = em.find(Account.class, (int)id);
+        AccountDetail aDetail = new AccountDetail(acc.getAccountId(), acc.getAccountType(), acc.getBalance(), acc.getOwner().getFirstName());
 
         return createAccountDetail(acc);
 
@@ -111,7 +113,16 @@ public class BankManagerBean implements BankManager {
 
     @Override
     public String transactionToAnOtherAccount(int fromAccountId, int toAccountId, double amount) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Account fromAcc = em.find(Account.class, fromAccountId);
+        
+        Account toAcc = em.find(Account.class, toAccountId);
+        
+        toAcc.setBalance(toAcc.getBalance() + amount);
+        
+        fromAcc.setBalance(fromAcc.getBalance() - amount);
+        return null;
+        
+        
     }
 
     @Override
