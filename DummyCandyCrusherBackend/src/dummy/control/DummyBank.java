@@ -154,12 +154,12 @@ public class DummyBank implements BankManager {
         double minusAmount = amount - (2 * amount);
 
         try {
-            AccountDetail fromAccount = getAccountTransactionToEachOther(fromAccountId);
-            fromAccount.createTransaction(minusAmount, amount + " has been moved to account number: " + toAccountId);
-
-            AccountDetail toAccount = getAccountTransactionToEachOther(toAccountId);
-            toAccount.createTransaction(amount, amount + " has been inserted from account number: " + fromAccount.getAccountId());
-            returnString = "Transaction complete!";
+//            AccountDetail fromAccount = getAccountTransactionToEachOther(fromAccountId);
+//            fromAccount.createTransaction(minusAmount, amount + " has been moved to account number: " + toAccountId);
+//
+//            AccountDetail toAccount = getAccountTransactionToEachOther(toAccountId);
+//            toAccount.createTransaction(amount, amount + " has been inserted from account number: " + fromAccount.getAccountId());
+//            returnString = "Transaction complete!";
         } catch (Exception e) {
         }
         return returnString;
@@ -170,7 +170,7 @@ public class DummyBank implements BankManager {
         AccountDetail accountReturn = null;
         for (int i = 0; i <= accounts.size() - 1; i++) {
             if (accounts.get(i).getAccountId() == accountId) {
-                accountReturn = accounts.get(i);
+                accountReturn = accountDetails.get(i);
             }
         }
         return accountReturn;
@@ -185,12 +185,9 @@ public class DummyBank implements BankManager {
 
     @Override
     public AccountDetail addAccount(String accountType, double balance, long customerID) {
-           Account account = new Account(accountType, balance);
-        accounts.put(account.getCustomerId(), account);
-        return DummyBankAssembler.createCustomerDetail(newCust);
+           Account acc = new Account(accountType, balance);
+        return DummyBankAssembler.createAccountDetail(acc);
     }
-
-
 
 
 }
