@@ -112,7 +112,7 @@ public class BankManagerBean implements BankManager {
     }
 
     @Override
-    public String transactionToAnOtherAccount(int fromAccountId, int toAccountId, double amount) {
+    public AccountDetail transactionToAnOtherAccount(int fromAccountId, int toAccountId, double amount) {
         Account fromAcc = em.find(Account.class, fromAccountId);
         
         Account toAcc = em.find(Account.class, toAccountId);
@@ -120,13 +120,13 @@ public class BankManagerBean implements BankManager {
         toAcc.setBalance(toAcc.getBalance() + amount);
         
         fromAcc.setBalance(fromAcc.getBalance() - amount);
-        return null;
         
-        
+        return createAccountDetail(fromAcc);
     }
 
     @Override
     public AccountDetail getAccountTransactionToEachOther(long accountId) {
+//        DENNE METODE BRUGES IKKE I DET ORIGINALE PROJEKT
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

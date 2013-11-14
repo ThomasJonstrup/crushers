@@ -6,9 +6,9 @@
         <property name="portNumber" value="1527"/>
         <property name="databaseName" value="CandyBase"/>
         <property name="User" value="candy"/>
-        <property name="Password" value="candy"/>
+        <property name="Password" value="test"/>
         <property name="URL" value="jdbc:derby://localhost:1527/CandyBase"/>
         <property name="driverClass" value="org.apache.derby.jdbc.ClientDriver"/>
     </jdbc-connection-pool>
-    <jdbc-resource enabled="true" jndi-name="jdbc/candyBase" object-type="user" pool-name="derby_net_CandyBase_candyPool"/>
+    <jdbc-resource enabled="true" jndi-name="CandyBase" object-type="user" pool-name="derby_net_CandyBase_candyPool"/>
 </resources>
