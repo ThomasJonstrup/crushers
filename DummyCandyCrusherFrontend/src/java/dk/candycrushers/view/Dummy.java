@@ -63,7 +63,7 @@ public class Dummy extends HttpServlet {
             out.println("<p>" + manager.getAccount(1)+"<p>");
             
 //            AccountDetail account = manager.addAccount("Lån", 1000, 1);
-//            
+            
 //            out.println("<p>" + account.getAccountType() + " oprettet </p>");
             out.println("</body>");
             out.println("</html>");
