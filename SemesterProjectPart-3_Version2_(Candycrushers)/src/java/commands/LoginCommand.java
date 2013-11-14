@@ -27,14 +27,14 @@ public class LoginCommand extends TargetCommand{
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         
-        Person currentPerson = Factory.getInstance().getBank().checkLogin(username, password);
-        
-        if(currentPerson != null){
-            request.getSession().setAttribute("currentPerson", currentPerson);
-        return super.execute(request); //To change body of generated methods, choose Tools | Templates.
-        }
-        
-        request.getSession().setAttribute("username", username);
+//        Person currentPerson = Factory.getInstance().getBank().checkLogin(username, password);
+//        
+//        if(currentPerson != null){
+//            request.getSession().setAttribute("currentPerson", currentPerson);
+//        return super.execute(request); //To change body of generated methods, choose Tools | Templates.
+//        }
+//        
+//        request.getSession().setAttribute("username", username);
         return "/login.jsp";
     }
 }
