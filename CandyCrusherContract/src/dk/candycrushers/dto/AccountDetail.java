@@ -18,7 +18,7 @@ public class AccountDetail implements Serializable {
     private String accountType;
     private double balance;
     private String owner;
-//    private List<Transaction> transactions = new ArrayList();
+    private List<TransactionDetail> transactions = new ArrayList();
 
     public AccountDetail(long accountId, String accountType, double balance, String owner) {
         this.accountId = accountId;
@@ -43,10 +43,15 @@ public class AccountDetail implements Serializable {
         return owner;
     }
 
-//    public List<Transaction> getTransactions() {
-//        return transactions;
+    public List<TransactionDetail> getTransactions() {
+        return transactions;
+    }
+//
+//    public TransactionDetail createTransaction(double amount, String message) {
+//        TransactionSummary t = new TransactionSummary(amount, message);
+//        transactions.add(t);
+//        balance += amount;
+//        t.setBalance(balance);
+//        return t;
 //    }
-    
-    
-    
 }

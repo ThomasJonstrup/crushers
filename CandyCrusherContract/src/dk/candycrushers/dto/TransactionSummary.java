@@ -10,4 +10,23 @@ package dk.candycrushers.dto;
  */
 public class TransactionSummary {
     
+    
+    private double ammount;
+    private String message;
+
+    public TransactionSummary(double ammount, String message) {
+        this.ammount = ammount;
+        this.message = message;
+    }
+
+    public double getAmmount() {
+        return ammount;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    
+    
 }
