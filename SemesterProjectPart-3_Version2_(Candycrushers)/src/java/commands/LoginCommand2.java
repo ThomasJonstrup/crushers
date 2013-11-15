@@ -31,6 +31,16 @@ public class LoginCommand2 implements Command {
         
     try {
       request.login(userName, password);
+      
+      if(request.isUserInRole("Customers")) {
+          System.out.println("User is customer");
+      }else
+      
+      if(request.isUserInRole("Banktellers")) {
+          System.out.println("User is banktellers");
+      }else
+            System.out.println("unkhown roles");
+      
       for (SecurityRole role : roleToTarget.keySet()) {
         if(request.isUserInRole(role.toString())){
           nextPage = roleToTarget.get(role);

@@ -7,8 +7,6 @@ package commands;
 import dk.candycrushers.dto.AccountDetail;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
-import dummy.model.Customer;
-import dummy.model.Person;
 import security.SecurityRole;
 import servlets.Factory;
 

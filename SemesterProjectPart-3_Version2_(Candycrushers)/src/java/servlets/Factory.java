@@ -6,12 +6,12 @@ package servlets;
 
 import commands.*;
 import dk.candycrushers.control.BankManager;
-import java.util.ArrayList;
+import dk.candycrushers.dto.AccountDetail;
+import dk.candycrushers.dto.CustomerDetail;
+import dk.candycrushers.dto.CustomerSummary;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import dummy.model.Customer;
-import dummy.control.DummyBank;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -25,10 +25,13 @@ import security.SecurityRole;
  * @author Thomas
  */
 public class Factory {
-
+    
+    
+    private BankManager bank = lookupBankManagerBeanRemote();
+ 
     
 
-    private BankManager bank = new DummyBank();
+//    private BankManager bank = new DummyBank();
     private static Factory instance = null;
     private Map<String, Command> commands = new HashMap<>();
 
@@ -36,7 +39,12 @@ public class Factory {
     {
         //All
         commands.put("main", new TargetCommand("/all/main.jsp", SecurityRole.All));
-        commands.put("login_command", new LoginCommand("/all/main.jsp", SecurityRole.All));
+//        commands.put("login_command", new LoginCommand("/all/main.jsp", SecurityRole.All));
+        commands.put("show_login", new ShowLoginCommand("login.jsp", SecurityRole.All));
+        Map<SecurityRole, String> targetRoles = new HashMap<>();
+        targetRoles.put(SecurityRole.Customers, "/all/main.jsp");
+        targetRoles.put(SecurityRole.Banktellers, "/all/main.jsp");
+        commands.put("login_command", new LoginCommand2(targetRoles, "login.jsp"));
         commands.put("cancel", new TargetCommand("/all/main.jsp", SecurityRole.All));
         
         //Banktellers
@@ -45,7 +53,7 @@ public class Factory {
         commands.put("show_account", new ShowCustomerAccountCommand("/all/account.jsp", SecurityRole.All));
         commands.put("add_customer_target", new TargetCommand("/banktellers/add_customer.jsp", SecurityRole.Banktellers));
         commands.put("add_customer", new AddCustomerCommand("/banktellers/view_customer.jsp", SecurityRole.Banktellers));
-        commands.put("logout_command", new LogOutCommand("login.jsp", SecurityRole.Banktellers));
+        commands.put("logout_command", new LogOutCommand("login.jsp", SecurityRole.All));
         commands.put("edit_customer", new EditCustomerCommand("/banktellers/edit_customer.jsp", SecurityRole.Banktellers));
         commands.put("create_account", new TargetCommand("/banktellers/createAccount.jsp", SecurityRole.Banktellers));
         commands.put("add_account", new CreateNewAccountCommand("/all/account.jsp", SecurityRole.All));
@@ -80,7 +88,7 @@ public class Factory {
 
 public Command getCommand(String cmdStr, HttpServletRequest request) {
     if (cmdStr == null) {
-      cmdStr = "main";
+      cmdStr = "show_login";
     }
     Command cmd = commands.get(cmdStr);
 
@@ -97,5 +105,16 @@ public Command getCommand(String cmdStr, HttpServletRequest request) {
     }
 
     return cmd;
-  } 
+  }
+
+    private BankManager lookupBankManagerBeanRemote() {
+        try {
+            Context c = new InitialContext();
+            return (BankManager) c.lookup("java:global/CandyCrusherBackend/BankManagerBean!dk.candycrushers.control.BankManager");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+
 }

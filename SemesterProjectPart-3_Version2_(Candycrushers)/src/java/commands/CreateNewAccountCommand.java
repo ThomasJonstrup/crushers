@@ -5,10 +5,9 @@
 package commands;
 
 import dk.candycrushers.dto.AccountDetail;
+import dk.candycrushers.dto.AccountSummary;
 import dk.candycrushers.dto.CustomerDetail;
 import javax.servlet.http.HttpServletRequest;
-import dummy.model.Account;
-import dummy.model.Customer;
 import security.SecurityRole;
 import servlets.Factory;
 
@@ -25,8 +24,8 @@ public class CreateNewAccountCommand extends TargetCommand{
     @Override
     public String execute(HttpServletRequest request) {
         String accountType = request.getParameter("accountType");
-        Account newAccount = new Account(accountType, 0);
-        newAccount.createTransaction(0, "Konto oprettet!");
+//        AccountDetail newAccount = new AccountDetail();
+//        newAccount.createTransaction(0, "Konto oprettet!");
         
         String cusId = request.getParameter("customerId");
         long customerId = Integer.parseInt(cusId);

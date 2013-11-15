@@ -11,20 +11,28 @@ package dk.candycrushers.dto;
 public class TransactionSummary {
     
     
-    private double ammount;
+    private double balance;
     private String message;
 
-    public TransactionSummary(double ammount, String message) {
-        this.ammount = ammount;
+    public TransactionSummary(double balance, String message) {
+        this.balance = balance;
         this.message = message;
     }
 
-    public double getAmmount() {
-        return ammount;
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
     public String getMessage() {
         return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     

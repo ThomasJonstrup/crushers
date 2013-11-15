@@ -5,7 +5,6 @@
 package commands;
 
 import javax.servlet.http.HttpServletRequest;
-import dummy.model.Customer;
 import dk.candycrushers.control.BankManager;
 
 import dk.candycrushers.dto.CustomerDetail;

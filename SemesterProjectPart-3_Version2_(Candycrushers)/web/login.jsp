@@ -54,6 +54,8 @@
          </fieldset>
 
         </form>
+        
+            ${loginerror}
         <button id="applink"><a href="Mobile/MobileA/BankMain.html" data-role="button" data-inline="true" data-theme="b">Mobile APP</a></button>
     </div>
 
