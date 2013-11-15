@@ -1,10 +1,12 @@
 *.class
 
+setup/glassfish-resources.xml
+src/conf/persistence.xml
+
+
 # Package Files #
 *.jar
 *.war
 *.ear
 
-persistence.xml
-glassfish-ressources.xml
 
