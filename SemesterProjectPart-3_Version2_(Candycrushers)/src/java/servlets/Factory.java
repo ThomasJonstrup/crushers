@@ -53,7 +53,7 @@ public class Factory {
         commands.put("show_account", new ShowCustomerAccountCommand("/all/account.jsp", SecurityRole.All));
         commands.put("add_customer_target", new TargetCommand("/banktellers/add_customer.jsp", SecurityRole.Banktellers));
         commands.put("add_customer", new AddCustomerCommand("/banktellers/view_customer.jsp", SecurityRole.Banktellers));
-        commands.put("logout_command", new LogOutCommand("login.jsp", SecurityRole.All));
+        commands.put("logout_command", new LogoutCommand2("login.jsp", SecurityRole.All));
         commands.put("edit_customer", new EditCustomerCommand("/banktellers/edit_customer.jsp", SecurityRole.Banktellers));
         commands.put("create_account", new TargetCommand("/banktellers/createAccount.jsp", SecurityRole.Banktellers));
         commands.put("add_account", new CreateNewAccountCommand("/all/account.jsp", SecurityRole.All));
@@ -63,7 +63,7 @@ public class Factory {
 //        commands.put("show_banktellers", new ShowBankTellersCommand("show_banktellers.jsp"));
         
         //Customers
-        commands.put("show_own_account", new ShowCustomersOwnAccountCommand("/all/account.jsp", SecurityRole.Customers));
+        commands.put("show_own_account", new ShowCustomersOwnAccountCommand("/all/account.jsp", SecurityRole.All));
         commands.put("move_money", new MoveMoneyCommand("/all/main.jsp", SecurityRole.All));
             }
 

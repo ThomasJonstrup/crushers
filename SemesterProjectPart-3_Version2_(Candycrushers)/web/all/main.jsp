@@ -4,6 +4,7 @@
     Author     : Thomas
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
@@ -75,10 +76,15 @@
         
         <div id="menulink">
             
-            <li id="linav"><a href="Controller?command=show_customers" class="nav bankTeller">- Show Customers</a></li>
+            <c:if test="${pageContext.request.isUserInRole('Banktellers')==true}">
+            <li id="linav"><a href="Controller?command=show_customers" class="nav bankTeller">- Show Customers</a></li>    
+            </c:if>
             <li id="linav"><a href="Controller?command=show_own_account" class="nav customer" >- Show Account</a></li>
 <!--            <li id="linav"><a href="Controller?command=show_banktellers" class="bankTeller nav">- Show Bank Teller</a></li>-->
+             
+            <c:if test="${pageContext.request.isUserInRole('Banktellers')==true}">
             <li id="linav"><a href="Controller?command=add_customer_target" class="bankTeller nav">- Add Customer</a></li>
+             </c:if>
             <!--<li class="bankTeller"><a href="Controller?command=create_account" class="bankTeller">Create new account</a></li>-->
 <!--            <li id="linav"><a href="Controller?command=add_bankteller" class="bankTeller nav">- Add Bank Teller</a></li>-->
         </div>    
