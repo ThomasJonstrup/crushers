@@ -138,7 +138,6 @@ $(function() {
       </table>
       <br/><br/>
       </c:forEach>
-        <a href="main.jsp">Back to main</a>
     
     </div>
 

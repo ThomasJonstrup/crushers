@@ -72,10 +72,10 @@
                     <th>Email:</th>
                     <td><input type="text" name="email" value="${customer.email}" /></td>
                 </tr>
-       
+                
                 <tr class="ButtonRow">
                     <td colspan="2">
-                        <!--<input type="hidden" name="command" value="save_customer"/>-->
+<!--                        <input type="hidden" name="command" value="save_customer"/>-->
                         <button type="submit" name="command" value="save_customer">Save Customer</button>
 <!--                        <button type="submit" name="command" value="cancel">Cancel Editing</button>-->
                          <input type="button" value="Back" onclick="javascript:history.go(-1);">

@@ -4,13 +4,14 @@
  */
 package dk.candycrushers.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author Thomas
  */
-public class TransactionDetail {
+public class TransactionDetail implements Serializable {
 
     private long transactionId;
     private Date timestamp;

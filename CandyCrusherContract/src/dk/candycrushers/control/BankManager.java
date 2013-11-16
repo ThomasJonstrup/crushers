@@ -21,7 +21,7 @@ public interface BankManager {
     Collection<CustomerSummary> getCustomers();
     CustomerDetail getCustomer(long id);
     CustomerDetail addCustomer(String firstName, String lastName, String email, String password, int role);
-    CustomerDetail updateCustomer(long customerID, String firstName, String lastName, String email, String password);
+    CustomerDetail updateCustomer(long customerID, String firstName, String lastName, String email);
 
     AccountDetail addAccount(String accountType, double balance, long customerID);
     AccountDetail getAccount(long id);

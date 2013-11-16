@@ -56,7 +56,7 @@
         </form>
         
             ${loginerror}
-        <button id="applink"><a href="Mobile/MobileA/BankMain.html" data-role="button" data-inline="true" data-theme="b">Mobile APP</a></button>
+        <button id="applink"><a href="Mobile/MobileA/BankMain.jsp" data-role="button" data-inline="true" data-theme="b">Mobile APP</a></button>
     </div>
 
 <!--  Menu div: -->

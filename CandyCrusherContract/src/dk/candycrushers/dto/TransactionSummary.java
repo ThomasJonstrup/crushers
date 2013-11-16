@@ -4,11 +4,13 @@
  */
 package dk.candycrushers.dto;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Thomas
  */
-public class TransactionSummary {
+public class TransactionSummary implements Serializable {
     
     
     private double balance;

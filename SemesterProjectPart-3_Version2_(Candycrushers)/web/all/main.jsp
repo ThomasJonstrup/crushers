@@ -63,7 +63,7 @@
     <!-- Top right div: -->
 
     <div id="topright">
-        <h2 style="color: white;">Hr. ${currentPerson.firstName}</h2>
+        <h2 style="color: white;">Welcome ${currentPerson.firstName}</h2>
          <a href="Controller?command=logout_command"><button>Log out</button></a>
     </div>
 

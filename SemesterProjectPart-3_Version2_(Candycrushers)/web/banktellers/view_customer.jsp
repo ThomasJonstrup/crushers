@@ -100,6 +100,7 @@
                 <tr>
                     <td>Account type</td>
                     <td><input type="text" name="accountType" value="" required></td>
+                    
                 </tr>
 
                 <tr>

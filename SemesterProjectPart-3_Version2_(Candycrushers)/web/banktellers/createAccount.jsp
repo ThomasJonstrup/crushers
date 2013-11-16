@@ -64,6 +64,9 @@
                 <tr>
                     <td>Account type</td>
                     <td><input type="text" name="accountType" value="" ></td>
+                    <td><input type="text" name="balance" value="" ></td>
+                    <td><input type="text" name="customerId" value="" ></td>
+                    
                 </tr>
 
                 <tr>

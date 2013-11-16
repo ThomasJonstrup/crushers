@@ -31,9 +31,9 @@ public class SaveCustomerCommand extends TargetCommand{
     String firstName = request.getParameter("firstName");
     String lastName = request.getParameter("lastName");
     String email = request.getParameter("email");
-    String password = request.getParameter("password");
+//    String password = request.getParameter("password");
 
-        cusChanged = Factory.getInstance().getBank().updateCustomer(idLong, firstName, lastName, email, password);
+        cusChanged = Factory.getInstance().getBank().updateCustomer(idLong, firstName, lastName, email);
         
         request.setAttribute("customer", cusChanged);
         
