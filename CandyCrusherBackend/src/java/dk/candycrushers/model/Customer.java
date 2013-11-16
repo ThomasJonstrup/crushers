@@ -4,8 +4,13 @@
  */
 package dk.candycrushers.model;
 
+import dk.candycrushers.utils.PasswordGenerator;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -94,17 +99,28 @@ public class Customer implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
+            try {
+            this.password = PasswordGenerator.getEncoded(password); 
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
+            Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+
 
     public Customer(String firstName, String lastName, String email, String password, Integer customerRole) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.customerRole = customerRole;;
+        this.customerRole = customerRole;
     }
     
+    public Customer(Integer customerId, String firstName, String lastName, String email) {
+        this.customerId = customerId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
     
 
     public Integer getCustomerId() {

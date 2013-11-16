@@ -62,9 +62,9 @@ public class BankManagerBean implements BankManager {
     public CustomerDetail addCustomer(String firstName, String lastName, String email, String password, int role) {
         Customer customer;
         customer = new Customer(firstName, lastName, email, password, role);
-        Query query = em.createNamedQuery("Groups.findByGroupName");
-        query.setParameter("groupName", "Customers");
-        Groups group = (Groups) query.getSingleResult();
+//        Query query = em.createNamedQuery("Groups.findByGroupName");
+//        query.setParameter("groupName", "Customers");
+//        Groups group = (Groups) query.getSingleResult();
         em.persist(customer);
         return createCustomerDetail(customer);
     }
@@ -86,18 +86,18 @@ public class BankManagerBean implements BankManager {
     }
 
     @Override
-    public CustomerDetail updateCustomer(long customerID, String firstName, String lastName, String email, String password) {
+    public CustomerDetail updateCustomer(long customerID, String firstName, String lastName, String email) {
         long id = customerID;
         Customer cust;
         if (id == 0) {
-            cust = new Customer(0, firstName, lastName, email, password);
+            cust = new Customer(0, firstName, lastName, email);
             em.persist(cust);
         } else {
             cust = em.find(Customer.class, (int) id);
             cust.setFirstName(firstName);
             cust.setLastName(lastName);
             cust.setEmail(email);
-            cust.setPassword(password);
+//            cust.setPassword(password);
         }
         return createCustomerDetail(cust);
     }
