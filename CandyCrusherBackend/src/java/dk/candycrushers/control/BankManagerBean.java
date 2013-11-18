@@ -129,4 +129,13 @@ public class BankManagerBean implements BankManager {
 //        DENNE METODE BRUGES IKKE I DET ORIGINALE PROJEKT
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public CustomerDetail getCustomerByEmail(String email) {
+      Customer customer = 
+              em.createNamedQuery("Customer.findByEmail", Customer.class)
+              .setParameter("email", email)
+              .getSingleResult();
+      return createCustomerDetail(customer);
+    }
 }

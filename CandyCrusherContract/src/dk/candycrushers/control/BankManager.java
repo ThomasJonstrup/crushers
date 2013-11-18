@@ -20,6 +20,7 @@ public interface BankManager {
     String sayHello(String name);
     Collection<CustomerSummary> getCustomers();
     CustomerDetail getCustomer(long id);
+    CustomerDetail getCustomerByEmail(String email);
     CustomerDetail addCustomer(String firstName, String lastName, String email, String password, int role);
     CustomerDetail updateCustomer(long customerID, String firstName, String lastName, String email);
 

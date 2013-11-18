@@ -6,6 +6,7 @@ package dk.candycrushers.dto;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class CustomerDetail implements Serializable {
     private String lastName;
     private String email;
 
-    private List<AccountDetail> accounts = new ArrayList();
+    private Collection<AccountDetail> accounts = new ArrayList();
     
     public CustomerDetail(long customerId, String firstName, String lastName, String email) {
         this.customerId = customerId;
@@ -57,11 +58,11 @@ public class CustomerDetail implements Serializable {
     }    
     
 
-  public List<AccountDetail> getAccounts() {
+  public Collection<AccountDetail> getAccounts() {
     return accounts;
   }
 
-  public void setAccounts(List<AccountDetail> accounts) {
+  public void setAccounts(Collection<AccountDetail> accounts) {
     this.accounts = accounts;
   }
 

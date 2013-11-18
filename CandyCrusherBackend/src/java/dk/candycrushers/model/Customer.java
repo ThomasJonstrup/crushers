@@ -61,31 +61,37 @@ public class Customer implements Serializable {
     @Size(min = 1, max = 40)
     @Column(name = "FIRST_NAME", nullable = false, length = 40)
     private String firstName;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 40)
     @Column(name = "LAST_NAME", nullable = false, length = 40)
     private String lastName;
+    
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "EMAIL", nullable = false, length = 100)
     private String email;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 150)
     @Column(name = "PASSWORD", nullable = false, length = 150)
     private String password;
+    
     @Column(name = "CUSTOMER_ROLE")
     private Integer customerRole;
+    
     @JoinTable(name = "CUSTOMER_GROUP", joinColumns = {
         @JoinColumn(name = "EMAIL", referencedColumnName = "EMAIL", nullable = false)}, inverseJoinColumns = {
         @JoinColumn(name = "GROUP_NAME", referencedColumnName = "GROUP_NAME", nullable = false)})
     @ManyToMany
     private Collection<Groups> groupsCollection;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
-    private Collection<Account> accountCollection;
+    private Collection<Account> accounts;
 
     public Customer() {
     }
@@ -181,12 +187,12 @@ public class Customer implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Account> getAccountCollection() {
-        return accountCollection;
+    public Collection<Account> getAccounts() {
+        return accounts;
     }
 
-    public void setAccountCollection(Collection<Account> accountCollection) {
-        this.accountCollection = accountCollection;
+    public void setAccounts(Collection<Account> accounts) {
+        this.accounts = accounts;
     }
 
     @Override

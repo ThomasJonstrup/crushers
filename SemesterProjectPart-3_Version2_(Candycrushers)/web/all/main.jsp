@@ -32,15 +32,15 @@
                     $(".bankTeller").hide();
             }
 
-            if (${currentPerson.role} == 1){
-            $(customer);
-            }
-            if (${currentPerson.role} == 2){
-                $(bankTeller);
-            }
-            if (${currentPerson.role} == 3){
-                $(manager);
-            }
+//            if ({currentPerson.role} == 1){
+//            $(customer);
+//            }
+//            if ({currentPerson.role} == 2){
+//                $(bankTeller);
+//            }
+//            if ({currentPerson.role} == 3){
+//                $(manager);
+//            }
         </script>
     </head>
     <body>

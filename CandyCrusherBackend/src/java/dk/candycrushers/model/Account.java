@@ -40,14 +40,17 @@ public class Account implements Serializable {
     @Column(name = "ACCOUNT_ID", nullable = false)
     @GeneratedValue(generator = "ASEQ", strategy = GenerationType.SEQUENCE)
     private Integer accountId;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 40)
     @Column(name = "ACCOUNT_TYPE", nullable = false, length = 40)
     private String accountType;
+    
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "BALANCE", precision = 52)
     private Double balance;
+    
     @JoinColumn(name = "OWNER", referencedColumnName = "CUSTOMER_ID", nullable = false)
     @ManyToOne(optional = false)
     private Customer owner;
