@@ -10,6 +10,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -17,7 +19,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -25,42 +26,53 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "TRANSACTIONS")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Transaction.findAll", query = "SELECT t FROM Transaction t"),
-    @NamedQuery(name = "Transaction.findByTransactionId", query = "SELECT t FROM Transaction t WHERE t.transactionId = :transactionId"),
-    @NamedQuery(name = "Transaction.findByTransactionDate", query = "SELECT t FROM Transaction t WHERE t.transactionDate = :transactionDate"),
-    @NamedQuery(name = "Transaction.findByAmmount", query = "SELECT t FROM Transaction t WHERE t.ammount = :ammount"),
-    @NamedQuery(name = "Transaction.findByBalance", query = "SELECT t FROM Transaction t WHERE t.balance = :balance"),
-    @NamedQuery(name = "Transaction.findByInfo", query = "SELECT t FROM Transaction t WHERE t.info = :info"),
-    @NamedQuery(name = "Transaction.findByMessage", query = "SELECT t FROM Transaction t WHERE t.message = :message")})
+    @NamedQuery(name = "Transaction.findAll", query = "SELECT t FROM Transaction t")})
 public class Transaction implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "TRANSACTION_ID", nullable = false)
-    private Integer transactionId;
+    @Column(name = "TRANSACTION_ID")
+    private Integer transactionId = 0;
+    
     @Column(name = "TRANSACTION_DATE")
     @Temporal(TemporalType.DATE)
     private Date transactionDate;
+    
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "AMMOUNT", precision = 52)
+    @Column(name = "AMMOUNT")
     private Double ammount;
-    @Column(name = "BALANCE", precision = 52)
+    
+    @Column(name = "BALANCE")
     private Double balance;
+    
     @Size(max = 250)
-    @Column(name = "INFO", length = 250)
+    @Column(name = "INFO")
     private String info;
+    
     @Size(max = 250)
-    @Column(name = "MESSAGE", length = 250)
+    @Column(name = "MESSAGE")
     private String message;
+    
+    @JoinColumn(name = "SOURCE_ACCOUNT_ID", referencedColumnName = "ACCOUNT_ID")
+    @ManyToOne(optional = false)
+    private Account sourceAccount;
+    
+    @JoinColumn(name = "TARGET_ACCOUNT_ID", referencedColumnName = "ACCOUNT_ID")
+    @ManyToOne(optional = false)
+    private Account targetAccount;
 
     public Transaction() {
     }
 
-    public Transaction(Integer transactionId) {
-        this.transactionId = transactionId;
+    public Transaction(Account sourceAccount, Account targetAccount, double amount) {
+        this.ammount = amount;
+        this.sourceAccount = sourceAccount;
+        this.targetAccount = targetAccount;
+        this.info = "Some info";
+        this.message = "Some message";
+        this.transactionDate = new Date();
     }
 
     public Integer getTransactionId() {
@@ -109,6 +121,22 @@ public class Transaction implements Serializable {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Account getSourceAccount() {
+        return sourceAccount;
+    }
+
+    public void setSourceAccount(Account sourceAccount) {
+        this.sourceAccount = sourceAccount;
+    }
+
+    public Account getTargetAccount() {
+        return targetAccount;
+    }
+
+    public void setTargetAccount(Account targetAccount) {
+        this.targetAccount = targetAccount;
     }
 
     @Override

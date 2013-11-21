@@ -12,7 +12,7 @@ import dk.candycrushers.dto.AccountDetail;
 import dk.candycrushers.dto.BanktellerDetail;
 import dk.candycrushers.model.Account;
 import dk.candycrushers.model.Bankteller;
-import dk.candycrushers.model.Groups;
+import dk.candycrushers.model.Transaction;
 import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -63,7 +63,7 @@ public class BankManagerBean implements BankManager {
     @Override
     public CustomerDetail addCustomer(String firstName, String lastName, String email, String password, int role) {
         Customer customer;
-        customer = new Customer(firstName, lastName, email, password, role);
+        customer = new Customer(0, firstName, lastName, email, password);
 //        Query query = em.createNamedQuery("Groups.findByGroupName");
 //        query.setParameter("groupName", "Customers");
 //        Groups group = (Groups) query.getSingleResult();
@@ -75,7 +75,7 @@ public class BankManagerBean implements BankManager {
     public AccountDetail addAccount(String accountType, double balance, long customerID) {
         Account acc;
         Integer i = (int) customerID;
-        acc = new Account(accountType, balance);
+        acc = new Account(0, accountType, balance);
         
         Customer cus = em.find(Customer.class, i);
         
@@ -91,16 +91,16 @@ public class BankManagerBean implements BankManager {
     public CustomerDetail updateCustomer(long customerID, String firstName, String lastName, String email) {
         long id = customerID;
         Customer cust;
-        if (id == 0) {
-            cust = new Customer(0, firstName, lastName, email);
-            em.persist(cust);
-        } else {
+//        if (id == 0) {
+//            cust = new Customer(0, firstName, lastName, email, "password");
+//            em.persist(cust);
+//        } else {
             cust = em.find(Customer.class, (int) id);
             cust.setFirstName(firstName);
             cust.setLastName(lastName);
             cust.setEmail(email);
 //            cust.setPassword(password);
-        }
+//        }
         return createCustomerDetail(cust);
     }
 
@@ -122,6 +122,8 @@ public class BankManagerBean implements BankManager {
         toAcc.setBalance(toAcc.getBalance() + amount);
         
         fromAcc.setBalance(fromAcc.getBalance() - amount);
+        
+        Transaction t = new Transaction(fromAcc, toAcc, amount);
         
         return createAccountDetail(fromAcc);
     }

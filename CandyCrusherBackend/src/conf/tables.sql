@@ -71,7 +71,7 @@ create table transactions (
     balance double,
     info varchar(250),
     message varchar(250),
-    constraint fk_account_id foreign key (transaction_id)
-    references accounts(account_id)
+    source_account_id int not null references accounts(account_id),
+    target_account_id int not null references accounts(account_id)
 );
 

@@ -5,17 +5,17 @@
 package dk.candycrushers.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -26,34 +26,35 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "ACCOUNTS")
-@SequenceGenerator(name = "ASEQ", sequenceName = "account_seq")
 @NamedQueries({
-    @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a"),
-    @NamedQuery(name = "Account.findByAccountId", query = "SELECT a FROM Account a WHERE a.accountId = :accountId"),
-    @NamedQuery(name = "Account.findByAccountType", query = "SELECT a FROM Account a WHERE a.accountType = :accountType"),
-    @NamedQuery(name = "Account.findByBalance", query = "SELECT a FROM Account a WHERE a.balance = :balance")})
+    @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")})
 public class Account implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ACCOUNT_ID", nullable = false)
-    @GeneratedValue(generator = "ASEQ", strategy = GenerationType.SEQUENCE)
+    @Column(name = "ACCOUNT_ID")
     private Integer accountId;
     
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 40)
-    @Column(name = "ACCOUNT_TYPE", nullable = false, length = 40)
+    @Column(name = "ACCOUNT_TYPE")
     private String accountType;
     
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "BALANCE", precision = 52)
+    @Column(name = "BALANCE")
     private Double balance;
     
-    @JoinColumn(name = "OWNER", referencedColumnName = "CUSTOMER_ID", nullable = false)
+    @JoinColumn(name = "OWNER", referencedColumnName = "CUSTOMER_ID")
     @ManyToOne(optional = false)
     private Customer owner;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sourceAccount")
+    private Collection<Transaction> outgoingTransactions;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "targetAccount")
+    private Collection<Transaction> incomingTransaction;
 
     public Account() {
     }
@@ -62,18 +63,11 @@ public class Account implements Serializable {
         this.accountId = accountId;
     }
 
-    public Account(Integer accountId, double balance, String accountType) {
+    public Account(Integer accountId, String accountType, double balance) {
         this.accountId = accountId;
-        this.balance = balance;
-        this.accountType = accountType;
-    }
-
-    public Account(String accountType, Double balance) {
         this.accountType = accountType;
         this.balance = balance;
     }
-    
-    
 
     public Integer getAccountId() {
         return accountId;
@@ -105,6 +99,22 @@ public class Account implements Serializable {
 
     public void setOwner(Customer owner) {
         this.owner = owner;
+    }
+
+    public Collection<Transaction> getOutgoingTransactions() {
+        return outgoingTransactions;
+    }
+
+    public void setOutgoingTransactions(Collection<Transaction> outgoingTransactions) {
+        this.outgoingTransactions = outgoingTransactions;
+    }
+
+    public Collection<Transaction> getIncomingTransaction() {
+        return incomingTransaction;
+    }
+
+    public void setIncomingTransaction(Collection<Transaction> incomingTransaction) {
+        this.incomingTransaction = incomingTransaction;
     }
 
     @Override

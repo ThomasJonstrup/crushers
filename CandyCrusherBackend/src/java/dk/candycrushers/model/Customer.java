@@ -4,19 +4,12 @@
  */
 package dk.candycrushers.model;
 
-import dk.candycrushers.utils.PasswordGenerator;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -24,71 +17,61 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Thomas
  */
 @Entity
-@Table(name = "CUSTOMERS", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"EMAIL"})})
-@SequenceGenerator(name = "CSEQ", sequenceName = "customer_seq")
+@Table(name = "CUSTOMERS")
 @NamedQueries({
     @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c"),
-    @NamedQuery(name = "Customer.findByCustomerId", query = "SELECT c FROM Customer c WHERE c.customerId = :id"),
-    @NamedQuery(name = "Customer.findByFirstName", query = "SELECT c FROM Customer c WHERE c.firstName = :firstName"),
-    @NamedQuery(name = "Customer.findByLastName", query = "SELECT c FROM Customer c WHERE c.lastName = :lastName"),
-    @NamedQuery(name = "Customer.findByEmail", query = "SELECT c FROM Customer c WHERE c.email = :email"),
-    @NamedQuery(name = "Customer.findByPassword", query = "SELECT c FROM Customer c WHERE c.password = :password"),
-    @NamedQuery(name = "Customer.findByCustomerRole", query = "SELECT c FROM Customer c WHERE c.customerRole = :customerRole")})
+    @NamedQuery(name = "Customer.findByEmail", query = "SELECT c FROM Customer c WHERE c.email = :email")
+})
 public class Customer implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "CUSTOMER_ID", nullable = false)
-    @GeneratedValue(generator = "CSEQ", strategy = GenerationType.SEQUENCE)
+    @Column(name = "CUSTOMER_ID")
     private Integer customerId;
     
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 40)
-    @Column(name = "FIRST_NAME", nullable = false, length = 40)
+    @Column(name = "FIRST_NAME")
     private String firstName;
     
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 40)
-    @Column(name = "LAST_NAME", nullable = false, length = 40)
+    @Column(name = "LAST_NAME")
     private String lastName;
     
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
-    @Column(name = "EMAIL", nullable = false, length = 100)
+    @Column(name = "EMAIL")
     private String email;
     
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 150)
-    @Column(name = "PASSWORD", nullable = false, length = 150)
+    @Column(name = "PASSWORD")
     private String password;
     
     @Column(name = "CUSTOMER_ROLE")
     private Integer customerRole;
     
     @JoinTable(name = "CUSTOMER_GROUP", joinColumns = {
-        @JoinColumn(name = "EMAIL", referencedColumnName = "EMAIL", nullable = false)}, inverseJoinColumns = {
-        @JoinColumn(name = "GROUP_NAME", referencedColumnName = "GROUP_NAME", nullable = false)})
+        @JoinColumn(name = "EMAIL", referencedColumnName = "EMAIL")}, inverseJoinColumns = {
+        @JoinColumn(name = "GROUP_NAME", referencedColumnName = "GROUP_NAME")})
     @ManyToMany
-    private Collection<Groups> groupsCollection;
+    private Collection<Role> roles;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private Collection<Account> accounts;
@@ -105,29 +88,8 @@ public class Customer implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-            try {
-            this.password = PasswordGenerator.getEncoded(password); 
-        } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
-            Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-
-    public Customer(String firstName, String lastName, String email, String password, Integer customerRole) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
         this.password = password;
-        this.customerRole = customerRole;
     }
-    
-    public Customer(Integer customerId, String firstName, String lastName, String email) {
-        this.customerId = customerId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-    }
-    
 
     public Integer getCustomerId() {
         return customerId;
@@ -177,16 +139,14 @@ public class Customer implements Serializable {
         this.customerRole = customerRole;
     }
 
-    @XmlTransient
-    public Collection<Groups> getGroupsCollection() {
-        return groupsCollection;
+    public Collection<Role> getRoles() {
+        return roles;
     }
 
-    public void setGroupsCollection(Collection<Groups> groupsCollection) {
-        this.groupsCollection = groupsCollection;
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
 
-    @XmlTransient
     public Collection<Account> getAccounts() {
         return accounts;
     }

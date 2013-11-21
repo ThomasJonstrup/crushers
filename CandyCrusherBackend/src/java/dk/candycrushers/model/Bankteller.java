@@ -8,16 +8,12 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -25,43 +21,37 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "BANKTELLERS")
-@SequenceGenerator(name = "BSEQ", sequenceName = "bankteller_seq")
 @NamedQueries({
     @NamedQuery(name = "Bankteller.findAll", query = "SELECT b FROM Bankteller b"),
-    @NamedQuery(name = "Bankteller.findByBanktellerId", query = "SELECT b FROM Bankteller b WHERE b.banktellerId = :banktellerId"),
-    @NamedQuery(name = "Bankteller.findByFirstName", query = "SELECT b FROM Bankteller b WHERE b.firstName = :firstName"),
-    @NamedQuery(name = "Bankteller.findByLastName", query = "SELECT b FROM Bankteller b WHERE b.lastName = :lastName"),
-    @NamedQuery(name = "Bankteller.findByEmail", query = "SELECT b FROM Bankteller b WHERE b.email = :email"),
-    @NamedQuery(name = "Bankteller.findByPassword", query = "SELECT b FROM Bankteller b WHERE b.password = :password"),
-    @NamedQuery(name = "Bankteller.findByBanktellerRole", query = "SELECT b FROM Bankteller b WHERE b.banktellerRole = :banktellerRole")})
+    @NamedQuery(name = "Bankteller.findByEmail", query = "SELECT b FROM Bankteller b WHERE b.email = :email")
+})
 public class Bankteller implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "BANKTELLER_ID", nullable = false)
-    @GeneratedValue(generator = "BSEQ", strategy = GenerationType.SEQUENCE)
+    @Column(name = "BANKTELLER_ID")
     private Integer banktellerId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 40)
-    @Column(name = "FIRST_NAME", nullable = false, length = 40)
+    @Column(name = "FIRST_NAME")
     private String firstName;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 40)
-    @Column(name = "LAST_NAME", nullable = false, length = 40)
+    @Column(name = "LAST_NAME")
     private String lastName;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 40)
-    @Column(name = "EMAIL", nullable = false, length = 40)
+    @Column(name = "EMAIL")
     private String email;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 150)
-    @Column(name = "PASSWORD", nullable = false, length = 150)
+    @Column(name = "PASSWORD")
     private String password;
     @Column(name = "BANKTELLER_ROLE")
     private Integer banktellerRole;

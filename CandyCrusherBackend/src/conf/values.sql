@@ -55,5 +55,5 @@ values (3, 'MULLE', 700000, 3);
 
 --Transactions----
 
-insert into transactions(transaction_id, transaction_date, ammount, balance, info, message)
-values (1, '2013-11-18', 100, 10000, 'money',' overførelse');
+insert into transactions(transaction_id, transaction_date, ammount, balance, info, message, source_account_id, target_account_id)
+values (1, '2013-11-18', 100, 10000, 'money','overførsel', 1, 2);

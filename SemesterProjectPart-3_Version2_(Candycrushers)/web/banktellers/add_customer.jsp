@@ -13,6 +13,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="pics/favicon.ico"/>
          <link rel="stylesheet" href="css/CSSFIL.css" type="text/css"/>
     </head>
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
     <script>
         function validateForm()
         {
@@ -25,7 +26,10 @@
                 return false;
             }
         }
+        
     </script>
+    
+
     <body>
 
  <!-- Hoved div: -->
