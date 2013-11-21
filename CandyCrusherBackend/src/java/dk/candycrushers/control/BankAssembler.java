@@ -6,10 +6,15 @@ package dk.candycrushers.control;
 
 import dk.candycrushers.dto.AccountDetail;
 import dk.candycrushers.dto.AccountSummary;
+import dk.candycrushers.dto.BanktellerDetail;
 import dk.candycrushers.dto.CustomerDetail;
 import dk.candycrushers.dto.CustomerSummary;
+import dk.candycrushers.dto.TransactionDetail;
+import dk.candycrushers.dto.TransactionSummary;
 import dk.candycrushers.model.Account;
+import dk.candycrushers.model.Bankteller;
 import dk.candycrushers.model.Customer;
+import dk.candycrushers.model.Transaction;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -70,4 +75,32 @@ public class BankAssembler {
         }
         return summaries;
     }
-}
+    
+    public static TransactionSummary createTransactionSummary(Transaction transaction)
+    {
+        return new TransactionSummary(transaction.getBalance(), transaction.getMessage());
+        
+    }
+    
+    public static TransactionDetail createTransactionDetail(Transaction transaction)
+    {
+       return new TransactionDetail(
+                transaction.getTransactionId(), 
+                transaction.getTransactionDate(), 
+                transaction.getAmmount(), 
+                transaction.getBalance(), 
+                transaction.getInfo());
+    }
+        
+    public static BanktellerDetail createBantktellerDetail(Bankteller bankteller) {
+        BanktellerDetail detail = new BanktellerDetail(
+                bankteller.getBanktellerId(),
+                bankteller.getFirstName(),
+                bankteller.getLastName(),
+                bankteller.getEmail());
+
+//        detail.setAccounts(createAccountDetails(customer.getAccounts()));
+        return detail;
+    }
+    
+    }

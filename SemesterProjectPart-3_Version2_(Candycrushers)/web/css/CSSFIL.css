@@ -57,6 +57,7 @@
     text-align: center;
     float: left;
     background-color: #0078ae;
+     
     /*background-color: lightblue;*/
    
 }
@@ -81,10 +82,11 @@
    
     float: right;
     background-color: lightyellow;
-    overflow-y: scroll; 
+    overflow-y: scroll;
     
     
 }
+
 
 #footer {
     width: 915px;
@@ -103,7 +105,6 @@
     
        
 }
-
 
 p.footer
 {

@@ -1,6 +1,7 @@
 
 package commands;
 
+import dk.candycrushers.dto.BanktellerDetail;
 import dk.candycrushers.dto.CustomerDetail;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -43,8 +44,10 @@ public class LoginCommand2 implements Command {
       
       if(request.isUserInRole("Banktellers")) {
           System.out.println("User is banktellers");
+          BanktellerDetail currentPerson = Factory.getInstance().getBank().getBanktellerByEmail(userName);
+          request.getSession().setAttribute("currentPerson", currentPerson);
       }else
-            System.out.println("unkhown roles");
+            System.out.println("Unknown roles");
       
       for (SecurityRole role : roleToTarget.keySet()) {
         if(request.isUserInRole(role.toString())){

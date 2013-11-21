@@ -9,7 +9,9 @@ import dk.candycrushers.dto.CustomerSummary;
 import dk.candycrushers.model.Customer;
 import static dk.candycrushers.control.BankAssembler.*;
 import dk.candycrushers.dto.AccountDetail;
+import dk.candycrushers.dto.BanktellerDetail;
 import dk.candycrushers.model.Account;
+import dk.candycrushers.model.Bankteller;
 import dk.candycrushers.model.Groups;
 import java.util.Collection;
 import javax.ejb.Stateless;
@@ -137,5 +139,15 @@ public class BankManagerBean implements BankManager {
               .setParameter("email", email)
               .getSingleResult();
       return createCustomerDetail(customer);
+    }
+    
+
+    @Override
+    public BanktellerDetail getBanktellerByEmail(String email) {
+          Bankteller bankteller = 
+              em.createNamedQuery("Bankteller.findByEmail", Bankteller.class)
+              .setParameter("email", email)
+              .getSingleResult();
+      return createBantktellerDetail(bankteller);
     }
 }

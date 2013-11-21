@@ -1,3 +1,4 @@
+drop table transactions;
 drop table accounts;
 drop table customer_group;
 drop table groups;
@@ -6,6 +7,7 @@ drop table customers;
 drop sequence customer_seq restrict;
 drop sequence bankteller_seq restrict;
 drop sequence account_seq restrict;
+drop sequence transaction_seq restrict;
 
 --------
 
@@ -60,4 +62,16 @@ create table accounts (
     references customers(customer_id)
 );
 
+create sequence transaction_seq start with 1000;
+
+create table transactions (
+    transaction_id int primary key,
+    transaction_date date,
+    ammount double,
+    balance double,
+    info varchar(250),
+    message varchar(250),
+    constraint fk_account_id foreign key (transaction_id)
+    references accounts(account_id)
+);
 

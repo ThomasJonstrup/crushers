@@ -63,7 +63,15 @@
     <!-- Top right div: -->
 
     <div id="topright">
-        <h2 style="color: white;">Welcome ${currentPerson.firstName}</h2>
+        
+            <c:if test="${pageContext.request.isUserInRole('Banktellers')==true}">
+                <h2 style="color: white;"> Bankteller ${currentPerson.firstName}</h2>
+            </c:if>
+                
+            <c:if test="${pageContext.request.isUserInRole('Customers')==true}">
+                <h2 style="color: white;"> Welcome ${currentPerson.firstName}</h2>
+            </c:if>
+                
          <a href="Controller?command=logout_command"><button>Log out</button></a>
     </div>
 
@@ -114,32 +122,6 @@
  
  
     </div>        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-<!--        <h1 style="color: white;">Welcome ${currentPerson.firstName}</h1>
 
-        <br><form action="Controller">
-        </form></br>
-        <ul>
-            <li class="bankTeller"><a href="Controller?command=show_customers">Show Customers</a></li>
-            <li class="customer"><a href="Controller?command=show_own_account">Show Account</a></li>
-            <li class="bankTeller"><a href="Controller?command=add_customer_target" class="bankTeller">Add Customer</a></li>
-            <li class="bankTeller"><a href="Controller?command=create_account" class="bankTeller">Create new account</a></li>
-            <li class="manager"><a href="Controller?command=add_bankteller" class="bankTeller">Add Bank Teller</a></li>
-            <li class="manager"><a href="Controller?command=show_banktellers" class="bankTeller">Show Bank Teller</a></li>
-        </ul>
-                <div><a href="Controller?command=edit_customer">Edit Customer</a></div>
-        <a href="Controller?command=show_date">Show Date</a><br>
-        <input type="hidden" name="command" value="show_date">
-        <a href="Controller?command=logout_command"><button>Log out</button></a>
-    </form>-->
 </body>
 </html>

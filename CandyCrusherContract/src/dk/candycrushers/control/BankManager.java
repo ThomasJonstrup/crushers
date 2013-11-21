@@ -5,6 +5,7 @@
 package dk.candycrushers.control;
 
 import dk.candycrushers.dto.AccountDetail;
+import dk.candycrushers.dto.BanktellerDetail;
 import dk.candycrushers.dto.CustomerDetail;
 import dk.candycrushers.dto.CustomerSummary;
 import java.util.Collection;
@@ -28,6 +29,7 @@ public interface BankManager {
     AccountDetail getAccount(long id);
     AccountDetail transactionToAnOtherAccount(int fromAccountId, int toAccountId, double amount);
     AccountDetail getAccountTransactionToEachOther(long accountId);
+    BanktellerDetail getBanktellerByEmail(String email);
     
     
 
