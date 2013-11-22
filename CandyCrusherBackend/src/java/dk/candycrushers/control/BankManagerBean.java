@@ -63,7 +63,7 @@ public class BankManagerBean implements BankManager {
     @Override
     public CustomerDetail addCustomer(String firstName, String lastName, String email, String password, int role) {
         Customer customer;
-        customer = new Customer(0, firstName, lastName, email, password);
+        customer = new Customer(firstName, lastName, email, password, role);
 //        Query query = em.createNamedQuery("Groups.findByGroupName");
 //        query.setParameter("groupName", "Customers");
 //        Groups group = (Groups) query.getSingleResult();
@@ -75,7 +75,7 @@ public class BankManagerBean implements BankManager {
     public AccountDetail addAccount(String accountType, double balance, long customerID) {
         Account acc;
         Integer i = (int) customerID;
-        acc = new Account(0, accountType, balance);
+        acc = new Account(accountType, balance);
         
         Customer cus = em.find(Customer.class, i);
         
@@ -100,7 +100,7 @@ public class BankManagerBean implements BankManager {
             cust.setLastName(lastName);
             cust.setEmail(email);
 //            cust.setPassword(password);
-//        }
+////        }
         return createCustomerDetail(cust);
     }
 

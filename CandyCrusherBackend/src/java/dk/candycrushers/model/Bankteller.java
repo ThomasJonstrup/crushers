@@ -8,9 +8,12 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -21,6 +24,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "BANKTELLERS")
+@SequenceGenerator(name = "BSEQ", sequenceName = "bankteller_seq")
 @NamedQueries({
     @NamedQuery(name = "Bankteller.findAll", query = "SELECT b FROM Bankteller b"),
     @NamedQuery(name = "Bankteller.findByEmail", query = "SELECT b FROM Bankteller b WHERE b.email = :email")
@@ -31,6 +35,7 @@ public class Bankteller implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "BANKTELLER_ID")
+    @GeneratedValue(generator = "BSEQ", strategy = GenerationType.SEQUENCE)
     private Integer banktellerId;
     @Basic(optional = false)
     @NotNull

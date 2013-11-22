@@ -10,6 +10,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -17,6 +19,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -27,6 +30,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "CUSTOMERS")
+@SequenceGenerator(name = "CSEQ", sequenceName = "customer_seq")
 @NamedQueries({
     @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c"),
     @NamedQuery(name = "Customer.findByEmail", query = "SELECT c FROM Customer c WHERE c.email = :email")
@@ -37,6 +41,7 @@ public class Customer implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "CUSTOMER_ID")
+    @GeneratedValue(generator = "CSEQ", strategy = GenerationType.SEQUENCE)
     private Integer customerId;
     
     @Basic(optional = false)
@@ -82,14 +87,23 @@ public class Customer implements Serializable {
     public Customer(Integer customerId) {
         this.customerId = customerId;
     }
-
-    public Customer(Integer customerId, String firstName, String lastName, String email, String password) {
-        this.customerId = customerId;
+    
+   public Customer(String firstName, String lastName, String email, String password, Integer customerRole) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.customerRole = customerRole;
     }
+
+//    public Customer(Integer customerId, String firstName, String lastName, String email, String password) {
+//        this.customerId = customerId;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.email = email;
+//        this.password = password;
+//    }
+
 
     public Integer getCustomerId() {
         return customerId;

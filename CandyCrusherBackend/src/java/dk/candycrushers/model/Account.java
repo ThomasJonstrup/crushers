@@ -10,12 +10,15 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -26,14 +29,18 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "ACCOUNTS")
+@SequenceGenerator(name = "ASEQ", sequenceName = "account_seq")
 @NamedQueries({
-    @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")})
+    @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a"),
+   @NamedQuery(name = "Account.findByAccountId", query = "SELECT a FROM Account a WHERE a.accountId = :accountId")
+})
 public class Account implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "ACCOUNT_ID")
+    @GeneratedValue(generator = "ASEQ", strategy = GenerationType.SEQUENCE)
     private Integer accountId;
     
     @Basic(optional = false)
@@ -59,12 +66,18 @@ public class Account implements Serializable {
     public Account() {
     }
 
+
     public Account(Integer accountId) {
         this.accountId = accountId;
     }
 
-    public Account(Integer accountId, String accountType, double balance) {
+    public Account(Integer accountId, double balance, String accountType) {
         this.accountId = accountId;
+        this.balance = balance;
+        this.accountType = accountType;
+    }
+
+    public Account(String accountType, Double balance) {
         this.accountType = accountType;
         this.balance = balance;
     }
