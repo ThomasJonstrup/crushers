@@ -12,8 +12,12 @@ import dk.candycrushers.dto.AccountDetail;
 import dk.candycrushers.dto.BanktellerDetail;
 import dk.candycrushers.model.Account;
 import dk.candycrushers.model.Bankteller;
+import dk.candycrushers.model.Person;
+import dk.candycrushers.model.Role;
 import dk.candycrushers.model.Transaction;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -50,7 +54,12 @@ public class BankManagerBean implements BankManager {
 //        Customer cus = (Customer) q.getSingleResult();
 //
         Customer cus = em.find(Customer.class, (int)id);
-        CustomerDetail cDetail = new CustomerDetail(cus.getCustomerId(), cus.getFirstName(), cus.getLastName(), cus.getEmail());
+        CustomerDetail cDetail = new CustomerDetail(
+                cus.getCustomerId(), 
+                cus.getFirstName(),
+                cus.getLastName(),
+                cus.getPerson().getEmail()
+                );
 
         return createCustomerDetail(cus);
 
@@ -61,44 +70,43 @@ public class BankManagerBean implements BankManager {
     }
 
     @Override
-    public CustomerDetail addCustomer(String firstName, String lastName, String email, String password, int role) {
-        Customer customer;
-        customer = new Customer(firstName, lastName, email, password, role);
-//        Query query = em.createNamedQuery("Groups.findByGroupName");
-//        query.setParameter("groupName", "Customers");
-//        Groups group = (Groups) query.getSingleResult();
+    public CustomerDetail addCustomer(String firstName, String lastName, String email, String password, int dontuse) {
+        Customer customer = new Customer(firstName, lastName);
+        Person person = new Person(email, password);
+        Role role = em.find(Role.class, "Customers");
+        person.setRoles(Collections.singleton(role));
+        em.persist(person);
+        customer.setPerson(person);
         em.persist(customer);
         return createCustomerDetail(customer);
     }
 
     @Override
     public AccountDetail addAccount(String accountType, double balance, long customerID) {
-        Account acc;
-        Integer i = (int) customerID;
-        acc = new Account(accountType, balance);
+        Account acc = new Account(accountType);
+        acc.setBalance(balance);
         
-        Customer cus = em.find(Customer.class, i);
+        Customer cus = em.find(Customer.class, (int)customerID);
         
         acc.setOwner(cus);
-        
-        Query query = em.createNamedQuery("Account.findByAccountId");
         em.persist(acc);
+        
+        em.refresh(cus);
         
         return createAccountDetail(acc);
     }
 
     @Override
     public CustomerDetail updateCustomer(long customerID, String firstName, String lastName, String email) {
-        long id = customerID;
-        Customer cust;
 //        if (id == 0) {
 //            cust = new Customer(0, firstName, lastName, email, "password");
 //            em.persist(cust);
 //        } else {
-            cust = em.find(Customer.class, (int) id);
+         Customer cust = em.find(Customer.class, (int)customerID);
             cust.setFirstName(firstName);
             cust.setLastName(lastName);
-            cust.setEmail(email);
+            //cust.setEmail(email);
+//            cust.getPerson().setEmail(email);
 //            cust.setPassword(password);
 ////        }
         return createCustomerDetail(cust);
@@ -123,8 +131,8 @@ public class BankManagerBean implements BankManager {
         
         fromAcc.setBalance(fromAcc.getBalance() - amount);
         
-        Transaction t = new Transaction(fromAcc, toAcc, amount);
-        
+        Transaction t = new Transaction(new Date(), amount, "Some info", "Some message", fromAcc, toAcc);
+        em.persist(t);
         return createAccountDetail(fromAcc);
     }
 

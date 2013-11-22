@@ -25,7 +25,12 @@ import java.util.Collection;
 public class BankAssembler {
 
     public static CustomerSummary createCustomerSummary(Customer customer) {
-        return new CustomerSummary(customer.getCustomerId(), customer.getFirstName(), customer.getLastName(), customer.getEmail());
+        return new CustomerSummary(
+                customer.getCustomerId(),
+                customer.getFirstName(),
+                customer.getLastName(),
+                customer.getPerson().getEmail()
+                );
     }
 
     public static Collection<CustomerSummary> createCustomerSummaries(Collection<Customer> customers) {
@@ -41,7 +46,7 @@ public class BankAssembler {
                 customer.getCustomerId(),
                 customer.getFirstName(),
                 customer.getLastName(),
-                customer.getEmail());
+                customer.getPerson().getEmail());
 
         detail.setAccounts(createAccountDetails(customer.getAccounts()));
         return detail;
@@ -97,7 +102,7 @@ public class BankAssembler {
                 bankteller.getBanktellerId(),
                 bankteller.getFirstName(),
                 bankteller.getLastName(),
-                bankteller.getEmail());
+                bankteller.getPerson().getEmail());
 
 //        detail.setAccounts(createAccountDetails(customer.getAccounts()));
         return detail;

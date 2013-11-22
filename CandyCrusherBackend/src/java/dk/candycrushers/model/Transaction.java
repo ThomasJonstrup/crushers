@@ -9,11 +9,14 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,13 +31,15 @@ import javax.validation.constraints.Size;
 @Table(name = "TRANSACTIONS")
 @NamedQueries({
     @NamedQuery(name = "Transaction.findAll", query = "SELECT t FROM Transaction t")})
+@SequenceGenerator(name = "TRSEQ", sequenceName = "transaction_seq")
 public class Transaction implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "TRANSACTION_ID")
-    private Integer transactionId = 0;
+    @GeneratedValue(generator = "TRSEQ", strategy = GenerationType.SEQUENCE)
+    private Integer transactionId;
     
     @Column(name = "TRANSACTION_DATE")
     @Temporal(TemporalType.DATE)
@@ -66,15 +71,21 @@ public class Transaction implements Serializable {
     public Transaction() {
     }
 
-    public Transaction(Account sourceAccount, Account targetAccount, double amount) {
-        this.ammount = amount;
-        this.sourceAccount = sourceAccount;
-        this.targetAccount = targetAccount;
-        this.info = "Some info";
-        this.message = "Some message";
-        this.transactionDate = new Date();
+    public Transaction(Integer transactionId) {
+        this.transactionId = transactionId;
     }
 
+    public Transaction(Date transactionDate, Double ammount, String info, String message, Account sourceAccount, Account targetAccount) {
+        this.transactionDate = transactionDate;
+        this.ammount = ammount;
+        this.info = info;
+        this.message = message;
+        this.sourceAccount = sourceAccount;
+        this.targetAccount = targetAccount;
+    }
+
+    
+    
     public Integer getTransactionId() {
         return transactionId;
     }

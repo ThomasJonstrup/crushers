@@ -11,8 +11,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -24,42 +26,35 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "BANKTELLERS")
-@SequenceGenerator(name = "BSEQ", sequenceName = "bankteller_seq")
 @NamedQueries({
     @NamedQuery(name = "Bankteller.findAll", query = "SELECT b FROM Bankteller b"),
-    @NamedQuery(name = "Bankteller.findByEmail", query = "SELECT b FROM Bankteller b WHERE b.email = :email")
+    @NamedQuery(name = "Bankteller.findByEmail", query = "SELECT b FROM Bankteller b WHERE b.person.email = :email")
 })
+@SequenceGenerator(name = "TELSEQ", sequenceName = "bankteller_seq")
 public class Bankteller implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "BANKTELLER_ID")
-    @GeneratedValue(generator = "BSEQ", strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "TELSEQ", strategy = GenerationType.SEQUENCE)
     private Integer banktellerId;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 40)
     @Column(name = "FIRST_NAME")
     private String firstName;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 40)
     @Column(name = "LAST_NAME")
     private String lastName;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 40)
-    @Column(name = "EMAIL")
-    private String email;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 150)
-    @Column(name = "PASSWORD")
-    private String password;
-    @Column(name = "BANKTELLER_ROLE")
-    private Integer banktellerRole;
+    
+    @JoinColumn(name = "EMAIL", referencedColumnName = "EMAIL")
+    @OneToOne(optional = false)
+    private Person person;
 
     public Bankteller() {
     }
@@ -68,12 +63,10 @@ public class Bankteller implements Serializable {
         this.banktellerId = banktellerId;
     }
 
-    public Bankteller(Integer banktellerId, String firstName, String lastName, String email, String password) {
+    public Bankteller(Integer banktellerId, String firstName, String lastName) {
         this.banktellerId = banktellerId;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
-        this.password = password;
     }
 
     public Integer getBanktellerId() {
@@ -100,28 +93,12 @@ public class Bankteller implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Integer getBanktellerRole() {
-        return banktellerRole;
-    }
-
-    public void setBanktellerRole(Integer banktellerRole) {
-        this.banktellerRole = banktellerRole;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     @Override

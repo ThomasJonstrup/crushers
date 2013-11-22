@@ -93,6 +93,7 @@
 
                 <c:forEach var="account" items="${currentPerson.accounts}">
                     <h2>${account.accountType} - ${account.accountId}</h2>
+                    <h3>Balance ${account.balance}</h3>
 
                     <p>Move money from this account: </p>
                     <form action="Controller">

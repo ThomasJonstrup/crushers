@@ -10,6 +10,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -38,8 +40,11 @@ public class Role implements Serializable {
     @Column(name = "GROUP_DESC")
     private String groupDesc;
     
-    @ManyToMany(mappedBy = "roles")
-    private Collection<Customer> customers;
+    @JoinTable(name = "PERSON_GROUPS", joinColumns = {
+        @JoinColumn(name = "GROUP_NAME", referencedColumnName = "GROUP_NAME")}, inverseJoinColumns = {
+        @JoinColumn(name = "EMAIL", referencedColumnName = "EMAIL")})
+    @ManyToMany
+    private Collection<Person> persons;
 
     public Role() {
     }
@@ -64,12 +69,12 @@ public class Role implements Serializable {
         this.groupDesc = groupDesc;
     }
 
-    public Collection<Customer> getCustomers() {
-        return customers;
+    public Collection<Person> getPersons() {
+        return persons;
     }
 
-    public void setCustomers(Collection<Customer> customers) {
-        this.customers = customers;
+    public void setPersons(Collection<Person> persons) {
+        this.persons = persons;
     }
 
     @Override

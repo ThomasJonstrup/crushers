@@ -14,19 +14,22 @@ import java.security.NoSuchAlgorithmException;
  * @author Thomas
  */
 public class PasswordGenerator {
- 
-    public static String getEncoded(String str) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-     
-    MessageDigest md = MessageDigest.getInstance("SHA-256");
-    md.update(str.getBytes("UTF-8")); 
-    byte[] digest = md.digest();
-    BigInteger bigInt = new BigInteger(1, digest);
-    return bigInt.toString(16);
-  }
-  
-  public static void main(String[] args) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-    System.out.println("test: "+getEncoded("test"));
-    System.out.println("a1234: "+getEncoded("a1234"));
-      System.out.println("yes: "+getEncoded("yes"));
-  }
+
+    public static String getEncoded(String str) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(str.getBytes("UTF-8"));
+            byte[] digest = md.digest();
+            BigInteger bigInt = new BigInteger(1, digest);
+            return bigInt.toString(16);
+        } catch (Exception e) {
+            throw new Error("This shouldn't happen");
+        }
+    }
+
+    public static void main(String[] args) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        System.out.println("test: " + getEncoded("test"));
+        System.out.println("a1234: " + getEncoded("a1234"));
+        System.out.println("yes: " + getEncoded("yes"));
+    }
 }

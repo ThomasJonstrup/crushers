@@ -29,12 +29,14 @@ public class CreateNewAccountCommand extends TargetCommand{
         
         String cusId = request.getParameter("customerId");
         long customerId = Integer.parseInt(cusId);
-        CustomerDetail cus = Factory.getInstance().getBank().getCustomer(customerId);
         
         Factory.getInstance().getBank().addAccount(accountType, 0, customerId);
         
-        request.setAttribute("currentPerson", cus);
+        CustomerDetail cus = Factory.getInstance().getBank().getCustomer(customerId);
         
+        
+        request.setAttribute("currentPerson", cus);
+
 //        cus.addAccount(newAccount);
         return super.execute(request); //To change body of generated methods, choose Tools | Templates.
     }

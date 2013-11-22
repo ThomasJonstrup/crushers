@@ -1,46 +1,68 @@
-delete from customers;
-delete from banktellers;
-delete from groups;
 delete from transactions;
 delete from accounts;
+delete from customers;
+delete from banktellers;
+delete from person_groups;
+delete from persons;
+delete from groups;
 
 --------
 
-
+insert into groups values ('Banktellers', 'Banktellers');
+insert into groups values ('Customers', 'Bank customers');
 
 --Customers--
+insert into persons (email, password)
+values('ph@cph.dk', 'q');
 
-insert into customers (customer_id, first_name, last_name, email, password, customer_role)
-values (1,'Pia', 'Holm', 'ph@cph.dk', 'q', 1);
+insert into person_groups values('ph@cph.dk', 'Customers');
 
-insert into customers (customer_id, first_name, last_name, email, password, customer_role)
-values (2,'Mogens', 'Holm', 'mh@cph.dk', 'q', 1);
+insert into persons (email, password)
+values('mh@cph.dk', 'q');
 
-insert into customers (customer_id, first_name, last_name, email, password, customer_role)
-values (3,'Lasse', 'Holm', 'lh@cph.dk','q', 1);
+insert into person_groups values ('mh@cph.dk', 'Customers');
+
+insert into persons (email, password)
+values('lh@cph.dk', 'q');
+
+insert into person_groups values ('lh@cph.dk', 'Customers');
+
+insert into customers (customer_id, first_name, last_name, email)
+values (1,'Pia', 'Holm', 'ph@cph.dk');
+----
+insert into customers (customer_id, first_name, last_name, email)
+values (2,'Mogens', 'Holm', 'mh@cph.dk');
+
+insert into customers (customer_id, first_name, last_name, email)
+values (3,'Lasse', 'Holm', 'lh@cph.dk');
 
 --Banktellers--
 
-insert into banktellers (bankteller_id, first_name, last_name, email, password, bankteller_role)
-values (1,'Hans', 'Larsen', 'hl@cph.dk', 'q', 2);
+insert into persons (email, password)
+values('hl@cph.dk', 'q');
 
-insert into banktellers (bankteller_id, first_name, last_name, email, password, bankteller_role)
-values (2,'Mads', 'Larsen', 'mh@cph.dk', 'q', 2);
+insert into person_groups values ('hl@cph.dk', 'Banktellers');
 
-insert into banktellers (bankteller_id, first_name, last_name, email, password, bankteller_role)
-values (3,'Thomas', 'Larsen', 'tl@cph.dk','q', 2);
+insert into persons (email, password)
+values('mah@cph.dk', '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08');
+
+insert into person_groups values ('mah@cph.dk', 'Banktellers');
+
+insert into persons (email, password)
+values('tl@cph.dk', '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08');
+
+insert into person_groups values ('tl@cph.dk', 'Banktellers');
 
 
---Groups----
+insert into banktellers (bankteller_id, first_name, last_name, email)
+values (1,'Hans', 'Larsen', 'hl@cph.dk');
 
-insert into groups (group_name, group_desc)
-values ('Customers', 'Bank customers');
+insert into banktellers (bankteller_id, first_name, last_name, email)
+values (2,'Mads', 'Larsen', 'mah@cph.dk');
 
-insert into groups (group_name, group_desc)
-values ('Banktellers', 'Banktellers');
+insert into banktellers (bankteller_id, first_name, last_name, email)
+values (3,'Thomas', 'Larsen', 'tl@cph.dk');
 
-insert into customer_group(email, group_name)
-values ('ph@cph.dk', 'Customers');
 
 --Accounts-----
 

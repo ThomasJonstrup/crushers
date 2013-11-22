@@ -8,6 +8,7 @@ import java.util.Map;
 //import contract.Bank;
 import dk.candycrushers.control.BankManager;
 import dk.candycrushers.dto.AccountDetail;
+import dk.candycrushers.dto.BanktellerDetail;
 import dk.candycrushers.dto.CustomerDetail;
 import dk.candycrushers.dto.CustomerSummary;
 import dummy.model.Account;
@@ -187,6 +188,21 @@ public class DummyBank implements BankManager {
     public AccountDetail addAccount(String accountType, double balance, long customerID) {
            Account acc = new Account(accountType, balance);
         return DummyBankAssembler.createAccountDetail(acc);
+    }
+
+    @Override
+    public CustomerDetail getCustomerByEmail(String email) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public CustomerDetail updateCustomer(long customerID, String firstName, String lastName, String email) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public BanktellerDetail getBanktellerByEmail(String email) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 

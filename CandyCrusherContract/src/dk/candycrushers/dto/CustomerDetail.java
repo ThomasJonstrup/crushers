@@ -28,7 +28,8 @@ public class CustomerDetail implements Serializable {
         this.lastName = lastName;
         this.email = email;
     }
-
+    
+    
     public long getCustomerId() {
         return customerId;
     }

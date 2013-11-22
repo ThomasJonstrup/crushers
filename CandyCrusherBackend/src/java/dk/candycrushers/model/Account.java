@@ -29,18 +29,16 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "ACCOUNTS")
-@SequenceGenerator(name = "ASEQ", sequenceName = "account_seq")
 @NamedQueries({
-    @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a"),
-   @NamedQuery(name = "Account.findByAccountId", query = "SELECT a FROM Account a WHERE a.accountId = :accountId")
-})
+    @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")})
+@SequenceGenerator(name = "ACCSEQ", sequenceName = "ACCOUNT_SEQ")
 public class Account implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "ACCOUNT_ID")
-    @GeneratedValue(generator = "ASEQ", strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "ACCSEQ", strategy = GenerationType.SEQUENCE)
     private Integer accountId;
     
     @Basic(optional = false)
@@ -61,28 +59,25 @@ public class Account implements Serializable {
     private Collection<Transaction> outgoingTransactions;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "targetAccount")
-    private Collection<Transaction> incomingTransaction;
+    private Collection<Transaction> incomingTransactions;
 
     public Account() {
     }
-
 
     public Account(Integer accountId) {
         this.accountId = accountId;
     }
 
-    public Account(Integer accountId, double balance, String accountType) {
+    public Account(Integer accountId, String accountType) {
         this.accountId = accountId;
-        this.balance = balance;
         this.accountType = accountType;
     }
 
-    public Account(String accountType, Double balance) {
+    public Account(String accountType) {
         this.accountType = accountType;
-        this.balance = balance;
     }
 
-    public Integer getAccountId() {
+     public Integer getAccountId() {
         return accountId;
     }
 
@@ -122,12 +117,12 @@ public class Account implements Serializable {
         this.outgoingTransactions = outgoingTransactions;
     }
 
-    public Collection<Transaction> getIncomingTransaction() {
-        return incomingTransaction;
+    public Collection<Transaction> getIncomingTransactions() {
+        return incomingTransactions;
     }
 
-    public void setIncomingTransaction(Collection<Transaction> incomingTransaction) {
-        this.incomingTransaction = incomingTransaction;
+    public void setIncomingTransactions(Collection<Transaction> incomingTransactions) {
+        this.incomingTransactions = incomingTransactions;
     }
 
     @Override
