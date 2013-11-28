@@ -113,15 +113,7 @@
                                 <td>Balance</td>
                             </tr>
                         </thead>
-                        <c:forEach var="trans" items="${account.transactions}">
-                            <tr>
-                                <td><fmt:formatDate value="${trans.timestamp}" pattern="dd-MM-YYYY" /></td> 
-                                <td>${trans.info}</td>
-                                <td>${trans.amount}</td>
-                                <td>${trans.balance}</td>
-                            </tr>
-                        </c:forEach>
-                    </table>
+                        <button> Go to transactions </button>
                     <br/><br/>
                 </c:forEach>
 

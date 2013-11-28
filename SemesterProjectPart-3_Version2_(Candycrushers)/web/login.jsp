@@ -13,27 +13,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="pics/favicon.ico"/>
         <link rel="stylesheet" type="text/css" href="css/CSSFIL.css">
          <script>
-            $( "form:first" ).submit();
-            
-function ValidateLogin(){
-var userID=document.login.username;
-var passID=document.frm.password;
-
-if ((userID.value==null)||(userID.value==""))
-{
-alert("Please Enter A Valid User Name")
-userID.focus()
-return false
-}
-
-if ((passID.value==null)||(passID.value=="")){
-alert("Please Enter Your Password")
-passID.focus()
-return false
-}
-
-return true
-}
+            $( "form:first" ).submit();        
         </script>
         <title>Login</title>
     </head>
@@ -60,7 +40,7 @@ return true
 
     <div id="topright">
         
-     <form name="login" action="Controller"  onSubmit="return ValidateLogin()">
+     <form action="Controller">
          <fieldset id="fieldsetLogin">
              
              
