@@ -80,7 +80,7 @@ public class BankManagerBean implements BankManager {
         em.persist(customer);
         return createCustomerDetail(customer);
     }
-
+ 
     @Override
     public AccountDetail addAccount(String accountType, double balance, long customerID) {
         Account acc = new Account(accountType);

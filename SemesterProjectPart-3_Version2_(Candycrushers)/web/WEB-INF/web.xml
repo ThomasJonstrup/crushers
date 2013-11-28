@@ -5,6 +5,11 @@
         <param-name>portNonSSL</param-name>
         <param-value>8080</param-value>
     </context-param>
+    <context-param>
+        <description>Port for SSL communication</description>
+        <param-name>portSSL</param-name>
+        <param-value>8081</param-value>
+    </context-param>
     <session-config>
         <session-timeout>
             30

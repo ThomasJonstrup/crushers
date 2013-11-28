@@ -26,7 +26,9 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "GROUPS")
 @NamedQueries({
-    @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r")})
+    @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r"),
+@NamedQuery(name = "Role.findByGroupName", query = "SELECT r FROM Role r WHERE r.groupName = :groupName")
+})
 public class Role implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

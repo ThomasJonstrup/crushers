@@ -29,6 +29,7 @@
             </div>
             
             <div data-role="fieldcontain">
+            <input type="hidden" name="command" value="login_command"/>
     <label for="name">Username:</label>
     <input type="text" name="name" id="name" value=""  />
 </div>	
@@ -36,7 +37,7 @@
     <label for="name">Password:</label>
     <input type="text" name="name" id="name" value=""  />
 </div>	
-            
+<input type="submit" id="loginSubmit" type="submit" value="login"/>
 <a href="LoginPage.jsp" data-role="button" data-inline="true" data-theme="b">Login</a>
 <a href="BankMain.jsp" data-role="button" data-inline="true">Cancel</a>
 
