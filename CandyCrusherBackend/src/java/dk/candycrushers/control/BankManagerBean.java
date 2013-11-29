@@ -131,8 +131,9 @@ public class BankManagerBean implements BankManager {
         toAcc.setBalance(toAcc.getBalance() + amount);
         
         fromAcc.setBalance(fromAcc.getBalance() - amount);
+        double balance = 0;
         
-        Transaction t = new Transaction(new Date(), amount, "Some info", "Some message", fromAcc, toAcc);
+        Transaction t = new Transaction(new Date(), amount, balance, "Some info", "Some message", fromAcc, toAcc);
         em.persist(t);
         return createAccountDetail(fromAcc);
     }

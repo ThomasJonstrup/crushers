@@ -77,9 +77,10 @@ public class Transaction implements Serializable {
         this.transactionId = transactionId;
     }
 
-    public Transaction(Date transactionDate, Double ammount, String info, String message, Account sourceAccount, Account targetAccount) {
+    public Transaction(Date transactionDate, Double ammount, Double balance, String info, String message, Account sourceAccount, Account targetAccount) {
         this.transactionDate = transactionDate;
         this.ammount = ammount;
+        this.balance = balance;
         this.info = info;
         this.message = message;
         this.sourceAccount = sourceAccount;
