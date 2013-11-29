@@ -29,8 +29,7 @@ public class BankAssembler {
                 customer.getCustomerId(),
                 customer.getFirstName(),
                 customer.getLastName(),
-                customer.getPerson().getEmail()
-                );
+                customer.getPerson().getEmail());
     }
 
     public static Collection<CustomerSummary> createCustomerSummaries(Collection<Customer> customers) {
@@ -60,7 +59,7 @@ public class BankAssembler {
                 account.getBalance(),
                 "" + account.getOwner().getFirstName() + " " + account.getOwner().getLastName());
     }
-    
+
     public static Collection<AccountDetail> createAccountDetails(Collection<Account> accounts) {
         Collection<AccountDetail> details = new ArrayList<>();
         for (Account account : accounts) {
@@ -80,23 +79,21 @@ public class BankAssembler {
         }
         return summaries;
     }
-    
-    public static TransactionSummary createTransactionSummary(Transaction transaction)
-    {
+
+    public static TransactionSummary createTransactionSummary(Transaction transaction) {
         return new TransactionSummary(transaction.getBalance(), transaction.getMessage());
-        
+
     }
-    
-    public static TransactionDetail createTransactionDetail(Transaction transaction)
-    {
-       return new TransactionDetail(
-                transaction.getTransactionId(), 
-                transaction.getTransactionDate(), 
-                transaction.getAmmount(), 
-                transaction.getBalance(), 
+
+    public static TransactionDetail createTransactionDetail(Transaction transaction) {
+        return new TransactionDetail(
+                transaction.getTransactionId(),
+                transaction.getTransactionDate(),
+                transaction.getAmmount(),
+                transaction.getBalance(),
                 transaction.getInfo());
     }
-        
+
     public static BanktellerDetail createBantktellerDetail(Bankteller bankteller) {
         BanktellerDetail detail = new BanktellerDetail(
                 bankteller.getBanktellerId(),
@@ -108,4 +105,11 @@ public class BankAssembler {
         return detail;
     }
     
+    public static Collection<TransactionDetail> createTransactionDetails(Collection<Transaction> transaction) {
+        Collection<TransactionDetail> transactionDetails = new ArrayList<>();
+        for (Transaction trans : transaction) {
+            transactionDetails.add(createTransactionDetail(trans));
+        }
+        return transactionDetails;
     }
+}

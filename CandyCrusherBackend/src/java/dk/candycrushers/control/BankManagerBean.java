@@ -10,6 +10,7 @@ import dk.candycrushers.model.Customer;
 import static dk.candycrushers.control.BankAssembler.*;
 import dk.candycrushers.dto.AccountDetail;
 import dk.candycrushers.dto.BanktellerDetail;
+import dk.candycrushers.dto.TransactionDetail;
 import dk.candycrushers.model.Account;
 import dk.candycrushers.model.Bankteller;
 import dk.candycrushers.model.Person;
@@ -159,5 +160,19 @@ public class BankManagerBean implements BankManager {
               .setParameter("email", email)
               .getSingleResult();
       return createBantktellerDetail(bankteller);
+    }
+
+    @Override
+    public Collection<TransactionDetail> getTransactionDetails(int accountId) {
+        
+        Account sourceAccount = em.find(Account.class, accountId);
+        
+        Collection<Transaction> transactions = em.createNamedQuery("Transaction.findBySourceAccount")
+                .setParameter("sourceAccount", sourceAccount)
+                .getResultList();
+        
+        return createTransactionDetails(transactions);
+        
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

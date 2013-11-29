@@ -4,8 +4,10 @@
  */
 package commands;
 
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import security.SecurityRole;
+import servlets.Factory;
 
 /**
  *
@@ -19,6 +21,15 @@ public class ShowTransactionCommand extends TargetCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
+        
+        String accId;
+        accId = request.getParameter("accountId");
+        int accountId = Integer.parseInt(accId);
+        
+        ArrayList transactions = (ArrayList) Factory.getInstance().getBank().getTransactionDetails(accountId);
+        
+        request.setAttribute("transactions", transactions);
+        
         return super.execute(request); //To change body of generated methods, choose Tools | Templates.
     }
  

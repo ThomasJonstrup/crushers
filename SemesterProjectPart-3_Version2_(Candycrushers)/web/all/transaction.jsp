@@ -4,6 +4,7 @@
     Author     : Thomas
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,7 +24,7 @@
                                 <td>Balance</td>
                             </tr>
                         </thead>
-                        <c:forEach var="trans" items="${account.transactions}">
+                        <c:forEach var="trans" items="${transactions}">
                             <tr>
                                 <td><fmt:formatDate value="${trans.timestamp}" pattern="dd-MM-YYYY" /></td> 
                                 <td>${trans.info}</td>

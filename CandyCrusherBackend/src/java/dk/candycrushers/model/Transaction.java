@@ -30,7 +30,9 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "TRANSACTIONS")
 @NamedQueries({
-    @NamedQuery(name = "Transaction.findAll", query = "SELECT t FROM Transaction t")})
+    @NamedQuery(name = "Transaction.findAll", query = "SELECT t FROM Transaction t"),
+    @NamedQuery(name = "Transaction.findBySourceAccount", query = "SELECT t FROM Transaction t WHERE t.sourceAccount = :sourceAccount")
+})
 @SequenceGenerator(name = "TRSEQ", sequenceName = "transaction_seq")
 public class Transaction implements Serializable {
     private static final long serialVersionUID = 1L;

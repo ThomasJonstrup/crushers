@@ -26,6 +26,21 @@
                 return false;
             }
         }
+        
+        var request;
+            function doSomething(field) {
+                // alert(field);
+                request = new XMLHttpRequest();
+                request.open("GET", "Customers?pattern="+field.value, true);
+                request.onreadystatechange = function(e) {
+                    if (request.readyState != 4) return;
+                    if (request.status != 200) return;
+                    var html = request.responseText;
+                    var target = document.getElementById("target");
+                    target.innerHTML = html;
+                    };
+                request.send();
+                }
 
 
 //        var request;
@@ -105,7 +120,7 @@
                         </tr>
                         <tr>
                             <td>Email</td>
-                            <td><input type="text" name="email" value=""></td>
+                            <td><input type="text" name="email" value="" onkeyup="doSomething(this);"></td>
                         </tr>
                         <tr>
                             <td>Password</td>
@@ -120,6 +135,7 @@
                             <td><input type="submit" name="Submit" value="Save User"></td>
                         </tr>
                     </table>
+                    <div id="target" style="height: 80px;border: 1px solid red;">TODO write content</div>
                 </form>
 
             </div>

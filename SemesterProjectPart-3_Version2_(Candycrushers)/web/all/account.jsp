@@ -104,17 +104,11 @@
                         <p>Amount of money: <input type="text" name="amount" value=""/></p><br>
                         <input type="submit" value="Submit"/>
                     </form>
-                    <table>
-                        <thead style="background-color: darkblue; color: white;">
-                            <tr>
-                                <td>Date</td>
-                                <td>Description</td>
-                                <td>Amount</td>
-                                <td>Balance</td>
-                            </tr>
-                        </thead>
-                        <button> Go to transactions </button>
-                    <br/><br/>
+                    <form action="Controller">
+                        <input type="hidden" name="accountId" value="${account.accountId}">
+                        <input type="hidden" name="command" value="transactions"/>
+                        <button type="submit" name="command" >Go to transactions</button>
+                    </form>
                 </c:forEach>
 
             </div>

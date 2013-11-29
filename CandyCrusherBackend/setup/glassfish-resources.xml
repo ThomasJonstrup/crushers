@@ -6,7 +6,7 @@
         <property name="portNumber" value="1527"/>
         <property name="databaseName" value="CandyBase"/>
         <property name="User" value="candy"/>
-        <property name="Password" value="test"/>
+        <property name="Password" value="candy"/>
         <property name="URL" value="jdbc:derby://localhost:1527/CandyBase"/>
         <property name="driverClass" value="org.apache.derby.jdbc.ClientDriver"/>
     </jdbc-connection-pool>
