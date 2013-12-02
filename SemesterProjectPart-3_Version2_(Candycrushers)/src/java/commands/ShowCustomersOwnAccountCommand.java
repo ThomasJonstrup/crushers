@@ -4,6 +4,7 @@
  */
 package commands;
 
+import dk.candycrushers.dto.CustomerDetail;
 import javax.servlet.http.HttpServletRequest;
 import security.SecurityRole;
 import servlets.Factory;
@@ -22,5 +23,6 @@ public class ShowCustomersOwnAccountCommand extends TargetCommand {
     public String execute(HttpServletRequest request) {
 //        request.setAttribute("account", Factory.getInstance().getBank().getAccount());
         return super.execute(request);
+        
     }
 }

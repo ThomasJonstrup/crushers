@@ -86,7 +86,27 @@
     
     
 }
+p.padding
+{
+padding-left:50px;
+}
+h1.padding
+{
+    padding-left: 50px;
+}
+h2.padding
+{
+    padding-left: 50px;
+}
+h3.padding
+{
+    padding-left: 50px;
+}
 
+input.padding
+{
+    padding-left: 50px;
+}
 
 #footer {
     width: 915px;

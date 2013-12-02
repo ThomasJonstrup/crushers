@@ -87,6 +87,7 @@
             <c:if test="${pageContext.request.isUserInRole('Banktellers')==true}">
             <li id="linav"><a href="Controller?command=show_customers" class="nav bankTeller">- Show Customers</a></li>    
             </c:if>
+            <input type="hidden" name="customerId" value="${customer.customerId}"/>
             <li id="linav"><a href="Controller?command=show_own_account" class="nav customer" >- Show Account</a></li>
 <!--            <li id="linav"><a href="Controller?command=show_banktellers" class="bankTeller nav">- Show Bank Teller</a></li>-->
              

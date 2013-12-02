@@ -9,11 +9,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width">
         <title>Add Customer Page</title>
         <link rel="shortcut icon" type="image/x-icon" href="pics/favicon.ico"/>
         <link rel="stylesheet" href="css/CSSFIL.css" type="text/css"/>
     </head>
-    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script>
         function validateForm()
         {
@@ -26,21 +28,23 @@
                 return false;
             }
         }
-        
+
         var request;
-            function doSomething(field) {
-                // alert(field);
-                request = new XMLHttpRequest();
-                request.open("GET", "Customers?pattern="+field.value, true);
-                request.onreadystatechange = function(e) {
-                    if (request.readyState != 4) return;
-                    if (request.status != 200) return;
-                    var html = request.responseText;
-                    var target = document.getElementById("target");
-                    target.innerHTML = html;
-                    };
-                request.send();
-                }
+        function doSomething(field) {
+            // alert(field);
+            request = new XMLHttpRequest();
+            request.open("GET", "Customers?pattern=" + field.value, true);
+            request.onreadystatechange = function(e) {
+                if (request.readyState != 4)
+                    return;
+                if (request.status != 200)
+                    return;
+                var html = request.responseText;
+                var target = document.getElementById("target");
+                target.innerHTML = html;
+            };
+            request.send();
+        }
 
 
 //        var request;
@@ -59,6 +63,26 @@
 //            };
 //            request.send();
 //        }
+
+      $(document).ready(function() {
+        $("#btn").click(function() {
+          $.ajax({
+            url:"PersonServlet",
+            data:"phone="+$("#phone1").val(),
+            cache: false,
+            dataType: "json",
+            success: dataReady
+          });
+        })
+
+        function dataReady(data) {
+          $("#fname").val(data.firstName);
+          $("#lname").val(data.lastName);
+          $("#street").val(data.address.street);
+
+        }
+
+      });
     </script>
 
 
@@ -96,9 +120,25 @@
             <!-- Indhold div: -->
 
             <div id="indhold">
+                
+ <!-- Prøve -->               
+    <input type="text" id="phone1"> 
+    <button id="btn">Get address from phone number</button>
+    <br/>
+    <br/>
+    <form action="#">
+      First name:<br/>
+      <input type="text" id="fname" name="fname"/><br/>
+      Last name:<br/>
+      <input type="text" id="lname" name="lname"/><br/>
+      Address:<br/>
+      <input type="text" id="street" name="street"/><br/>
+    </form>
+<!--Prøve -->    
                 <br>
                 <form name="Customer" action="Controller" method="post" onSubmit="return validateForm();">
                     <input type="hidden" name="command" value="add_customer">
+
                     <table width="350px" border=0 align="center" style="background-color:transparent;">
 
 
@@ -110,6 +150,7 @@
                             <td colspan=2>&nbsp;</td>
 
                         </tr>
+
                         <tr>
                             <td>First Name</td>
                             <td><input type="text" name="firstName" value="" ></td>
@@ -126,6 +167,10 @@
                             <td>Password</td>
                             <td><input type="password" name="password" value=""></td>
                         </tr>
+<!--                        <tr>
+                            <td>Adress</td>
+                            <td><input type="text" id="street" name="street"/></td>
+                        </tr>-->
                         <!--                <tr>
                                             <td>Confirm Password</td>
                                             <td><input type="password" name="confirmPassword" value=""></td>
@@ -135,7 +180,7 @@
                             <td><input type="submit" name="Submit" value="Save User"></td>
                         </tr>
                     </table>
-                    <div id="target" style="height: 80px;border: 1px solid red;">TODO write content</div>
+                    <!--                    <div id="target" style="height: 80px;border: 1px solid red;">TODO write content</div>-->
                 </form>
 
             </div>

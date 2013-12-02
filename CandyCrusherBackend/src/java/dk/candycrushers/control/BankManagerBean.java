@@ -19,6 +19,7 @@ import dk.candycrushers.model.Transaction;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -146,11 +147,13 @@ public class BankManagerBean implements BankManager {
 
     @Override
     public CustomerDetail getCustomerByEmail(String email) {
-      Customer customer = 
+      List<Customer> customers = 
               em.createNamedQuery("Customer.findByEmail", Customer.class)
               .setParameter("email", email)
-              .getSingleResult();
-      return createCustomerDetail(customer);
+              .getResultList();
+      if (customers.isEmpty()) return null;
+              //.getSingleResult();
+      return createCustomerDetail(customers.get(0));
     }
     
 

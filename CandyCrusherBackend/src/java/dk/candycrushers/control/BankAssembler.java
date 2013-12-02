@@ -41,6 +41,7 @@ public class BankAssembler {
     }
 
     public static CustomerDetail createCustomerDetail(Customer customer) {
+        if (customer == null) return null;
         CustomerDetail detail = new CustomerDetail(
                 customer.getCustomerId(),
                 customer.getFirstName(),

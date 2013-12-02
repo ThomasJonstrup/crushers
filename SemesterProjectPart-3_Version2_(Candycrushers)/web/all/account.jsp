@@ -88,26 +88,26 @@
 
             <div id="indhold">
 
-                <h1>Account History</h1>
-                <h2>Owner: ${currentPerson.firstName} ${currentPerson.lastName}</h2>
+                <h1 class="padding">Account History</h1>
+                <h2 class="padding">Owner: ${currentPerson.firstName} ${currentPerson.lastName}</h2>
 
                 <c:forEach var="account" items="${currentPerson.accounts}">
-                    <h2>${account.accountType} - ${account.accountId}</h2>
-                    <h3>Balance ${account.balance}</h3>
+                    <h2 class="padding">${account.accountType} - ${account.accountId}</h2>
+                    <h3 class="padding">Balance ${account.balance}</h3>
 
-                    <p>Move money from this account: </p>
+                    <p class="padding">Move money from this account: </p>
                     <form action="Controller">
 
                         <input type="hidden" name="command" value="move_money"/>
                         <input type="hidden" name="fromAccountId" value="${account.accountId}"/>
-                        <p>To account number: <input type="text" name="toAcountId" value=""/></p><br/>
-                        <p>Amount of money: <input type="text" name="amount" value=""/></p><br>
+                        <p class="padding">To account number: <input type="text" name="toAcountId" value=""/></p><br/>
+                        <p class="padding">Amount of money: <input type="text" name="amount" value=""/></p><br>
                         <input type="submit" value="Submit"/>
                     </form>
                     <form action="Controller">
                         <input type="hidden" name="accountId" value="${account.accountId}">
                         <input type="hidden" name="command" value="transactions"/>
-                        <button type="submit" name="command" >Go to transactions</button>
+                        <button type="submit" name="command">Go to transactions</button>
                     </form>
                 </c:forEach>
 

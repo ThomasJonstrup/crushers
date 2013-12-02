@@ -31,7 +31,7 @@
             <!-- Top left div: -->
 
             <div id="topright">
-        <!--        <h2 style="color: white;">Hr. ${currentPerson.firstName}</h2>-->
+                <h2 style="color: white;">Hr. ${currentPerson.firstName}</h2>
                 <a href="Controller?command=logout_command"><button>Log out</button></a>
 
             </div>
