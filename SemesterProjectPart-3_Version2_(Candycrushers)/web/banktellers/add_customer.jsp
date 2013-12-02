@@ -15,7 +15,17 @@
         <link rel="stylesheet" href="css/CSSFIL.css" type="text/css"/>
     </head>
 
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <style>
+            .Wrong {
+                background-color: red;
+                color: yellow;
+            }
+            .Correct {
+                background-color: #ccffcc;
+            }
+        </style>    
+<!--    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>-->
+            <script src="js/jquery-2.0.3.js"></script>  
     <script>
         function validateForm()
         {
@@ -28,41 +38,6 @@
                 return false;
             }
         }
-
-        var request;
-        function doSomething(field) {
-            // alert(field);
-            request = new XMLHttpRequest();
-            request.open("GET", "Customers?pattern=" + field.value, true);
-            request.onreadystatechange = function(e) {
-                if (request.readyState != 4)
-                    return;
-                if (request.status != 200)
-                    return;
-                var html = request.responseText;
-                var target = document.getElementById("target");
-                target.innerHTML = html;
-            };
-            request.send();
-        }
-
-
-//        var request;
-//        function checkUser(username) {
-//            // alert(field);
-//            request = new XMLHttpRequest();
-//            request.open("GET", "CandyBase?pattern=" + username.value, true);
-//            request.onreadystatechange = function(e) {
-//                if (request.readyState != 4)
-//                    return;
-//                if (request.status != 200)
-//                    return;
-//                var html = request.responseText;
-//                var target = document.getElementById("target");
-//                target.innerHTML = html;
-//            };
-//            request.send();
-//        }
 
       $(document).ready(function() {
         $("#btn").click(function() {
@@ -83,6 +58,27 @@
         }
 
       });
+      
+                  function callWhenSuccess(mailExists) {
+//                        if (response == "true") $("#email").css("background-color", "#ccffcc");
+//                        else $("#email").css("background-color", "red");
+                if (mailExists) $("#email").removeClass().addClass("Wrong");
+                else $("#email").removeClass().addClass("Correct");
+            }
+    
+            function checkMail() {
+                // var email = document.getElementById("email").value;
+                var email = $("#email").val();
+                alert(email);
+                //$("#target").load("AjaxController", { command: "check-email", email: email } );
+                $.ajax({
+                    url: "AjaxController",
+                    data: { command: "check-email", email: email },
+                    dataType: "json",
+                    success: callWhenSuccess
+                });
+                
+            }
     </script>
 
 
@@ -161,7 +157,8 @@
                         </tr>
                         <tr>
                             <td>Email</td>
-                            <td><input type="text" name="email" value="" onkeyup="doSomething(this);"></td>
+                            <td><input type="text" id="email" name="email" value=""></td>
+                            <td><button type="button" onclick="checkMail();">Check</button></td>
                         </tr>
                         <tr>
                             <td>Password</td>
@@ -178,6 +175,7 @@
                         <tr>
                             <td></td>
                             <td><input type="submit" name="Submit" value="Save User"></td>
+ 
                         </tr>
                     </table>
                     <!--                    <div id="target" style="height: 80px;border: 1px solid red;">TODO write content</div>-->
