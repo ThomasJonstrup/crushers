@@ -13,7 +13,7 @@ import com.sun.jersey.api.client.WebResource;
  * [dk.candycrushers.model.bankteller]<br>
  * USAGE:
  * <pre>
- *        CandyBanktellerClient client = new CandyBanktellerClient();
+ *        NewJerseyClient client = new NewJerseyClient();
  *        Object response = client.XXX(...);
  *        // do whatever with response
  *        client.close();
@@ -21,12 +21,12 @@ import com.sun.jersey.api.client.WebResource;
  *
  * @author Thomas
  */
-public class CandyBanktellerClient {
+public class NewJerseyClient {
     private WebResource webResource;
     private Client client;
     private static final String BASE_URI = "http://localhost:8080/CandyREST/webresources";
 
-    public CandyBanktellerClient() {
+    public NewJerseyClient() {
         com.sun.jersey.api.client.config.ClientConfig config = new com.sun.jersey.api.client.config.DefaultClientConfig();
         client = Client.create(config);
         webResource = client.resource(BASE_URI).path("dk.candycrushers.model.bankteller");

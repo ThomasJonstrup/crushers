@@ -15,17 +15,17 @@
         <link rel="stylesheet" href="css/CSSFIL.css" type="text/css"/>
     </head>
 
-        <style>
-            .Wrong {
-                background-color: red;
-                color: yellow;
-            }
-            .Correct {
-                background-color: #ccffcc;
-            }
-        </style>    
-<!--    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>-->
-            <script src="js/jquery-2.0.3.js"></script>  
+    <style>
+        .Wrong {
+            background-color: red;
+            color: yellow;
+        }
+        .Correct {
+            background-color: #ccffcc;
+        }
+    </style>    
+    <!--    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>-->
+    <script src="js/jquery-2.0.3.js"></script>  
     <script>
         function validateForm()
         {
@@ -39,46 +39,47 @@
             }
         }
 
-      $(document).ready(function() {
-        $("#btn").click(function() {
-          $.ajax({
-            url:"PersonServlet",
-            data:"phone="+$("#phone1").val(),
-            cache: false,
-            dataType: "json",
-            success: dataReady
-          });
-        })
+        $(document).ready(function() {
+            $("#btn").click(function() {
+                $.ajax({
+                    url: "PersonServlet",
+                    data: "phone=" + $("#phone1").val(),
+                    cache: false,
+                    dataType: "json",
+                    success: dataReady
+                });
+            })
 
-        function dataReady(data) {
-          $("#fname").val(data.firstName);
-          $("#lname").val(data.lastName);
-          $("#street").val(data.address.street);
+            function dataReady(data) {
+                $("#firstname").val(data.firstName);
+                $("#lastname").val(data.lastName);
+                $("#street").val(data.address.street);
 
-        }
+            }
 
-      });
-      
-                  function callWhenSuccess(mailExists) {
+        });
+
+        function callWhenSuccess(mailExists) {
 //                        if (response == "true") $("#email").css("background-color", "#ccffcc");
 //                        else $("#email").css("background-color", "red");
-                if (mailExists) $("#email").removeClass().addClass("Wrong");
-                else $("#email").removeClass().addClass("Correct");
-            }
-    
-            function checkMail() {
-                // var email = document.getElementById("email").value;
-                var email = $("#email").val();
-                alert(email);
-                //$("#target").load("AjaxController", { command: "check-email", email: email } );
-                $.ajax({
-                    url: "AjaxController",
-                    data: { command: "check-email", email: email },
-                    dataType: "json",
-                    success: callWhenSuccess
-                });
-                
-            }
+            if (mailExists)
+                $("#email").removeClass().addClass("Wrong");
+            else
+                $("#email").removeClass().addClass("Correct");
+        }
+
+        function checkMail() {
+            // var email = document.getElementById("email").value;
+            var email = $("#email").val();
+            //$("#target").load("AjaxController", { command: "check-email", email: email } );
+            $.ajax({
+                url: "AjaxController",
+                data: {command: "check-email", email: email},
+                dataType: "json",
+                success: callWhenSuccess
+            });
+
+        }
     </script>
 
 
@@ -116,21 +117,9 @@
             <!-- Indhold div: -->
 
             <div id="indhold">
-                
- <!-- Prøve -->               
-    <input type="text" id="phone1"> 
-    <button id="btn">Get address from phone number</button>
-    <br/>
-    <br/>
-    <form action="#">
-      First name:<br/>
-      <input type="text" id="fname" name="fname"/><br/>
-      Last name:<br/>
-      <input type="text" id="lname" name="lname"/><br/>
-      Address:<br/>
-      <input type="text" id="street" name="street"/><br/>
-    </form>
-<!--Prøve -->    
+
+                <input type="text" id="phone1"> 
+                <button id="btn">Get address from phone number</button>
                 <br>
                 <form name="Customer" action="Controller" method="post" onSubmit="return validateForm();">
                     <input type="hidden" name="command" value="add_customer">
@@ -140,7 +129,6 @@
 
                         <tr>
                             <td colspan=2  style="font-weight:bold;font-size:20pt; color: black;" align="center">Customer Registration</td>
-
                         </tr>
                         <tr>
                             <td colspan=2>&nbsp;</td>
@@ -149,11 +137,11 @@
 
                         <tr>
                             <td>First Name</td>
-                            <td><input type="text" name="firstName" value="" ></td>
+                            <td><input type="text" id="firstname" name="firstName" value="" ></td>
                         </tr>
                         <tr>
                             <td>Last Name</td>
-                            <td><input type="text" name="lastname" value=""></td>
+                            <td><input type="text" id="lastname" name="lastname" value=""></td>
                         </tr>
                         <tr>
                             <td>Email</td>
@@ -164,10 +152,10 @@
                             <td>Password</td>
                             <td><input type="password" name="password" value=""></td>
                         </tr>
-<!--                        <tr>
+                        <tr>
                             <td>Adress</td>
                             <td><input type="text" id="street" name="street"/></td>
-                        </tr>-->
+                        </tr>
                         <!--                <tr>
                                             <td>Confirm Password</td>
                                             <td><input type="password" name="confirmPassword" value=""></td>
@@ -175,7 +163,7 @@
                         <tr>
                             <td></td>
                             <td><input type="submit" name="Submit" value="Save User"></td>
- 
+
                         </tr>
                     </table>
                     <!--                    <div id="target" style="height: 80px;border: 1px solid red;">TODO write content</div>-->

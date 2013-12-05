@@ -43,7 +43,6 @@ public class PersonServlet extends HttpServlet {
     }
     Person p = persons.get(phone);
     String json =new Gson().toJson(p);
-    //Todo: use phone number to obtain an address from WannaeKRAK
     try (PrintWriter out = response.getWriter()) {
       out.println(json);
     }
