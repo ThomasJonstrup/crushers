@@ -3,6 +3,7 @@ package servlets;
 /*
  */
 
+import client.KrakClient;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -41,10 +42,14 @@ public class PersonServlet extends HttpServlet {
     if(persons == null){
       init();
     }
+    
+      KrakClient krak = new KrakClient();
+      String find_JSON = krak.find_JSON(String.class, phone);
+    
     Person p = persons.get(phone);
     String json =new Gson().toJson(p);
     try (PrintWriter out = response.getWriter()) {
-      out.println(json);
+      out.println(find_JSON);
     }
   }
   
