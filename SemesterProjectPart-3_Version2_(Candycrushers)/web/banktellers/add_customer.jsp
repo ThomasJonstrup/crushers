@@ -38,7 +38,7 @@
                 return false;
             }
         }
-
+//OOOOOOOOOOOOOOOOOOO Hent fra tlf. nr. OOOOOOOOOOOOOOOOOOO
         $(document).ready(function() {
             $("#btn").click(function() {
                 $.ajax({
@@ -49,7 +49,6 @@
                     success: dataReady
                 });
             })
-
             function dataReady(data) {
                 $("#firstname").val(data.firstName);
                 $("#lastname").val(data.lastName);
@@ -58,6 +57,7 @@
             }
 
         });
+//OOOOOOOOOOOOOOOOOOO Hent fra tlf. nr. SLUT OOOOOOOOOOOOOOOOOOO
 
         function callWhenSuccess(mailExists) {
 //                        if (response == "true") $("#email").css("background-color", "#ccffcc");
@@ -69,6 +69,28 @@
         }
 
         function checkMail() {
+            // var email = document.getElementById("email").value;
+            var email = $("#email").val();
+            //$("#target").load("AjaxController", { command: "check-email", email: email } );
+            $.ajax({
+                url: "AjaxController",
+                data: {command: "check-email", email: email},
+                dataType: "json",
+                success: callWhenSuccess
+            });
+
+        }
+        
+        function callWhenSuccessRKI(mailExists) {
+//                        if (response == "true") $("#email").css("background-color", "#ccffcc");
+//                        else $("#email").css("background-color", "red");
+            if (mailExists)
+                $("#email").removeClass().addClass("Wrong");
+            else
+                $("#email").removeClass().addClass("Correct");
+        }
+
+        function checkMailRKI() {
             // var email = document.getElementById("email").value;
             var email = $("#email").val();
             //$("#target").load("AjaxController", { command: "check-email", email: email } );
@@ -117,10 +139,14 @@
             <!-- Indhold div: -->
 
             <div id="indhold">
-
-                <input type="text" id="phone1"> 
-                <button id="btn">Get address from phone number</button>
-                <br>
+                <form name="RKIForm" action="RKIServlet" method="post">
+                    <input type="text" id="emailRKI" name="emailRKI" > 
+                    <button id="btnRKI" onclick="checkMailRKI()">Check rki</button>
+                    <br>
+                    <input type="text" id="phone1"> 
+                    <button id="btn">Get address from phone number</button>
+                    <br>
+                </form>
                 <form name="Customer" action="Controller" method="post" onSubmit="return validateForm();">
                     <input type="hidden" name="command" value="add_customer">
 
