@@ -47,6 +47,7 @@ public class Factory {
         commands.put("login_command", new LoginCommand2(targetRoles, "login.jsp"));
         commands.put("cancel", new TargetCommand("/all/main.jsp", SecurityRole.All));
         commands.put("transactions", new ShowTransactionCommand("/all/transaction.jsp", SecurityRole.All));
+        commands.put("show_currency", new TargetCommand("/all/currency.jsp", SecurityRole.All));
         
         //Banktellers
         commands.put("show_date", new ShowDateCommand("show_date.jsp", SecurityRole.Banktellers));

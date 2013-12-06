@@ -94,6 +94,7 @@
             <c:if test="${pageContext.request.isUserInRole('Banktellers')==true}">
             <li id="linav"><a href="Controller?command=add_customer_target" class="bankTeller nav">- Add Customer</a></li>
              </c:if>
+            <li id="linav"><a href="Controller?command=show_currency" class="bankTeller nav">- Show Currency</a></li>
             <!--<li class="bankTeller"><a href="Controller?command=create_account" class="bankTeller">Create new account</a></li>-->
 <!--            <li id="linav"><a href="Controller?command=add_bankteller" class="bankTeller nav">- Add Bank Teller</a></li>-->
         </div>    
