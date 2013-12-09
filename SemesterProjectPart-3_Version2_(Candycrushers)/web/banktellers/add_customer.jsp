@@ -41,20 +41,22 @@
 //OOOOOOOOOOOOOOOOOOO Hent fra tlf. nr. OOOOOOOOOOOOOOOOOOO
         $(document).ready(function() {
             $("#btn").click(function() {
+
                 $.ajax({
                     url: "PersonServlet",
                     data: "phone=" + $("#phone1").val(),
                     cache: false,
                     dataType: "json",
-                    success: dataReady
+                    success: function(data) {
+                        alert("Problem");
+                        $("#firstname").val(data.firstName);
+                        $("#lastname").val(data.lastName);
+                        $("#street").val(data.address.street);
+                    }
                 });
-            })
-            function dataReady(data) {
-                $("#firstname").val(data.firstName);
-                $("#lastname").val(data.lastName);
-                $("#street").val(data.address.street);
 
-            }
+
+            });
 
         });
 //OOOOOOOOOOOOOOOOOOO Hent fra tlf. nr. SLUT OOOOOOOOOOOOOOOOOOO
@@ -80,7 +82,7 @@
             });
 
         }
-        
+
         function callWhenSuccessRKI(mailExists) {
 //                        if (response == "true") $("#email").css("background-color", "#ccffcc");
 //                        else $("#email").css("background-color", "red");
@@ -92,11 +94,11 @@
 
         function checkMailRKI() {
             // var email = document.getElementById("email").value;
-            var email = $("#email").val();
+            var email = $("#emailRKI").val();
             //$("#target").load("AjaxController", { command: "check-email", email: email } );
             $.ajax({
-                url: "AjaxController",
-                data: {command: "check-email", email: email},
+                url: "RKIServlet",
+                data: {email: email},
                 dataType: "json",
                 success: callWhenSuccess
             });
@@ -141,12 +143,13 @@
             <div id="indhold">
                 <form name="RKIForm" action="RKIServlet" method="post">
                     <input type="text" id="emailRKI" name="emailRKI" > 
-                    <button id="btnRKI" onclick="checkMailRKI()">Check rki</button>
+                    <button id="btnRKI" onclick="checkMailRKI();">Check rki</button>
                     <br>
+                    <br>
+                </form>             
+ 
                     <input type="text" id="phone1"> 
                     <button id="btn">Get address from phone number</button>
-                    <br>
-                </form>
                 <form name="Customer" action="Controller" method="post" onSubmit="return validateForm();">
                     <input type="hidden" name="command" value="add_customer">
 

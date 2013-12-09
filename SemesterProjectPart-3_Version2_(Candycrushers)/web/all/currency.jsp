@@ -12,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="shortcut icon" type="image/x-icon" href="pics/favicon.ico"/>
         <link rel="stylesheet" type="text/css" href="css/CSSFIL.css">
-        <title>JSP Page</title>
+        <title>Currency Page</title>
     </head>
     <script src="js/jquery-2.0.3.js"></script>  
     <script>
