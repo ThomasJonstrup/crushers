@@ -33,7 +33,7 @@ public class RKIServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/json;charset=UTF-8");
-        String emailRKI = request.getParameter("emailRKI");
+        String emailRKI = request.getParameter("checkEmail");
 
         RKIClient clientRKI = new RKIClient();
         String jsonClientRKI = clientRKI.find_JSON(String.class, emailRKI);
@@ -41,9 +41,10 @@ public class RKIServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         if(jsonClientRKI.isEmpty()){
-            out.println("The person is NOT in RKI");
+//            out.println("The person is NOT in RKI");
+            out.println("false");
         }else{
-            out.println("The person is IN RKI");
+            out.println("true");
         }
 
 //        try (PrintWriter out = response.getWriter()) {

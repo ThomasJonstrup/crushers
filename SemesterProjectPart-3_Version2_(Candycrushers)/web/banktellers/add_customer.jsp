@@ -87,20 +87,20 @@
 //                        if (response == "true") $("#email").css("background-color", "#ccffcc");
 //                        else $("#email").css("background-color", "red");
             if (mailExists)
-                $("#email").removeClass().addClass("Wrong");
+                $("#emailRKI").removeClass().addClass("Wrong");
             else
-                $("#email").removeClass().addClass("Correct");
+                $("#emailRKI").removeClass().addClass("Correct");
         }
 
         function checkMailRKI() {
             // var email = document.getElementById("email").value;
-            var email = $("#emailRKI").val();
+            var checkEmail = $("#emailRKI").val();
             //$("#target").load("AjaxController", { command: "check-email", email: email } );
             $.ajax({
                 url: "RKIServlet",
-                data: {email: email},
+                data: {checkEmail: checkEmail},
                 dataType: "json",
-                success: callWhenSuccess
+                success: callWhenSuccessRKI
             });
 
         }
@@ -141,12 +141,12 @@
             <!-- Indhold div: -->
 
             <div id="indhold">
-                <form name="RKIForm" action="RKIServlet" method="post">
+                <!--<form name="RKIForm" action="RKIServlet" method="post">-->
                     <input type="text" id="emailRKI" name="emailRKI" > 
                     <button id="btnRKI" onclick="checkMailRKI();">Check rki</button>
                     <br>
                     <br>
-                </form>             
+                <!--</form>-->             
  
                     <input type="text" id="phone1"> 
                     <button id="btn">Get address from phone number</button>
