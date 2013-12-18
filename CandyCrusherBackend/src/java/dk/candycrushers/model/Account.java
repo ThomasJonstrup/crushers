@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -32,6 +34,7 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")})
 @SequenceGenerator(name = "ACCSEQ", sequenceName = "ACCOUNT_SEQ")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Account implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

@@ -7,6 +7,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+
 <html>
     <head>
 
@@ -38,14 +40,10 @@
         <style type="text/css">
             .ui-datepicker { font-size: 6.5pt !important; }
         </style>-->
-
+        <script src="js/numbers.js"></script>
 
     </head>
     <body>
-
-
-
-
 
         <!-- Hoved div: -->
         <div id="hoved">
@@ -78,6 +76,7 @@
 
                 <div id="menulink">
                     <a href="Controller?command=main" class ="nav">- Back to main</a>
+                    <a href="javascript:history.back()" class ="nav">- Back one page</a>
                     <p class="nav">Transaction</p>
                 </div>
 
@@ -88,28 +87,32 @@
 
             <div id="indhold">
 
-                <h1 class="padding">Account History</h1>
+                <h1 class="padding" align="center">Account History</h1>
                 <h2 class="padding">Owner: ${currentPerson.firstName} ${currentPerson.lastName}</h2>
 
                 <c:forEach var="account" items="${currentPerson.accounts}">
-                    <h2 class="padding">${account.accountType} - ${account.accountId}</h2>
-                    <h3 class="padding">Balance ${account.balance}</h3>
+                    <h3 class="padding"> Account Type: ${account.accountType}</h3>
+                    <h3 class ="padding"> Account number: ${account.accountId}</h3>
+                    <h3 class="padding">Account balance: ${account.balance}</h3>
 
                     <p class="padding">Move money from this account: </p>
-                    <form action="Controller">
+                    <form action="Controller" name="form1" align="center">
 
                         <input type="hidden" name="command" value="move_money"/>
                         <input type="hidden" name="fromAccountId" value="${account.accountId}"/>
-                        <p class="padding">To account number: <input type="text" name="toAcountId" value=""/></p><br/>
-                        <p class="padding">Amount of money: <input type="text" name="amount" value=""/></p><br>
-                        <input type="submit" value="Submit"/>
+                        <p class="padding">To account number: <input type="text" name="toAcountId" value="" onkeypress="return onlyNumbers();"/></p><br/>
+                        <p class="padding">Amount of money: <input type="text" name="amount" value="" onkeypress="return onlyNumbers();"/></p><br>
+                        <input type="submit" name="submit" value="Submit"/>
                     </form>
-                    <form action="Controller">
+                    <form action="Controller" align="center">
                         <input type="hidden" name="accountId" value="${account.accountId}">
                         <input type="hidden" name="command" value="transactions"/>
                         <button type="submit" name="command">Go to transactions</button>
                     </form>
+                        <hr>
                 </c:forEach>
+
+
 
             </div>
 

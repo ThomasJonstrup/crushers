@@ -12,18 +12,16 @@
         <!--<link rel="stylesheet" type="text/css" href="style.css">-->
         <link rel="shortcut icon" type="image/x-icon" href="pics/favicon.ico"/>
         <link rel="stylesheet" type="text/css" href="css/CSSFIL.css">
-         <script>
-            $( "form:first" ).submit();        
-        </script>
+        
+<!--         <script>
+            $( "form:first" ).submit(); 
+          
+        
+        </script>-->
         <title>Login</title>
     </head>
 
     <body align="center">
-        
-        
-        
-        
-
         
         <!-- Hoved div: -->
     <div id="hoved">
@@ -40,7 +38,7 @@
 
     <div id="topright">
         
-     <form action="Controller">
+     <form action="Controller" method="post">
          <fieldset id="fieldsetLogin">
              
              
@@ -52,10 +50,9 @@
             <input type="submit" id="loginSubmit" type="submit" value="login"/>
         
          </fieldset>
-
+      <p style='color:red'>${loginerror}</p>
         </form>
         
-            ${loginerror}
         <button id="applink"><a href="Mobile/MobileA/BankMain.jsp" data-role="button" data-inline="true" data-theme="b">Mobile APP</a></button>
     </div>
 
@@ -67,11 +64,14 @@
       
     </div>
     
-
 <!-- Indhold div: -->
 
      <div id="indhold">
-      <img src="pics/candymain.jpg" alt="Candy crush" width="715" height="530">
+      <img src="pics/candymain.jpg" alt="Candy crush" width="715" height="400">
+      <h1>Welcome to Candy Bank</h1>
+      <p>Login to bank to show your accounts</p>
+                <li><a href="Controller?command=show_login">Login</a>
+      
 </div>
        <!-- Top footer div: -->
         

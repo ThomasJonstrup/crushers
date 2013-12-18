@@ -70,6 +70,7 @@
 
                 <div id="menulink">
                     <a href="Controller?command=main" class ="nav">- Back to main</a>
+                    <a href="javascript:history.back()" class ="nav">- Back one page</a>
                 </div>
 
             </div
@@ -79,13 +80,15 @@
 
             <div id="indhold">
                 
-                <h1>Currency Rates</h1>
+                <h1 align="center">Currency Rates</h1>
                 
                 <input type="text" id="code"> 
                 <button id="btn">Get Currency Rate</button>
-                
+                <hr>
                 <form name="Curency">
-                <tr>
+        <table width="350px" border=0 align="center" style="background-color:transparent;">
+                
+            <tr>
                             <td>Description</td>
                             <td><input type="text" id="desc" name="desc" value="" ></td>
                         </tr>
@@ -93,6 +96,7 @@
                             <td>Rate</td>
                             <td><input type="text" id="rate" name="rate" value=""></td>
                         </tr>
+        </table>
                 </form>
                 
             </div>

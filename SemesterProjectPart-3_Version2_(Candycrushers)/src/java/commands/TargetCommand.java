@@ -11,7 +11,7 @@ import security.SecurityRole;
  *
  * @author Thomas
  */
-public class TargetCommand implements Command {
+public class TargetCommand implements Command { // Implementerer Command interfacet
 
     private final String target;
     private final SecurityRole role;

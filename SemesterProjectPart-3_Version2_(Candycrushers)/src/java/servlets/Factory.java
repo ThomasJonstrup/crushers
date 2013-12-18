@@ -45,6 +45,7 @@ public class Factory {
         targetRoles.put(SecurityRole.Customers, "/all/main.jsp");
         targetRoles.put(SecurityRole.Banktellers, "/all/main.jsp");
         commands.put("login_command", new LoginCommand2(targetRoles, "login.jsp"));
+
         commands.put("cancel", new TargetCommand("/all/main.jsp", SecurityRole.All));
         commands.put("transactions", new ShowTransactionCommand("/all/transaction.jsp", SecurityRole.All));
         commands.put("show_currency", new TargetCommand("/all/currency.jsp", SecurityRole.All));
@@ -58,6 +59,7 @@ public class Factory {
         commands.put("logout_command", new LogoutCommand2("login.jsp", SecurityRole.All));
         commands.put("edit_customer", new EditCustomerCommand("/banktellers/edit_customer.jsp", SecurityRole.Banktellers));
         commands.put("create_account", new TargetCommand("/banktellers/createAccount.jsp", SecurityRole.Banktellers));
+        commands.put("create_money_account", new TargetCommand("/banktellers/create_money_account.jsp", SecurityRole.Banktellers));
         commands.put("add_account", new CreateNewAccountCommand("/all/account.jsp", SecurityRole.All));
         commands.put("view_customer", new ShowCustomerCommand("/banktellers/view_customer.jsp", SecurityRole.Banktellers));
         commands.put("save_customer", new SaveCustomerCommand("/banktellers/view_customer.jsp", SecurityRole.Banktellers));
@@ -67,8 +69,14 @@ public class Factory {
         //Customers
         commands.put("show_own_account", new ShowCustomersOwnAccountCommand("/all/account.jsp", SecurityRole.All));
         commands.put("move_money", new MoveMoneyCommand("/all/main.jsp", SecurityRole.All));
+        
+        
+        //Mobile
+        commands.put("login_command_mobile", new LoginCommand2(targetRoles, "/MobileA/login.jsp"));
+                commands.put("bank_main_mobile", new TargetCommand("/MobileA/BankMain.jsp", SecurityRole.All));
             }
 
+    
     public static Factory getInstance() 
     {
         if (instance == null) instance = new Factory();

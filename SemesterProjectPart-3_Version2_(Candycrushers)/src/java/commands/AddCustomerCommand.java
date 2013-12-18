@@ -13,7 +13,7 @@ import servlets.Factory;
  *
  * @author Thomas
  */
-public class AddCustomerCommand extends TargetCommand {
+public class AddCustomerCommand extends TargetCommand { // Arver fra TargetCommand
 
     public AddCustomerCommand(String target, SecurityRole role) {
         super(target, role);

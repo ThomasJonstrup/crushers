@@ -25,7 +25,8 @@
         }
     </style>    
     <!--    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>-->
-    <script src="js/jquery-2.0.3.js"></script>  
+    <script src="js/jquery-2.0.3.js"></script> 
+    <script src="js/numbers.js"></script>
     <script>
         function validateForm()
         {
@@ -48,10 +49,10 @@
                     cache: false,
                     dataType: "json",
                     success: function(data) {
-                        alert("Problem");
                         $("#firstname").val(data.firstName);
                         $("#lastname").val(data.lastName);
                         $("#street").val(data.address.street);
+                        $("#email").val(data.email);
                     }
                 });
 
@@ -135,6 +136,7 @@
                 <li id="linav">
                     <p id="menutop" class="nav">Menu</p>
                     <a id="backToMainShowCustomer" href="Controller?command=main" class ="nav">- Back to main</a>
+                    <a id="backOnePage" href="javascript:history.back()" class ="nav">- Back one page</a>
                 </li>
             </div>
 
@@ -142,14 +144,15 @@
 
             <div id="indhold">
                 <!--<form name="RKIForm" action="RKIServlet" method="post">-->
-                    <input type="text" id="emailRKI" name="emailRKI" > 
-                    <button id="btnRKI" onclick="checkMailRKI();">Check rki</button>
-                    <br>
-                    <br>
+                <br>
+                <a>Check Creditworth:  </a><input type="text" id="emailRKI" name="emailRKI" > 
+                <button id="btnRKI" onclick="checkMailRKI();">Check rki</button>
+                <br>
+                <br>
                 <!--</form>-->             
- 
-                    <input type="text" id="phone1"> 
-                    <button id="btn">Get address from phone number</button>
+
+                <a>Get from Phone number:  </a><input type="text" id="phone1" onkeypress="return onlyNumbers();"> 
+                <button id="btn">Get address from phone number</button>
                 <form name="Customer" action="Controller" method="post" onSubmit="return validateForm();">
                     <input type="hidden" name="command" value="add_customer">
 
@@ -166,11 +169,11 @@
 
                         <tr>
                             <td>First Name</td>
-                            <td><input type="text" id="firstname" name="firstName" value="" ></td>
+                            <td><input type="text" id="firstname" name="firstName" value="" onkeypress="return onlyLetters();"></td>
                         </tr>
                         <tr>
                             <td>Last Name</td>
-                            <td><input type="text" id="lastname" name="lastname" value=""></td>
+                            <td><input type="text" id="lastname" name="lastname" value="" onkeypress="return onlyLetters();"></td>
                         </tr>
                         <tr>
                             <td>Email</td>
@@ -181,10 +184,10 @@
                             <td>Password</td>
                             <td><input type="password" name="password" value=""></td>
                         </tr>
-                        <tr>
+<!--                        <tr>
                             <td>Adress</td>
                             <td><input type="text" id="street" name="street"/></td>
-                        </tr>
+                        </tr>-->
                         <!--                <tr>
                                             <td>Confirm Password</td>
                                             <td><input type="password" name="confirmPassword" value=""></td>

@@ -28,7 +28,22 @@
             <h4>Logon</h4>
             </div>
             
-            <div data-role="fieldcontain">
+     <form action="Controller">
+         <fieldset id="fieldsetLogin">
+             
+             
+            <input type="hidden" name="command" value="login_command_mobile"/>
+            <div>
+            <input size="10" type="text" name="username" value="" autofocus required placeholder="&nbsp; Username" /><br>
+            <input size="10" type="password" name="password" value="" required placeholder="&nbsp; Password" />
+            </div>
+            <input type="submit" id="loginSubmit" type="submit" value="login"/>
+        
+         </fieldset>
+
+        </form>
+            
+<!--            <div data-role="fieldcontain">
             <input type="hidden" name="command" value="login_command"/>
     <label for="name">Username:</label>
     <input type="text" name="name" id="name" value=""  />
@@ -37,9 +52,9 @@
     <label for="name">Password:</label>
     <input type="text" name="name" id="name" value=""  />
 </div>	
-<input type="submit" id="loginSubmit" type="submit" value="login"/>
-<a href="LoginPage.jsp" data-role="button" data-inline="true" data-theme="b">Login</a>
-<a href="BankMain.jsp" data-role="button" data-inline="true">Cancel</a>
+<input type="submit" id="loginSubmit" type="submit" value="login"/>-->
+<!--<a href="LogonPage.jsp" data-role="button" data-inline="true" data-theme="b">Login</a>
+<a href="BankMain.jsp" data-role="button" data-inline="true">Cancel</a>-->
 
 <div data-role="footer" data-id="foo1" data-position="fixed">
 	<div data-role="navbar">

@@ -13,6 +13,7 @@ import dk.candycrushers.dto.BanktellerDetail;
 import dk.candycrushers.dto.TransactionDetail;
 import dk.candycrushers.model.Account;
 import dk.candycrushers.model.Bankteller;
+import dk.candycrushers.model.MoneyMarketAccount;
 import dk.candycrushers.model.Person;
 import dk.candycrushers.model.Role;
 import dk.candycrushers.model.Transaction;
@@ -85,7 +86,8 @@ public class BankManagerBean implements BankManager {
  
     @Override
     public AccountDetail addAccount(String accountType, double balance, long customerID) {
-        Account acc = new Account(accountType);
+        // Account acc = new Account(accountType);
+        Account acc = new MoneyMarketAccount(600000.0);
         acc.setBalance(balance);
         
         Customer cus = em.find(Customer.class, (int)customerID);
@@ -132,7 +134,8 @@ public class BankManagerBean implements BankManager {
         toAcc.setBalance(toAcc.getBalance() + amount);
         
         fromAcc.setBalance(fromAcc.getBalance() - amount);
-        double balance = 0;
+        double balance = fromAcc.getBalance();
+//        double balance = 0;
         
         Transaction t = new Transaction(new Date(), amount, balance, "Some info", "Some message", fromAcc, toAcc);
         em.persist(t);

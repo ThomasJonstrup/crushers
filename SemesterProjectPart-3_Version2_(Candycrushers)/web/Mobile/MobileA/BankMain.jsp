@@ -42,7 +42,7 @@
             <div data-role="footer">
             <h4>Login</h4>
             </div>
-<a href="Logon.jsp" data-role="button" data-inline="true" data-theme="b">Login</a> 
+<a href="Login.jsp" data-role="button" data-inline="true" data-theme="b">Login</a> 
     
         
 <div data-role="footer" data-id="foo1" data-position="fixed">

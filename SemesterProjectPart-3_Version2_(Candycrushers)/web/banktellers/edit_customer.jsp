@@ -13,6 +13,52 @@
         <link rel="stylesheet" type="text/css" href="css/CSSFIL.css">
         <title>Edit Customer Page</title>
     </head>
+    
+    <style>
+        .Wrong {
+            background-color: red;
+            color: yellow;
+        }
+        .Correct {
+            background-color: #ccffcc;
+        }
+    </style> 
+    <script src="js/jquery-2.0.3.js"></script>
+    <script>
+        function validateForm()
+        {
+            var x = document.forms["Customer"]["email"].value;
+            var atpos = x.indexOf("@");
+            var dotpos = x.lastIndexOf(".");
+            if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= x.length)
+            {
+                alert("Not a valid e-mail address, missing eitehr @ or a dot");
+                return false;
+            }
+        }
+        function callWhenSuccess(mailExists) {
+//                        if (response == "true") $("#email").css("background-color", "#ccffcc");
+//                        else $("#email").css("background-color", "red");
+            if (mailExists)
+                $("#email").removeClass().addClass("Wrong");
+            else
+                $("#email").removeClass().addClass("Correct");
+        }
+
+        function checkMail() {
+            // var email = document.getElementById("email").value;
+            var email = $("#email").val();
+            //$("#target").load("AjaxController", { command: "check-email", email: email } );
+            $.ajax({
+                url: "AjaxController",
+                data: {command: "check-email", email: email},
+                dataType: "json",
+                success: callWhenSuccess
+            });
+
+        }
+
+    </script>
     <body>
 <!-- Hoved div: -->
     <div id="hoved">
@@ -40,7 +86,9 @@
         <li id="linav">
                 <p id="menutop" class="nav">Menu</p>
         <a id="backToMainViewCustomer" href="Controller?command=main" class ="nav">- Back to main</a>
+                    <a href="javascript:history.back()" class ="nav">- Back one page</a>
             </li>
+<!--            <li id="linav"><a id="backOnePage" href="javascript:history.back()" class ="nav">- Back one page</a></li>-->
     </div>
 
  <!-- Indhold div: -->
@@ -49,7 +97,7 @@
    
         
    <input type="hidden" name="customerId" value="${empty customer ? 0 : customer.customerId}" />
-        <form action="Controller" >
+<form name="Customer" action="Controller" method="post" onSubmit="return validateForm();">
             <table width="350px" border=0 align="center" style="background-color:transparent;">
 
                 <tr>
@@ -58,19 +106,20 @@
                 </tr>
                 <tr>
                     <th>ID:</th>
-                    <td><input type="text" name="customerId" value="${customer.customerId}" readonly=""/></td>
+                    <td><input type="text" id='custid' name="customerId" value="${customer.customerId}" readonly=""/></td>
                 </tr>
                 <tr>
                     <th>First name:</th>
-                    <td><input type="text" name="firstName" value="${customer.firstName}" /></td>
+                    <td><input type="text" id='firstname' name="firstName" value="${customer.firstName}" /></td>
                 </tr>
                 <tr>
                     <th>Last name:</th>
-                    <td><input type="text" name="lastName" value="${customer.lastName}" /></td>
+                    <td><input type="text"  id='lastname' name="lastName" value="${customer.lastName}" /></td>
                 </tr>
                 <tr>
                     <th>Email:</th>
-                    <td><input type="text" name="email" value="${customer.email}" /></td>
+                    <td><input type="text" id='email' name="email" value="${customer.email}" /></td>
+                    <td><button type="button" onclick="checkMail();">Check</button></td>
                 </tr>
                 
                 <tr class="ButtonRow">

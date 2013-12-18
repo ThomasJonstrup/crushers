@@ -5,6 +5,7 @@
 package servlets;
 
 import commands.Command;
+import commands.LoginCommand2;
 import commands.LogoutCommand2;
 import commands.ShowLoginCommand;
 import java.io.IOException;
@@ -32,36 +33,6 @@ public class Controller extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-//    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        
-//        HttpSession session = request.getSession();
-//        Person currentPerson = (Person) session.getAttribute("currentPerson");
-//        
-////        Date userTimeOut = (Date)session.getAttribute("timeout");
-////        long diff = new Date().getTime() - userTimeOut.getTime();
-//        
-//            String commandString = request.getParameter("command");
-//        
-//        if(currentPerson != null || "login_command".equals(commandString)){
-//            Command command = Factory.getInstance().getCommand(commandString);
-//            String path = command.execute(request);
-//            RequestDispatcher requestDispatcher = 
-//                    request.getRequestDispatcher(path);
-//            requestDispatcher.forward(request, response);
-//            
-//        }
-////        else if("login_command".equals(commandString)){
-////            Command command = Factory.getInstance().getCommand(commandString);
-////            String path = command.execute(request);
-////            RequestDispatcher requestDispatcher = 
-////                    request.getRequestDispatcher(path);
-////            requestDispatcher.forward(request, response);
-////        }
-//        else{
-//            RequestDispatcher req = request.getRequestDispatcher("login.jsp");
-//            req.forward(request, response);
-//        }
 
   private int PORT_NON_SSL;
   private int PORT_SSL;
@@ -78,7 +49,7 @@ public class Controller extends HttpServlet {
 //    } 
 //    else if(command instanceof LogoutCommand2) {
 //      String nonSSL = "http://" + request.getServerName() + ":" + PORT_NON_SSL + request.getRequestURI();
-//      response.sendRedirect(nonSSL);
+//      response.sendRedirect(nonSSL);   
 //    }
 //    else {
 //      request.getRequestDispatcher(path).forward(request, response);

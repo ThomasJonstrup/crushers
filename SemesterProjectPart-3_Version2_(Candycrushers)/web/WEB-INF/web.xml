@@ -8,7 +8,7 @@
     <context-param>
         <description>Port for SSL communication</description>
         <param-name>portSSL</param-name>
-        <param-value>8081</param-value>
+        <param-value>8181</param-value>
     </context-param>
     <session-config>
         <session-timeout>
@@ -41,18 +41,6 @@
             <description/>
             <role-name>Banktellers</role-name>
         </auth-constraint>
-    </security-constraint>
-    <security-constraint>
-        <display-name>SSL_SWITCH</display-name>
-        <web-resource-collection>
-            <web-resource-name>SSL</web-resource-name>
-            <description/>
-            <url-pattern>/SecureLoginController</url-pattern>
-        </web-resource-collection>
-        <user-data-constraint>
-            <description/>
-            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
-        </user-data-constraint>
     </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>

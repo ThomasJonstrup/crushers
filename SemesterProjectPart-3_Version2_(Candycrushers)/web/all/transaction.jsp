@@ -31,7 +31,7 @@
             <!-- Top left div: -->
 
             <div id="topright">
-                <h2 style="color: white;">Name: ${currentPerson.firstName}</h2>
+                <h2 style="color: white;">Owner: ${currentPerson.firstName}</h2>
                 <a href="Controller?command=logout_command"><button>Log out</button></a>
 
             </div>
@@ -48,7 +48,7 @@
 
                 <div id="menulink">
                     <a href="Controller?command=main" class ="nav">- Back to main</a>
-                    <p class="nav">Transaction</p>
+                    <a href="javascript:history.back()" class ="nav">- Back one page</a>
                 </div>
 
             </div
@@ -58,8 +58,8 @@
 
             <div id="indhold">
 
-                <h1>Transactions</h1>
-                <table>
+                <h1 align="center">Transactions</h1>
+                <table align="center" border="0" width="350px">
                     <thead style="background-color: darkblue; color: white;">
                         <tr>
                             <td>Date</td>
@@ -74,6 +74,7 @@
                             <td>${trans.info}</td>
                             <td>${trans.amount}</td>
                             <td>${trans.balance}</td>
+
                         </tr>
                     </c:forEach>
                 </table>

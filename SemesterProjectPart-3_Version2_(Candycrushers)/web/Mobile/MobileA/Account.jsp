@@ -28,8 +28,8 @@
                 <li><a href="AccountName.html">Name of Account<div>Account ID,Balance</div></a></li>
                 <li><a href="AccountName.html">Name of Account<div>Account ID,Balance</div></a></li>
                 <div>
-      <a href="Logon.html" data-role="button" data-inline="true" data-theme="b">Logof</a>       
-      <a href="LoginPage.html" data-role="button" data-inline="true">Back</a>
+      <a href="Logon.jsp" data-role="button" data-inline="true" data-theme="b">Logof</a>       
+      <a href="LoginPage.jsp" data-role="button" data-inline="true">Back</a>
            
    
                 

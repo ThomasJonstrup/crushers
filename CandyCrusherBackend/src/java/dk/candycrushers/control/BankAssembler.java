@@ -9,11 +9,15 @@ import dk.candycrushers.dto.AccountSummary;
 import dk.candycrushers.dto.BanktellerDetail;
 import dk.candycrushers.dto.CustomerDetail;
 import dk.candycrushers.dto.CustomerSummary;
+import dk.candycrushers.dto.MoneyMarketAccountDetail;
+import dk.candycrushers.dto.TimeDepositAccountDetail;
 import dk.candycrushers.dto.TransactionDetail;
 import dk.candycrushers.dto.TransactionSummary;
 import dk.candycrushers.model.Account;
 import dk.candycrushers.model.Bankteller;
 import dk.candycrushers.model.Customer;
+import dk.candycrushers.model.MoneyMarketAccount;
+import dk.candycrushers.model.TimeDepositAccount;
 import dk.candycrushers.model.Transaction;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -50,10 +54,31 @@ public class BankAssembler {
 
         detail.setAccounts(createAccountDetails(customer.getAccounts()));
         return detail;
+        
     }
 
     public static AccountDetail createAccountDetail(Account account) {
-
+        if (account instanceof MoneyMarketAccount) {
+          MoneyMarketAccount mm = (MoneyMarketAccount)account;
+          return new MoneyMarketAccountDetail( 
+                  (long)mm.getAccountId(), 
+                  mm.getAccountType(), 
+                  mm.getBalance(), 
+                  "" + mm.getOwner().getFirstName()+""+ mm.getOwner().getLastName(),
+                  mm.getMinBalance()
+                  );
+        }
+//        if (account instanceof TimeDepositAccount) {
+//            TimeDepositAccount time = (TimeDepositAccount)account;
+//            return new TimeDepositAccountDetail(
+//                    time.getAccountId(), 
+//                    time.getAccountType(), 
+//                    time.getBalance(),
+//                    "" + time.getOwner().getFirstName()+"" + time.getOwner().getLastName(),
+//                    time.getStartDate(), 
+//                    time.getEndDate());
+//        }
+        
         return new AccountDetail(
                 account.getAccountId(),
                 account.getAccountType(),

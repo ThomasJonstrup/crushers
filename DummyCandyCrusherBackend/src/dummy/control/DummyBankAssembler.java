@@ -8,8 +8,11 @@ import dk.candycrushers.dto.AccountDetail;
 import dk.candycrushers.dto.AccountSummary;
 import dk.candycrushers.dto.CustomerDetail;
 import dk.candycrushers.dto.CustomerSummary;
+import dk.candycrushers.dto.TransactionDetail;
+import dk.candycrushers.dto.TransactionSummary;
 import dummy.model.Account;
 import dummy.model.Customer;
+import dummy.model.Transaction;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -52,4 +55,29 @@ public class DummyBankAssembler {
                 account.getBalance(),
                 "" + account.getOwner().getFirstName() + " " + account.getOwner().getLastName());
     }
+    
+        public static Collection<TransactionDetail> createAccountDetails(Collection<Transaction> transaction) {
+        Collection<TransactionDetail> transactionDetails = new ArrayList<>();
+        for (Transaction trans : transaction) {
+            transactionDetails.add(createTransactionDetail(trans));
+        }
+        return transactionDetails;
+        
+        
+    }
+        
+            public static TransactionSummary createTransactionSummary(Transaction transaction) {
+        return new TransactionSummary(transaction.getBalance(), transaction.getInfo());
+
+    }
+            
+                public static TransactionDetail createTransactionDetail(Transaction transaction) {
+        return new TransactionDetail(
+                transaction.getTransactionId(),
+                transaction.getTimestamp(),
+                transaction.getAmount(),
+                transaction.getBalance(),
+                transaction.getInfo());
+    }
+
 }

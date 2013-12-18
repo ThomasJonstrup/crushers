@@ -222,7 +222,12 @@ p.nav:active {
   left: 217px; 
   top: 143px;
   }
-  
+
+  #backOnePage {
+   position: absolute;
+   left: 217px;
+   top: 143px;
+  }
 
 
   

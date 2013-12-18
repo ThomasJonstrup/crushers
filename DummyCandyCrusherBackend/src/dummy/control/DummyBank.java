@@ -11,10 +11,12 @@ import dk.candycrushers.dto.AccountDetail;
 import dk.candycrushers.dto.BanktellerDetail;
 import dk.candycrushers.dto.CustomerDetail;
 import dk.candycrushers.dto.CustomerSummary;
+import dk.candycrushers.dto.TransactionDetail;
 import dummy.model.Account;
 import dummy.model.BankTeller;
 import dummy.model.Customer;
 import dummy.model.Person;
+import dummy.model.Transaction;
 
 public class DummyBank implements BankManager {
 
@@ -26,7 +28,7 @@ public class DummyBank implements BankManager {
     private AccountDetail accountDetail;
     private List<Account> accounts = new ArrayList();
     private List<AccountDetail> accountDetails = new ArrayList();
-    //    private List<Transaction> transactions = new ArrayList();
+        private List<Transaction> transactions = new ArrayList();
     //    private List<Transaction> transactions = new ArrayList();
 
     public DummyBank() {
@@ -90,7 +92,7 @@ public class DummyBank implements BankManager {
     }
     
     @Override
-    public CustomerDetail updateCustomer(long customerID, String firstName, String lastName, String email, String password) {
+    public CustomerDetail updateCustomer(long customerID, String firstName, String lastName, String email) {
         Customer cusReturn = null;
 
         for (Customer cus : customers.values()) {
@@ -98,7 +100,6 @@ public class DummyBank implements BankManager {
                 cus.setFirstName(firstName);
                 cus.setLastName(lastName);
                 cus.setEmail(email);
-                cus.setPassword(password);
                 cusReturn = cus;
             }
         }
@@ -107,64 +108,37 @@ public class DummyBank implements BankManager {
     }
 
 
-//
-//    @Override
-//    public Person checkLogin(String username, String password) {
-//        Person person = null;
-//        for (Customer cus : customers.values()) {
-//            if (cus.getFirstName().equals(username)) {
-//                if (cus.getPassword().equals(password)) {
-//                    person = cus;
-//                }
-//            }
-//        }
-//        if (person == null) {
-//            for (BankTeller bankTeller : banktellers.values()) {
-//                if (bankTeller.getFirstName().equals(username)) {
-//                    if (bankTeller.getPassword().equals(password)) {
-//                        person = bankTeller;
-//                    }
-//                }
-//            }
-//        }
-//        return person;
-//    }
-//
-//    @Override
-//    public void addBankTeller(String firstname, String lastName, String email, String password, int role) {
-//        BankTeller newBankT = new BankTeller(firstname, lastName, email, password, role);
-//        banktellers.put(newBankT.getBanktellerid(), newBankT);
-//    }
-//
-//    @Override
-//    public BankTeller getBankTeller(long id) {
-//        return banktellers.get(id);
-//    }
-//
-//    @Override
-//    public Collection<BankTeller> getBankTellers() {
-//        return banktellers.values();
-//    }
-//
-//    @Override
-
-
     @Override
     public AccountDetail transactionToAnOtherAccount(int fromAccountId, int toAccountId, double amount) {
         String returnString = "Transaction did not complete ..";
         double minusAmount = amount - (2 * amount);
 
         try {
-//            AccountDetail fromAccount = getAccountTransactionToEachOther(fromAccountId);
-//            fromAccount.createTransaction(minusAmount, amount + " has been moved to account number: " + toAccountId);
-//
-//            AccountDetail toAccount = getAccountTransactionToEachOther(toAccountId);
-//            toAccount.createTransaction(amount, amount + " has been inserted from account number: " + fromAccount.getAccountId());
-//            returnString = "Transaction complete!";
+            AccountDetail fromAccount = getAccountTransactionToEachOther(fromAccountId);
+            fromAccount.createTransaction(minusAmount, amount + " has been moved to account number: " + toAccountId);
+
+            AccountDetail toAccount = getAccountTransactionToEachOther(toAccountId);
+            toAccount.createTransaction(amount, amount + " has been inserted from account number: " + fromAccount.getAccountId());
+            returnString = "Transaction complete!";
         } catch (Exception e) {
         }
-        return returnString;
+        return DummyBankAssembler.createAccountDetail(account);
     }
+    
+//        public AccountDetail transactionToAnOtherAccount(int fromAccountId, int toAccountId, double amount) {
+//        Account fromAcc = em.find(Account.class, fromAccountId);
+//        
+//        Account toAcc = em.find(Account.class, toAccountId);
+//        
+//        toAcc.setBalance(toAcc.getBalance() + amount);
+//        
+//        fromAcc.setBalance(fromAcc.getBalance() - amount);
+//        double balance = 0;
+//        
+//        Transaction t = new Transaction(new Date(), amount, balance, "Some info", "Some message", fromAcc, toAcc);
+//        em.persist(t);
+//        return createAccountDetail(fromAcc);
+//    }
 
     @Override
     public AccountDetail getAccountTransactionToEachOther(long accountId) {
@@ -192,17 +166,17 @@ public class DummyBank implements BankManager {
 
     @Override
     public CustomerDetail getCustomerByEmail(String email) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public CustomerDetail updateCustomer(long customerID, String firstName, String lastName, String email) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+             return DummyBankAssembler.createCustomerDetail(customers.get(email));
     }
 
     @Override
     public BanktellerDetail getBanktellerByEmail(String email) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Collection<TransactionDetail> getTransactionDetails(int accountId) {
+throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 

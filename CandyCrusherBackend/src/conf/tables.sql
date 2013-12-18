@@ -1,4 +1,6 @@
 drop table transactions;
+drop table time_deposit_accounts;
+drop table money_market_accounts;
 drop table accounts;
 drop table banktellers;
 drop table customers;
@@ -51,12 +53,24 @@ create table banktellers (
 Create sequence account_seq start with 1000;
 
 create table accounts (
-    account_id int primary key,
+    account_id int primary key, 
+    dtype varchar(40) not null, 
     account_type varchar(40) not null,
     balance double,
     owner int not null,
     constraint fk_customer_id foreign key (owner)
     references customers(customer_id)
+);
+
+create table money_market_accounts (
+    account_id int primary key references accounts(account_id),
+    min_balance double
+);
+
+create table time_deposit_accounts (
+    account_id int primary key references accounts(account_id),
+    start_date date,
+    end_date date
 );
 
 create sequence transaction_seq start with 1000;
