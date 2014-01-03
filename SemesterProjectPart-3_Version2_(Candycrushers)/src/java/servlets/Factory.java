@@ -9,6 +9,7 @@ import dk.candycrushers.control.BankManager;
 import dk.candycrushers.dto.AccountDetail;
 import dk.candycrushers.dto.CustomerDetail;
 import dk.candycrushers.dto.CustomerSummary;
+//import dummy.control.DummyBank;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,19 +33,25 @@ public class Factory {
     
 
 //    private BankManager bank = new DummyBank();
-    private static Factory instance = null;
-    private Map<String, Command> commands = new HashMap<>();
+    private static Factory instance = null; // Singleton
+    private Map<String, Command> commands = new HashMap<>(); // Map med alle komandoerne
 
     private Factory() 
     {
         //All
         commands.put("main", new TargetCommand("/all/main.jsp", SecurityRole.All));
+        commands.put("mainTest", new TargetCommand("/all/mainTest.jsp", SecurityRole.All));
 //        commands.put("login_command", new LoginCommand("/all/main.jsp", SecurityRole.All));
         commands.put("show_login", new ShowLoginCommand("login.jsp", SecurityRole.All));
         Map<SecurityRole, String> targetRoles = new HashMap<>();
         targetRoles.put(SecurityRole.Customers, "/all/main.jsp");
         targetRoles.put(SecurityRole.Banktellers, "/all/main.jsp");
         commands.put("login_command", new LoginCommand2(targetRoles, "login.jsp"));
+        
+        //Trial Exam:
+        commands.put("about_command", new AboutCommand("/all/about2.jsp", SecurityRole.All));
+        commands.put("date_command", new TargetCommand("/all/date.jsp", SecurityRole.All));
+ 
 
         commands.put("cancel", new TargetCommand("/all/main.jsp", SecurityRole.All));
         commands.put("transactions", new ShowTransactionCommand("/all/transaction.jsp", SecurityRole.All));
@@ -77,13 +84,13 @@ public class Factory {
             }
 
     
-    public static Factory getInstance() 
+    public static Factory getInstance() // få en instans af singleon
     {
         if (instance == null) instance = new Factory();
         return instance;
     }
     
-    public BankManager getBank() { return bank; }
+    public BankManager getBank() { return bank; } // bruges til at hente information fra bankManager interfacet
     
     
     

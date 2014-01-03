@@ -40,7 +40,8 @@
        
      <li id="linav">
        <p id="menutop" class="nav">Menu</p>
-       <a id="backToMainViewCustomer" href="main.jsp" class="nav">Back to main</a>
+                    <a id="backToMainShowCustomer" href="Controller?command=main" class ="nav">- Back to main</a>
+                    <a id="backOnePage" href="javascript:history.back()" class ="nav">- Back one page</a>
      </li>
     </div>
 

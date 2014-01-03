@@ -59,7 +59,7 @@
             <!-- Top left div: -->
 
             <div id="topright">
-                <h2 style="color: white;">Name: ${currentPerson.firstName}</h2>
+                <h2 style="color: white;">Owner: ${currentPerson.firstName}</h2>
                 <a href="Controller?command=logout_command"><button>Log out</button></a>
 
             </div>
@@ -68,8 +68,6 @@
 
             <div id="menu">
 
-
-
                 <li id="linav">
                     <p id="menutop" class="nav">Menu</p>
                 <li/>
@@ -77,18 +75,15 @@
                 <div id="menulink">
                     <a href="Controller?command=main" class ="nav">- Back to main</a>
                     <a href="javascript:history.back()" class ="nav">- Back one page</a>
-                    <p class="nav">Transaction</p>
                 </div>
 
             </div
-
-
             <!-- Indhold div: -->
 
             <div id="indhold">
 
                 <h1 class="padding" align="center">Account History</h1>
-                <h2 class="padding">Owner: ${currentPerson.firstName} ${currentPerson.lastName}</h2>
+                <h2 class="padding" align="center">Owner: ${currentPerson.firstName} ${currentPerson.lastName}</h2>
 
                 <c:forEach var="account" items="${currentPerson.accounts}">
                     <h3 class="padding"> Account Type: ${account.accountType}</h3>
@@ -111,14 +106,11 @@
                     </form>
                         <hr>
                 </c:forEach>
-
-
-
             </div>
 
             <div id="footer">
                 <div>
-                    <p class="footer">Candy Bank 2013<br>Copyright &copy</p>
+<p class="footer">Candy Bank Copyright &copy 2013 <br>Email:<a href="mailto:candybank@outlook.com">candybank@outlook.com</a></p>
                 </div>
             </div>
 

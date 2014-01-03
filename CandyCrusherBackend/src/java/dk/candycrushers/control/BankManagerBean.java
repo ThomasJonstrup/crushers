@@ -17,6 +17,7 @@ import dk.candycrushers.model.MoneyMarketAccount;
 import dk.candycrushers.model.Person;
 import dk.candycrushers.model.Role;
 import dk.candycrushers.model.Transaction;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -30,11 +31,11 @@ import javax.persistence.Query;
  *
  * @author Thomas
  */
-@Stateless
+@Stateless //Stateless Bean annotation, har ikke nogen specifik stadie kan have en instans
 public class BankManagerBean implements BankManager {
 
     @PersistenceContext(unitName = "CandyCrusherBackendPU")
-    private EntityManager em;
+    private EntityManager em; // har API for CRUD (Create, read, update, delete)
 
     @Override
     public String sayHello(String name) {
@@ -109,10 +110,10 @@ public class BankManagerBean implements BankManager {
          Customer cust = em.find(Customer.class, (int)customerID);
             cust.setFirstName(firstName);
             cust.setLastName(lastName);
-            //cust.setEmail(email);
+//            cust.setEmail(email);
 //            cust.getPerson().setEmail(email);
 //            cust.setPassword(password);
-////        }
+//        }
         return createCustomerDetail(cust);
     }
 
@@ -155,7 +156,6 @@ public class BankManagerBean implements BankManager {
               .setParameter("email", email)
               .getResultList();
       if (customers.isEmpty()) return null;
-              //.getSingleResult();
       return createCustomerDetail(customers.get(0));
     }
     
@@ -180,6 +180,21 @@ public class BankManagerBean implements BankManager {
         
         return createTransactionDetails(transactions);
         
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public int getCustomerCount() {
+
+        int count = ((Long)em.createNamedQuery("Customer.countAll").getSingleResult()).intValue();
+        return count;
+    }
+
+    @Override
+    public int getBanktellerCount() {
+        int count = ((Long)em.createNamedQuery("Bankteller.countAll").getSingleResult()).intValue();
+        return count;
+    }
+    
+
+
 }

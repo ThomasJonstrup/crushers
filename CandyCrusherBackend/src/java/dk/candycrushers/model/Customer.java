@@ -31,7 +31,8 @@ import javax.validation.constraints.Size;
 @Table(name = "CUSTOMERS")
 @NamedQueries({
     @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c"),
-    @NamedQuery(name = "Customer.findByEmail", query = "SELECT c FROM Customer c WHERE c.person.email = :email")
+    @NamedQuery(name = "Customer.findByEmail", query = "SELECT c FROM Customer c WHERE c.person.email = :email"),
+    @NamedQuery(name = "Customer.countAll", query = "SELECT COUNT(c) FROM Customer c")    
 })
 @SequenceGenerator(name = "CUSSEQ", sequenceName = "customer_seq")
 public class Customer implements Serializable {

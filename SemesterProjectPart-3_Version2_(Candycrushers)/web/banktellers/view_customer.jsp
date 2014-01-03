@@ -11,43 +11,6 @@
         <script src="js/jquery.ui.datepicker-da.js"></script>
         <title>View Customer page</title>
 
-        <script>
-            $(function() {
-                $("#tabs").tabs();
-                tab1Demo();
-            });
-
-
-            //Code for tab-1 - Show hide
-            function tab1Demo() {
-                $("div[id^='detail_']").hide();
-                $("#accounttype").change(function(e) {
-                    if ($("#accounttype").val() === "Loan Account") {
-                        $("#detail_loanAccount").show();
-                        $("#detail_depositAccount").hide();
-                        $("#detail_timedepositAccountStart").hide();
-                        $("#detail_timedepositAccountEnd").hide();
-                    }
-                    ;
-                    if ($("#accounttype").val() === "Money Market Account") {
-                        $("#detail_loanAccount").hide();
-                        $("#detail_depositAccount").show();
-                        $("#detail_timedepositAccountStart").hide();
-                        $("#detail_timedepositAccountEnd").hide();
-                    }
-                    ;
-                    if ($("#accounttype").val() === "TimeDeposit Account") {
-                        $("#detail_loanAccount").hide();
-                        $("#detail_depositAccount").hide();
-                        $("#detail_timedepositAccountStart").show();
-                        $("#detail_timedepositAccountEnd").show();
-                    }
-                    ;
-                });
-            }
-
-
-        </script>
     </head>
 
 
@@ -72,18 +35,19 @@
 
             <!--  Menu div: -->
 
-            <div id="menu">
 
+            <div id="menu">
+                
                 <li id="linav">
                     <p id="menutop" class="nav">Menu</p>
-                    <!--        <a id="backToMainViewCustomer" href="Controller?command=main" class ="nav">- Back to main</a>
-                            <a id="backOnePage" href="javascript:history.back()" class ="nav">- Back one page</a>-->
+                <li/>
+
+                <div id="menulink">
                     <a href="Controller?command=main" class ="nav">- Back to main</a>
                     <a href="javascript:history.back()" class ="nav">- Back one page</a>
-                    <a href="Controller?command=create_money_account" class="nav">- Create Money Account</a>
-                </li>
+                </div>
 
-            </div>
+            </div
 
             <!-- Indhold div: -->
 
@@ -96,7 +60,7 @@
 
 
                         <tr>
-                            <td colspan=2  style="font-weight:bold;font-size:20pt;" align="center">Customer Registration</td>
+                            <td colspan=2  style="font-weight:bold;font-size:20pt;" align="center">Customer Information</td>
 
                         </tr>
                         <tr>
@@ -147,18 +111,19 @@
                             <!--                    <td><input type="text" name="accountType" value="" required></td>-->
                             <!--                    <td><input type="text" name="balance" value="" required="" ></td>-->
 
-                            <td><label>Account Type</label></td>
+                            <td><label><b>Account Type</b></label></td>
                             <td><select id="accounttype" type="text" name="accountType">
                                     <option></option>
                                     <option>Loan Account</option>
                                     <option>MoneyMarketAccount</option>
                                     <option>TimeDepositAccount</option>
                                 </select></td>
-
                         </tr>
-
                         <tr>
-                            <td></td>
+                            <td><label><b>Balance</b></label></td>
+                            <td><input type="text" name="balance" value="" onkeypress="return onlyNumbers();"></td>
+                        </tr>
+                        <tr>
                             <td><input type="submit" name="Submit" value="Create account"></td>
                         <input type="hidden" name="customerId" value="${customer.customerId}"/>
                         <input type="hidden" name="command" value="add_account">

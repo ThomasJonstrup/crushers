@@ -10,13 +10,14 @@ import dk.candycrushers.dto.CustomerDetail;
 import dk.candycrushers.dto.CustomerSummary;
 import dk.candycrushers.dto.TransactionDetail;
 import java.util.Collection;
+import java.util.Date;
 import javax.ejb.Remote;
 
 /**
  *
  * @author Thomas
  */
-@Remote
+@Remote // Remote Bean  anotation
 public interface BankManager {
 
     String sayHello(String name);
@@ -26,6 +27,11 @@ public interface BankManager {
     CustomerDetail addCustomer(String firstName, String lastName, String email, String password, int role);
     CustomerDetail updateCustomer(long customerID, String firstName, String lastName, String email);
 
+    //Trial exam:
+    int getCustomerCount();
+    
+    int getBanktellerCount();
+    
     AccountDetail addAccount(String accountType, double balance, long customerID);
     AccountDetail getAccount(long id);
     AccountDetail transactionToAnOtherAccount(int fromAccountId, int toAccountId, double amount);

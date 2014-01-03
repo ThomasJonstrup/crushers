@@ -7,7 +7,7 @@ package dk.candycrushers.model;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.Entity; // skal annoteres
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,10 +28,11 @@ import javax.validation.constraints.Size;
 @Table(name = "BANKTELLERS")
 @NamedQueries({
     @NamedQuery(name = "Bankteller.findAll", query = "SELECT b FROM Bankteller b"),
-    @NamedQuery(name = "Bankteller.findByEmail", query = "SELECT b FROM Bankteller b WHERE b.person.email = :email")
+    @NamedQuery(name = "Bankteller.findByEmail", query = "SELECT b FROM Bankteller b WHERE b.person.email = :email"),
+            @NamedQuery(name = "Bankteller.countAll", query = "SELECT COUNT(b) FROM Bankteller b") 
 })
 @SequenceGenerator(name = "TELSEQ", sequenceName = "bankteller_seq")
-public class Bankteller implements Serializable {
+public class Bankteller implements Serializable { // skal implementeres i en entitetsklasse og skal være enten public eller protected
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -56,7 +57,7 @@ public class Bankteller implements Serializable {
     @OneToOne(optional = false)
     private Person person;
 
-    public Bankteller() {
+    public Bankteller() { // skal have en tom kontruktør og må gerne have flere
     }
 
     public Bankteller(Integer banktellerId) {

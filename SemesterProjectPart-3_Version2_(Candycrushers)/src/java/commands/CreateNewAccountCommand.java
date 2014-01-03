@@ -30,7 +30,10 @@ public class CreateNewAccountCommand extends TargetCommand{
         String cusId = request.getParameter("customerId");
         long customerId = Integer.parseInt(cusId);
         
-        Factory.getInstance().getBank().addAccount(accountType, 0, customerId);
+        String bal = request.getParameter("balance");
+        double balance = Double.parseDouble(bal);
+        
+        Factory.getInstance().getBank().addAccount(accountType, balance, customerId);
         
         CustomerDetail cus = Factory.getInstance().getBank().getCustomer(customerId);
         

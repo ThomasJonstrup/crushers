@@ -27,14 +27,7 @@ public class MoveMoneyCommand extends TargetCommand{
         int amount = Integer.parseInt(request.getParameter("amount"));
         
         AccountDetail moneyTransfer = Factory.getInstance().getBank().transactionToAnOtherAccount(fromAcountId, toAcountId, amount);
-//        Person currentPerson = Factory.getInstance().getBank().checkLogin(username, password);
-        
-//        if(currentPerson != null){
-//            request.getSession().setAttribute("currentPerson", currentPerson);
-//        return super.execute(request); //To change body of generated methods, choose Tools | Templates.
-//        }
-        
-//        request.getSession().setAttribute("username", username);
+
         return super.execute(request);
     }
 }

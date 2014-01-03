@@ -126,8 +126,7 @@ public class BankAssembler {
                 bankteller.getFirstName(),
                 bankteller.getLastName(),
                 bankteller.getPerson().getEmail());
-
-//        detail.setAccounts(createAccountDetails(customer.getAccounts()));
+        
         return detail;
     }
     

@@ -17,20 +17,6 @@
         <title>${currentPerson.firstName}'s site</title>
         <script src="js/jquery-2.0.3.js"></script>
         <script>
-                    function customer() {
-                    $(".bankTeller").hide();
-                            $(".manager").hide();
-                    }
-
-            function bankTeller() {
-            $(".customer").hide();
-                    $(".manager").hide();
-            }
-
-            function manager() {
-            $(".customer").hide();
-                    $(".bankTeller").hide();
-            }
 
 //            if ({currentPerson.role} == 1){
 //            $(customer);
@@ -97,13 +83,16 @@
             <li id="linav"><a href="Controller?command=show_currency" class="bankTeller nav">- Show Currency</a></li>
             <!--<li class="bankTeller"><a href="Controller?command=create_account" class="bankTeller">Create new account</a></li>-->
 <!--            <li id="linav"><a href="Controller?command=add_bankteller" class="bankTeller nav">- Add Bank Teller</a></li>-->
+<!-- Trial exam:-->
+  <li id="linav"><a href="Controller?command=about_command" class="bankTeller nav">- About</a></li>
+<!--  <li id="linav"><a href="Controller?command=date_command" class="bankTeller nav">- Date</a></li>-->
         </div>    
-            
+<!--            
             <li id="linav">
                 <p id="hygge" class="bankTeller nav">Hygge</p>
                 
                 <a id="wantCandy" href="candy.jsp" class="bankTeller nav">- Want Candy?</a>
-            </li>
+            </li>-->
             
      
          
@@ -112,18 +101,15 @@
  <!-- Indhold div: -->
 
     <div id="indhold">
-         <img src="pics/candymain.jpg" alt="Candy crush" width="715" height="530">
+         <img src="pics/candy_main.jpg" alt="Candy crush" width="715" height="530">
  
     </div>
 
  <div id="footer">
     <div>
-        <p class="footer">Candy Bank 2013<br>Copyright &copy</p>
+<!--        <p class="footer">Candy Bank Copyright &copy 2013 </p><br>-->
+  <p class="footer">Candy Bank Copyright &copy 2013 <br>Email:<a href="mailto:candybank@outlook.com">candybank@outlook.com</a></p>
     </div>
-</div>
- 
- 
-    </div>        
 
 </body>
 </html>

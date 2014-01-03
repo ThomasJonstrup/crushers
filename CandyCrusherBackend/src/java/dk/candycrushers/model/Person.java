@@ -28,7 +28,8 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "PERSONS")
 @NamedQueries({
-    @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")})
+    @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")
+})
 public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation

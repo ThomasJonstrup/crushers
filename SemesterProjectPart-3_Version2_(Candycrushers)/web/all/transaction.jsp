@@ -39,19 +39,12 @@
             <!--  Menu div: -->
 
             <div id="menu">
-
-
-
                 <li id="linav">
                     <p id="menutop" class="nav">Menu</p>
-                <li/>
-
-                <div id="menulink">
-                    <a href="Controller?command=main" class ="nav">- Back to main</a>
-                    <a href="javascript:history.back()" class ="nav">- Back one page</a>
-                </div>
-
-            </div
+                    <a id="backToMainShowCustomer" href="Controller?command=main" class ="nav">- Back to main</a>
+                    <a id="backOnePage" href="javascript:history.back()" class ="nav">- Back one page</a>
+                </li>
+            </div>
 
 
             <!-- Indhold div: -->
@@ -82,7 +75,7 @@
             </div>
             <div id="footer">
                 <div>
-                    <p class="footer">Candy Bank 2013<br>Copyright &copy</p>
+<p class="footer">Candy Bank Copyright &copy 2013 <br>Email:<a href="mailto:candybank@outlook.com">candybank@outlook.com</a></p>
                 </div>
             </div>
 

@@ -26,7 +26,8 @@
     border-width: thin;
     text-align: left;
     float: left;
-    background-image: url(../pics/king.jpg);
+    background-color: transparent;
+    background-image: url(../pics/logocandy-crush-saga.png);
     background-size: 197px 103px;
     background-repeat: no-repeat;
 }
@@ -39,9 +40,7 @@
     border-style: solid;
     border-width: thin;
     float: left;
-    background-image: url(../pics/candy.png);
-
-    background-size: 100px 100px;
+    background-color: #0078ae;
      
     
 }
@@ -56,7 +55,9 @@
     border-width: thin;
     text-align: center;
     float: left;
-    background-color: #0078ae;
+    background-image: url(../pics/blue_menu1.png);
+    background-size: 100% auto; 
+    background-repeat: no-repeat;
      
     /*background-color: lightblue;*/
    
@@ -69,13 +70,18 @@
     border-width: thin;
     margin-left: auto;
     float: left;
-    background-color:#0078ae;
+/*    background-color:#0078ae;*/
+  background-image: url(../pics/blue_menu1.png);
+ background-size: 198px 510px;
 
 }
 
+        a {
+            padding-left: 10px;
+        }
 
 #indhold {
-    width: 715px;
+    width: 716px;
     height: 510px;
     border-style: solid;
     border-width: thin;
@@ -83,6 +89,19 @@
     float: right;
     background-color: lightyellow;
     overflow-y: scroll;
+    
+    
+}
+#indhold_login{
+    width: 716px;
+    height: 510px;
+    border-style: solid;
+    border-width: thin;
+   
+    float: right;
+    background-image: url(../pics/candy_main2.jpg);
+    background-size: 716px 510px;
+/*    overflow-y: scroll;*/
     
     
 }
@@ -135,11 +154,10 @@ font-weight: bold;
 position:absolute;
 top:615px;
 left: 610px;
-text-align: center;
+/*text-align: center;*/
     
         
 }
-
 
 
 #ulnav {
@@ -157,15 +175,17 @@ a.nav:LINK, a.nav:visited {
     display: block;
     width:189px;
     font-weight: bold;
-    color: lightblue;
+    color: white;
     background-color: #242424;
     text-align: left;
     padding: 4px;
     text-decoration: none;
     text-transform: uppercase;
+/*font-size: 16px;*/
 }
 a.nav:hover {
-    background-color: blue;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+    background-color: #59595c;
 }
 a.nav:active {
    
@@ -177,8 +197,8 @@ p.nav{
     display: block;
     width:189px;
     font-weight: bold;
-    color: black;
-    background-color: lightcoral;
+    color: white;
+    background-color: #026890;
     text-align: left;
     padding: 4px;
     text-decoration: none;
@@ -195,7 +215,7 @@ p.nav:active {
 
   #menutop {
   position: absolute;
-  left: 217px; 
+/*  left: 217px; */
   top: 99px;
   }
   
@@ -288,7 +308,7 @@ body{
         #fieldsetLogin{
             position: absolute;
             top: 13px;
-            left: 932px;
+            left: 926px;
             
             background: #0078ae;
             width: 150px;

@@ -7,6 +7,7 @@ package halloooo;
 import com.google.gson.Gson;
 import entity.Bankteller;
 import entity.Person;
+import java.util.Scanner;
 
 /**
  *
@@ -39,21 +40,28 @@ public class Halloooo {
 //        
 //        bantellerclient.create_JSON(tellerJson);
 
+        
+        
         BankTellerClient client = new BankTellerClient();
-        String find_JSON = client.find_JSON(String.class, "1");
-        System.out.println(find_JSON);
+                System.out.println("Enter Bankteller id:");        
+        Scanner scan = new Scanner(System.in);      
+        String find_JSON = client.find_JSON(String.class, scan.nextLine());
+//        System.out.println(find_JSON);
         Bankteller fromJson = new Gson().fromJson(find_JSON, Bankteller.class);
-        System.out.println(fromJson.getFirstName());
-        fromJson.setBanktellerId(12);
+        System.out.println("Firstname: " + fromJson.getFirstName() + "\n" + "Lastname: " + fromJson.getLastName());
         
-        //Person skal tilføjes først i databasen før bankteller kan tilføjes
-        Person person = new Person("test@test.dk", "hemlig");
-        PersonClient pclient = new PersonClient();
-        pclient.create_JSON(new Gson().toJson(person));
-        fromJson.setEmail(person);
+//        System.out.println("Enter new Bankteller id: ");
         
-        //Bankteller tilføjes
-        client.create_JSON(new Gson().toJson(fromJson));
+        fromJson.setBanktellerId(25);
+        
+//        //Person skal tilføjes først i databasen før bankteller kan tilføjes
+////        Person person = new Person("hej@hej.dk", "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08");
+////        PersonClient pclient = new PersonClient();
+////        pclient.create_JSON(new Gson().toJson(person));
+////        fromJson.setEmail(person);
+////        
+////        //Bankteller tilføjes
+////        client.create_JSON(new Gson().toJson(fromJson));
 
 
 

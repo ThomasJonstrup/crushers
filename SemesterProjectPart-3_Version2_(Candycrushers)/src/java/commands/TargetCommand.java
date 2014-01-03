@@ -13,20 +13,20 @@ import security.SecurityRole;
  */
 public class TargetCommand implements Command { // Implementerer Command interfacet
 
-    private final String target;
-    private final SecurityRole role;
+    private final String target; // Hvor den skal sendes hen
+    private final SecurityRole role; // sikkerhedsrolle, som bestemmes i securityRole enum
 
     public SecurityRole getRole() {
         return role;
     }
 
-    public TargetCommand(String target, SecurityRole role) {
+    public TargetCommand(String target, SecurityRole role) { // Konstruktør
         this.target = target;
         this.role = role;
     }
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public String execute(HttpServletRequest request) { // execute metode, som er i command interfacet
         return target;
     }
 }

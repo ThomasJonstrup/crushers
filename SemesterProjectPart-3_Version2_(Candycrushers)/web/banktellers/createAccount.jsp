@@ -65,7 +65,7 @@
                         <tr>
                             <td>Account type</td>
                             <td><input type="text" name="accountType" value="" ></td>
-                            <td><input type="text" name="balance" value="" ></td>
+                            <td><input type="text" name="balance" value="" onkeypress="return onlyNumbers();"></td>
                             <td><input type="text" name="customerId" value="" ></td>
 
                         </tr>
@@ -83,7 +83,7 @@
 
             <div id="footer">
                 <div>
-                    <p class="footer">Candy Bank 2013<br>Copyright &copy</p>
+<p class="footer">Candy Bank Copyright &copy 2013 <br>Email:<a href="mailto:candybank@outlook.com">candybank@outlook.com</a></p>
                 </div>
             </div>
 

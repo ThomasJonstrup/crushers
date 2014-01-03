@@ -43,24 +43,23 @@ public class Controller extends HttpServlet {
     Command command = Factory.getInstance().getCommand(cmdStr,request);
     String path = command.execute(request);
     
-//    if (command instanceof ShowLoginCommand && !request.isSecure() ) {
-//      String SSL = "https://" + request.getServerName() + ":" + PORT_SSL + request.getRequestURI()+"?command=show_login";
-//      response.sendRedirect(SSL);
-//    } 
-//    else if(command instanceof LogoutCommand2) {
-//      String nonSSL = "http://" + request.getServerName() + ":" + PORT_NON_SSL + request.getRequestURI();
-//      response.sendRedirect(nonSSL);   
-//    }
-//    else {
-//      request.getRequestDispatcher(path).forward(request, response);
-//    }
-          request.getRequestDispatcher(path).forward(request, response);
+    if (command instanceof ShowLoginCommand && !request.isSecure() ) {
+      String SSL = "https://" + request.getServerName() + ":" + PORT_SSL + request.getRequestURI()+"?command=show_login";
+      response.sendRedirect(SSL);
+    }
+    else if(command instanceof LogoutCommand2) {
+      String nonSSL = "http://" + request.getServerName() + ":" + PORT_NON_SSL + request.getRequestURI();
+      response.sendRedirect(nonSSL);
+    }
+    else {
+      request.getRequestDispatcher(path).forward(request, response);
+    }
   }
 
   @Override
   public void init() throws ServletException {
     PORT_NON_SSL = Integer.parseInt(getServletContext().getInitParameter("portNonSSL"));
-//    PORT_SSL = Integer.parseInt(getServletContext().getInitParameter("portSSL"));
+    PORT_SSL = Integer.parseInt(getServletContext().getInitParameter("portSSL"));
   }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

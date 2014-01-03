@@ -35,31 +35,31 @@
             var dotpos = x.lastIndexOf(".");
             if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= x.length)
             {
-                alert("Not a valid e-mail address, missing eitehr @ or a dot");
+                alert("Not a valid e-mail address, missing either @ or a dot");
                 return false;
             }
         }
 //OOOOOOOOOOOOOOOOOOO Hent fra tlf. nr. OOOOOOOOOOOOOOOOOOO
-        $(document).ready(function() {
-            $("#btn").click(function() {
-
+//        $(document).ready(function() {
+//            $("#btn").click(function() {
+        function getPhone() {
                 $.ajax({
-                    url: "PersonServlet",
-                    data: "phone=" + $("#phone1").val(),
-                    cache: false,
-                    dataType: "json",
-                    success: function(data) {
+                    url: "PersonServlet", // En streng "String", som indeholder URL, hvor requestet bliver sendt
+                    data: "phone=" + $("#phone1").val(), // 
+                    cache: false, // det vil tvinge anmodet sider ikke at blive cached af browseren
+                    dataType: "json", // typen af data, som du formoder bliver sendt tilbage
+                    //json:  Evaluerer respons som JSON og returnerer et JavaScript objekt.
+                    success: function(data) { // En funktion som kaldes når request har succes
                         $("#firstname").val(data.firstName);
                         $("#lastname").val(data.lastName);
                         $("#street").val(data.address.street);
                         $("#email").val(data.email);
                     }
+                    // error en funktion som kaldes hvis request fejler 
                 });
 
 
-            });
-
-        });
+            }
 //OOOOOOOOOOOOOOOOOOO Hent fra tlf. nr. SLUT OOOOOOOOOOOOOOOOOOO
 
         function callWhenSuccess(mailExists) {
@@ -103,7 +103,6 @@
                 dataType: "json",
                 success: callWhenSuccessRKI
             });
-
         }
     </script>
 
@@ -132,13 +131,19 @@
 
             <!--  Menu div: -->
 
+
             <div id="menu">
+
                 <li id="linav">
                     <p id="menutop" class="nav">Menu</p>
-                    <a id="backToMainShowCustomer" href="Controller?command=main" class ="nav">- Back to main</a>
-                    <a id="backOnePage" href="javascript:history.back()" class ="nav">- Back one page</a>
-                </li>
-            </div>
+                <li/>
+
+                <div id="menulink">
+                    <a href="Controller?command=main" class ="nav">- Back to main</a>
+                    <a href="javascript:history.back()" class ="nav">- Back one page</a>
+                </div>
+
+            </div
 
             <!-- Indhold div: -->
 
@@ -152,7 +157,7 @@
                 <!--</form>-->             
 
                 <a>Get from Phone number:  </a><input type="text" id="phone1" onkeypress="return onlyNumbers();"> 
-                <button id="btn">Get address from phone number</button>
+                <button id="btn" onclick ="getPhone();">Get address from phone number</button>
                 <form name="Customer" action="Controller" method="post" onSubmit="return validateForm();">
                     <input type="hidden" name="command" value="add_customer">
 
@@ -178,7 +183,7 @@
                         <tr>
                             <td>Email</td>
                             <td><input type="text" id="email" name="email" value=""></td>
-                            <td><button type="button" onclick="checkMail();">Check</button></td>
+                            <td><button type="button" color="blue" onclick="checkMail();">Check</button></td>
                         </tr>
                         <tr>
                             <td>Password</td>
@@ -207,7 +212,7 @@
 
             <div id="footer">
                 <div>
-                    <p class="footer">Candy Bank 2013<br>Copyright &copy</p>
+<p class="footer">Candy Bank Copyright &copy 2013 <br>Email:<a href="mailto:candybank@outlook.com">candybank@outlook.com</a></p>
                 </div>
 
             </div>   

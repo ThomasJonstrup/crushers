@@ -36,6 +36,13 @@
 
         });
 </script>
+
+      <style type="text/css"> 
+         input{ 
+         text-align:center;
+         alignment-adjust: 10px;
+         } 
+      </style>
      
     <body>
 
@@ -62,8 +69,6 @@
 
             <div id="menu">
 
-
-
                 <li id="linav">
                     <p id="menutop" class="nav">Menu</p>
                 <li/>
@@ -81,8 +86,8 @@
             <div id="indhold">
                 
                 <h1 align="center">Currency Rates</h1>
-                
-                <input type="text" id="code"> 
+                <p align="center"> Enter a currency code to se currency example USD.</p>
+                <input size="10" type="text" id="code"> 
                 <button id="btn">Get Currency Rate</button>
                 <hr>
                 <form name="Curency">
@@ -103,7 +108,7 @@
 
             <div id="footer">
                 <div>
-                    <p class="footer">Candy Bank 2013<br>Copyright &copy</p>
+<p class="footer">Candy Bank Copyright &copy 2013 <br>Email:<a href="mailto:candybank@outlook.com">candybank@outlook.com</a></p>
                 </div>
             </div>
 
